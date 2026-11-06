@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-AO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Mukanda – CV e carta de apresentação em PDF para Angola</title>
+<meta name="description" content="Faz o teu currículo e a tua carta de apresentação em PDF, grátis e pelo telemóvel. Modelos simples, prontos para concursos e vagas em Angola.">
+<style>
+:root{--ink:#141414;--red:#b3141f;--gold:#e0a100;--bg:#f3f1ec;--line:#d9d5cc;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--ink);color:#fff;padding:32px 20px 28px;border-bottom:6px solid var(--red)}
+header div{max-width:680px;margin:auto}
+.brand{display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none}
+h1{font:700 clamp(2.4rem,9vw,3.4rem)/1 Georgia,serif;margin:0;letter-spacing:-.03em}
+header p{margin:16px 0 0;color:#e8e4da;max-width:34ch}
+header i{display:block;width:64px;height:6px;background:var(--gold);margin-top:18px}
+main{max-width:680px;margin:auto;padding:20px}
+.tabs{display:flex;gap:8px;margin-bottom:16px}
+.tabs button{flex:1;padding:12px;font:600 1rem system-ui;border:2px solid var(--ink);background:#fff;cursor:pointer}
+.tabs button.on{background:var(--ink);color:#fff}
+fieldset{border:1px solid var(--line);background:var(--card);margin:0 0 16px;padding:16px;border-radius:6px}
+legend{font:700 1.1rem Georgia,serif;padding:0 6px}
+label{display:block;font-size:.9rem;font-weight:600;margin:10px 0 4px}
+input,textarea{width:100%;padding:11px;font:inherit;border:1px solid #b9b4a8;border-radius:4px;background:#fff}
+textarea{min-height:84px;resize:vertical}
+:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.row{border:1px dashed var(--line);padding:10px;margin-bottom:10px;position:relative;display:grid;gap:8px;border-radius:4px}
+.x{position:absolute;top:4px;right:4px;border:0;background:none;font-size:1.4rem;cursor:pointer;color:var(--red)}
+.add{background:none;border:1px solid var(--ink);padding:9px 14px;cursor:pointer;font:600 .9rem system-ui;border-radius:4px}
+.go{width:100%;padding:16px;font:700 1.1rem system-ui;background:var(--red);color:#fff;border:0;border-radius:6px;cursor:pointer}
+.go:active{background:#8e0f18}
+.wa{display:block;text-align:center;margin-top:12px;padding:13px;border:2px solid #1a7f37;color:#1a7f37;font-weight:700;text-decoration:none;border-radius:6px}
+.hide{display:none}
+footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
+#msg{color:var(--red);font-weight:600;min-height:1.4em;margin:8px 0}
+@media(max-width:480px){.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div><a class="brand" href="/" aria-label="Mukanda"><svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#b3141f"/><path d="M16 11H40L50 21V53H16Z" fill="#fff"/><path d="M40 11V21H50Z" fill="#e0a100"/><path d="M23 45V28L32 38L41 28V45" fill="none" stroke="#141414" stroke-width="4.6" stroke-linejoin="miter" stroke-linecap="butt"/></svg><h1>Mukanda</h1></a><p>O teu CV e a tua carta de apresentação em PDF, prontos em minutos.</p><i></i></div></header>
+<main>
+<nav class="tabs"><button class="on" data-t="cv">Currículo</button><button data-t="carta">Carta de apresentação</button></nav>
+
+<section id="cv">
+<fieldset><legend>Dados pessoais</legend>
+<label for="nome">Nome completo</label><input id="nome" autocomplete="name">
+<label for="prof">Profissão ou área</label><input id="prof" placeholder="Ex: Técnico de Informática">
+<div class="g2"><div><label for="tel">Telefone</label><input id="tel" type="tel" autocomplete="tel"></div><div><label for="email">Email</label><input id="email" type="email" autocomplete="email"></div></div>
+<label for="morada">Morada</label><input id="morada" placeholder="Ex: Luanda, Viana">
+<div class="g2"><div><label for="nasc">Data de nascimento</label><input id="nasc" placeholder="dd/mm/aaaa"></div><div><label for="nat">Naturalidade</label><input id="nat"></div></div>
+<div class="g2"><div><label for="civil">Estado civil</label><input id="civil"></div><div><label for="bi">Nº do BI (opcional)</label><input id="bi"></div></div>
+</fieldset>
+<fieldset><legend>Resumo</legend><label for="res">Fala de ti em 2 ou 3 frases</label><textarea id="res"></textarea></fieldset>
+<fieldset><legend>Experiência profissional</legend><div id="exp"></div><button type="button" class="add" id="aexp">+ Adicionar experiência</button></fieldset>
+<fieldset><legend>Formação</legend><div id="edu"></div><button type="button" class="add" id="aedu">+ Adicionar formação</button></fieldset>
+<fieldset><legend>Competências e idiomas</legend>
+<label for="comp">Competências (separadas por vírgula)</label><input id="comp" placeholder="Word, Excel, Atendimento ao cliente">
+<label for="idi">Idiomas</label><input id="idi" placeholder="Português (nativo), Inglês (básico)"></fieldset>
+<button class="go" id="gcv">Gerar currículo em PDF</button>
+</section>
+
+<section id="carta" class="hide">
+<fieldset><legend>A vaga</legend>
+<label for="emp">Empresa ou instituição</label><input id="emp">
+<label for="vaga">Vaga a que te candidatas</label><input id="vaga">
+<label for="onde">Onde viste o anúncio (opcional)</label><input id="onde" placeholder="Ex: Jornal de Angola, site da empresa">
+</fieldset>
+<fieldset><legend>Sobre ti</legend>
+<label for="dest">Experiência ou formação mais forte para esta vaga</label><textarea id="dest"></textarea>
+<label for="porq">Porque queres esta vaga</label><textarea id="porq"></textarea>
+<p style="font-size:.85rem;margin:8px 0 0">Os teus dados pessoais vêm do separador Currículo.</p></fieldset>
+<button class="go" id="gcarta">Gerar carta em PDF</button>
+</section>
+
+<fieldset id="pagar"><legend>Descarregar o PDF</legend>
+<p style="margin:0 0 8px">Preço fixo: <strong id="preco"></strong> (CV e carta incluídos).</p>
+<div id="dados"></div>
+<a class="wa" id="comp" href="#" target="_blank" rel="noopener">Enviar comprovativo por WhatsApp</a>
+<label for="cod">Já tens o código de acesso?</label>
+<div style="display:flex;gap:8px"><input id="cod" placeholder="Ex: MK-1234" autocapitalize="characters"><button type="button" class="add" id="vcod">Validar</button></div>
+</fieldset>
+<div id="msg" role="status"></div>
+<a class="wa" id="wa" href="#" target="_blank" rel="noopener">Partilhar o Mukanda no WhatsApp</a>
+</main>
+<footer>Mukanda · Os teus dados ficam no teu telemóvel. Nada é guardado no servidor.</footer>
+
+<script src="config.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+var SITE_URL = location.origin;
+var $ = function(i){return document.getElementById(i)}, v = function(i){return ($(i).value||'').trim()};
+var EXP=[['cargo','Cargo'],['emp','Empresa'],['per','Período (ex: 2021–2023)'],['desc','O que fazias',1]];
+var EDU=[['curso','Curso ou formação'],['inst','Instituição'],['ano','Ano']];
+function addRow(box,fields){var d=document.createElement('div');d.className='row';
+ fields.forEach(function(f){var e=document.createElement(f[2]?'textarea':'input');e.placeholder=f[1];e.setAttribute('aria-label',f[1]);e.dataset.k=f[0];d.appendChild(e)});
+ var b=document.createElement('button');b.type='button';b.className='x';b.setAttribute('aria-label','Remover');b.textContent='×';b.onclick=function(){d.remove()};d.appendChild(b);$(box).appendChild(d)}
+function rows(box){return Array.prototype.map.call($(box).children,function(d){var o={};d.querySelectorAll('[data-k]').forEach(function(e){o[e.dataset.k]=e.value.trim()});return o}).filter(function(o){return Object.keys(o).some(function(k){return o[k]})})}
+$('aexp').onclick=function(){addRow('exp',EXP)};$('aedu').onclick=function(){addRow('edu',EDU)};
+addRow('exp',EXP);addRow('edu',EDU);
+
+document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){
+ document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b)});
+ $('cv').classList.toggle('hide',b.dataset.t!=='cv');$('carta').classList.toggle('hide',b.dataset.t!=='carta');$('msg').textContent=''}});
+
+function Doc(){var p=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),y=20,M=20,W=170;
+ function t(s,size,bold,col){size=size||10;p.setFont('helvetica',bold?'bold':'normal');p.setFontSize(size);p.setTextColor.apply(p,col||[25,25,25]);
+  p.splitTextToSize(s,W).forEach(function(l){if(y>textLimit){p.addPage();y=20}p.text(l,M,y);y+=size*0.48})}
+ var textLimit=282;
+ return {p:p,t:t,gap:function(n){y+=n},
+  sec:function(s){y+=4;t(s.toUpperCase(),11,true,[179,20,31]);p.setDrawColor(224,161,0);p.setLineWidth(.5);p.line(M,y-3,M+W,y-3);y+=1.5}}}
+
+async function saveDoc(p,name){var dl=null;try{dl=window.claude&&await window.claude.use('downloads')}catch(e){}
+ if(dl){try{await dl.save({filename:name,data:p.output('blob')});return}catch(e){if(e&&e.code==='declined')return}}
+ p.save(name)}
+function needName(){if(!v('nome')){$('msg').textContent='Preenche o teu nome no separador Currículo.';return true}$('msg').textContent='';return false}
+function contactLine(){return [v('tel'),v('email'),v('morada')].filter(Boolean).join('  |  ')}
+
+$('gcv').onclick=function(){if(needName())return;var d=Doc();
+ d.t(v('nome'),22,true);if(v('prof'))d.t(v('prof'),12,false,[90,90,90]);d.gap(1);d.t(contactLine(),9.5);
+ var pes=[['Data de nascimento',v('nasc')],['Naturalidade',v('nat')],['Estado civil',v('civil')],['BI',v('bi')]].filter(function(x){return x[1]}).map(function(x){return x[0]+': '+x[1]}).join('  |  ');
+ if(pes)d.t(pes,9.5);
+ if(v('res')){d.sec('Resumo');d.t(v('res'))}
+ var ex=rows('exp');if(ex.length){d.sec('Experiência profissional');ex.forEach(function(e){d.gap(1.5);d.t([e.cargo,e.emp].filter(Boolean).join(' – ')+(e.per?'  ('+e.per+')':''),10.5,true);if(e.desc)d.t(e.desc)})}
+ var ed=rows('edu');if(ed.length){d.sec('Formação');ed.forEach(function(e){d.gap(1.5);d.t([e.curso,e.inst].filter(Boolean).join(' – ')+(e.ano?'  ('+e.ano+')':''),10.5,true)})}
+ if(v('comp')){d.sec('Competências');d.t(v('comp'))}
+ if(v('idi')){d.sec('Idiomas');d.t(v('idi'))}
+ saveDoc(d.p,'CV-'+v('nome').replace(/\s+/g,'-')+'.pdf');$('msg').textContent='Currículo gerado. Verifica a pasta de transferências.'};
+
+$('gcarta').onclick=function(){if(needName())return;if(!v('vaga')||!v('emp')){$('msg').textContent='Preenche a empresa e a vaga.';return}
+ var d=Doc(),hoje=new Date().toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'});
+ d.t(v('nome'),13,true);d.t(contactLine(),9.5);d.gap(8);
+ d.t(hoje,10);d.gap(6);d.t('Exmos. Senhores',11,true);d.t(v('emp'),11);d.gap(6);
+ d.t('Assunto: Candidatura à vaga de '+v('vaga'),11,true);d.gap(6);
+ d.t('Exmos. Senhores,',11);d.gap(4);
+ d.t('Venho por este meio apresentar a minha candidatura à vaga de '+v('vaga')+' na '+v('emp')+(v('onde')?', de que tive conhecimento através de '+v('onde'):'')+'.',11);d.gap(4);
+ if(v('dest')){d.t(v('dest'),11);d.gap(4)}
+ if(v('porq')){d.t(v('porq'),11);d.gap(4)}
+ d.t('Coloco-me à vossa inteira disposição para uma entrevista, na data e local que considerarem convenientes, e agradeço desde já a atenção dispensada.',11);d.gap(8);
+ d.t('Com os melhores cumprimentos,',11);d.gap(10);d.t(v('nome'),11,true);
+ saveDoc(d.p,'Carta-'+v('emp').replace(/\s+/g,'-')+'.pdf');$('msg').textContent='Carta gerada. Verifica a pasta de transferências.'};
+
+
+function lerCod(){try{return localStorage.getItem('mk_code')||''}catch(e){return ''}}
+async function checar(c){try{var r=await fetch('/api/validar?c='+encodeURIComponent(c));return (await r.json()).ok===true}catch(e){return false}}
+async function liberado(){var c=lerCod();return c?await checar(c):false}
+function pintar(ok){$('pagar').classList.toggle('hide',ok)}
+(function(){var P=PAGAMENTO;$('preco').textContent=P.preco;var d=$('dados');
+ if(P.iban){d.innerHTML='';[['Banco',P.banco],['IBAN',P.iban],['Titular',P.titular]].forEach(function(x){if(x[1]){var p=document.createElement('p');p.style.margin='2px 0';p.textContent=x[0]+': '+x[1];d.appendChild(p)}})}
+ else d.textContent='Dados de pagamento por configurar.';
+ $('comp').href=P.whatsapp?'https://wa.me/'+P.whatsapp+'?text='+encodeURIComponent('Olá! Paguei o Mukanda. Segue o comprovativo.'):'#';
+ if(!P.whatsapp)$('comp').classList.add('hide')})();
+$('vcod').onclick=async function(){var c=v('cod').toUpperCase();if(!c)return;
+ if(await checar(c)){try{localStorage.setItem('mk_code',c)}catch(e){}pintar(true);$('msg').textContent='Código aceite. Já podes gerar os PDFs.'}else $('msg').textContent='Código inválido. Confirma com quem te enviou.'};
+['gcv','gcarta'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){
+ if(needName())return;
+ if(!(await liberado())){$('msg').textContent='Para descarregar, paga e insere o código de acesso.';pintar(false);$('pagar').scrollIntoView({behavior:'smooth'});return}
+ f()}});
+liberado().then(pintar);
+$('wa').href='https://wa.me/?text='+encodeURIComponent('Faz o teu CV e carta em PDF, grátis, no Mukanda: '+SITE_URL);
+</script>
+</body>
+</html>
