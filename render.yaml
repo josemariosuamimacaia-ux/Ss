@@ -1,11 +1,5 @@
 services:
   - type: web
     name: mukanda
-    runtime: node
-    plan: free
-    buildCommand: npm install
-    startCommand: npm start
-    healthCheckPath: /healthz
-    envVars:
-      - key: CODIGOS
-        sync: false
+    runtime: static
+    staticPublishPath: ./public

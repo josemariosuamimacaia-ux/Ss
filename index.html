@@ -3,9 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mukanda – CV, documentos e capas em PDF">
+<meta property="og:description" content="Faz o teu CV, requerimentos e capas de trabalhos pelo telemóvel. Rápido e feito para Angola.">
+<meta property="og:image" content="https://SEU-ENDERECO/capa.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#141414">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>Mukanda – CV e carta de apresentação em PDF para Angola</title>
-<meta name="description" content="Faz o teu currículo e a tua carta de apresentação em PDF, grátis e pelo telemóvel. Modelos simples, prontos para concursos e vagas em Angola.">
+<title>Mukanda – CV, requerimentos e capas em PDF em Angola</title>
+<meta name="description" content="Cria o teu currículo, carta de apresentação, requerimentos e capas de trabalhos em PDF, pelo telemóvel. Rápido, simples e feito para Angola.">
 <style>
 :root{--ink:#141414;--red:#b3141f;--gold:#e0a100;--bg:#f3f1ec;--line:#d9d5cc;--card:#fff}
 *{box-sizing:border-box}
@@ -34,6 +42,16 @@ textarea{min-height:84px;resize:vertical}
 .go:active{background:#8e0f18}
 .wa{display:block;text-align:center;margin-top:12px;padding:13px;border:2px solid #1a7f37;color:#1a7f37;font-weight:700;text-decoration:none;border-radius:6px}
 .hide{display:none}
+#splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:99;background:#141414;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .35s;animation:sair .4s 2.5s forwards}
+#splash.sai{opacity:0;pointer-events:none}
+#splash svg{width:96px;height:96px;animation:pop .6s ease-out both}
+#splash b{font:700 2.4rem Georgia,serif;color:#fff;letter-spacing:-.03em;animation:pop .6s .15s ease-out both}
+#splash i{display:block;height:6px;width:64px;background:#e0a100;animation:pop .6s .3s ease-out both}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes sair{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){#splash *{animation:none!important}}
+.voltar.hide{display:none}
+.voltar{display:inline-block;margin-bottom:14px;padding:10px 16px;border:2px solid var(--ink);color:var(--ink);background:#fff;text-decoration:none;font-weight:700;border-radius:6px}
 small{font:600 .85rem system-ui;color:var(--gold);margin-left:10px;letter-spacing:.06em;text-transform:uppercase}
 body[data-t=documentos]{--red:#1d4e89}body[data-t=escola]{--red:#1b6b45}
 .card{display:block;background:#fff;border:1px solid var(--line);border-left:8px solid var(--red);padding:18px;margin-bottom:12px;color:var(--ink);text-decoration:none;border-radius:6px}
@@ -46,8 +64,10 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 </style>
 </head>
 <body>
+<div id="splash" aria-hidden="true"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#b3141f"/><path d="M16 11H40L50 21V53H16Z" fill="#fff"/><path d="M40 11V21H50Z" fill="#e0a100"/><path d="M23 45V28L32 38L41 28V45" fill="none" stroke="#141414" stroke-width="4.6" stroke-linejoin="miter"/></svg><b>Mukanda</b><i></i></div>
 <header><div><a class="brand" href="#inicio" aria-label="Mukanda – início"><svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true"><rect width="64" height="64" rx="14" style="fill:var(--red)"/><path d="M16 11H40L50 21V53H16Z" fill="#fff"/><path d="M40 11V21H50Z" fill="#e0a100"/><path d="M23 45V28L32 38L41 28V45" fill="none" stroke="#141414" stroke-width="4.6" stroke-linejoin="miter" stroke-linecap="butt"/></svg><h1>Mukanda<small id="sub"></small></h1></a><p id="lema"></p><i></i></div></header>
 <main>
+<a class="voltar hide" id="voltar" href="#inicio">← Voltar ao início</a>
 <section id="v-inicio" class="view">
 <p style="margin:0 0 14px;font-weight:600">O que precisas de fazer hoje?</p>
 <a class="card" data-c="cv" href="#cv"><b>Currículo e carta de apresentação</b><span>Para candidaturas a vagas e concursos.</span><em>Começar →</em></a>
@@ -177,7 +197,7 @@ $('gcarta').onclick=function(){if(needName())return;if(!v('vaga')||!v('emp')){$(
 
 
 function lerCod(){try{return localStorage.getItem('mk_code')||''}catch(e){return ''}}
-async function checar(c){try{var r=await fetch('/api/validar?c='+encodeURIComponent(c));return (await r.json()).ok===true}catch(e){return false}}
+async function checar(c){try{var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(c.trim().toUpperCase()));var x=Array.from(new Uint8Array(b)).map(function(n){return n.toString(16).padStart(2,'0')}).join('');return (PAGAMENTO.codigos||[]).indexOf(x)>-1}catch(e){return false}}
 async function liberado(){var c=lerCod();return c?await checar(c):false}
 var pago=false,cur='inicio';function sync(){$('pagar').classList.toggle('hide',pago||cur==='inicio')}function pintar(ok){pago=ok;sync()}
 (function(){var P=PAGAMENTO;$('preco').textContent=P.preco;var d=$('dados');
@@ -211,14 +231,17 @@ $('gcapa').onclick=function(){if(!v('e_tema')||!v('e_autor')){$('msg').textConte
  c([v('e_cid'),v('e_ano')].filter(Boolean).join(', '),275,12);
  saveDoc(p,'Capa-'+v('e_autor').split(',')[0].replace(/\s+/g,'-')+'.pdf');$('msg').textContent='Capa gerada. Verifica a pasta de transferências.'};
 var V={inicio:['','Documentos prontos em PDF, feitos para Angola.'],cv:['CV','O teu CV e a tua carta de apresentação em PDF, prontos em minutos.'],documentos:['Documentos','Requerimentos, declarações e contratos simples, prontos em PDF.'],escola:['Escola','Capas de trabalhos escolares e universitários, prontas em PDF.']};
-var COR={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,107,69]};
-function route(){var k=location.hash.slice(1);if(!V[k])k='inicio';cur=k;document.body.dataset.t=k;window.COR=COR[k];
+var PALETA={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,107,69]};
+var T0=document.title;function route(k){k=typeof k==='string'?k:location.hash.slice(1);if(!V[k])k='inicio';cur=k;$("voltar").classList.toggle("hide",k==="inicio");document.body.dataset.t=k;window.COR=PALETA[k];
  Object.keys(V).forEach(function(x){$('v-'+x).classList.toggle('hide',x!==k)});
- $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title='Mukanda'+(V[k][0]?' '+V[k][0]:'')+' – PDF para Angola';$('msg').textContent='';sync();window.scrollTo(0,0)}
+ $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title=V[k][0]?'Mukanda '+V[k][0]+' – PDF para Angola':T0;$('msg').textContent='';sync();window.scrollTo(0,0)}
 ['gcv','gcarta','gdoc','gcapa'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){
  if(!(await liberado())){$('msg').textContent='Para descarregar, paga e insere o código de acesso.';pintar(false);$('pagar').scrollIntoView({behavior:'smooth'});return}
  f()}});
-liberado().then(pintar);window.onhashchange=route;route();
+liberado().then(pintar);document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(){route(a.getAttribute("href").slice(1))})});window.onhashchange=function(){route()};route();
+(function(){var s=$('splash'),visto=false;try{visto=sessionStorage.getItem('mk_s')==='1';sessionStorage.setItem('mk_s','1')}catch(e){}
+function fecha(){s.classList.add('sai');setTimeout(function(){s.remove()},400)}
+if(visto){s.remove();return}s.onclick=fecha;setTimeout(fecha,1100)})();
 $('wa').href='https://wa.me/?text='+encodeURIComponent('Faz o teu CV e carta em PDF, grátis, no Mukanda: '+SITE_URL);
 </script>
 </body>
