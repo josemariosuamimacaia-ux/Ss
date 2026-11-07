@@ -23,7 +23,7 @@ main{max-width:680px;margin:auto;padding:20px}
 fieldset{border:1px solid var(--line);background:var(--card);margin:0 0 16px;padding:16px;border-radius:6px}
 legend{font:700 1.1rem Georgia,serif;padding:0 6px}
 label{display:block;font-size:.9rem;font-weight:600;margin:10px 0 4px}
-input,textarea{width:100%;padding:11px;font:inherit;border:1px solid #b9b4a8;border-radius:4px;background:#fff}
+input,textarea,select{width:100%;padding:11px;font:inherit;border:1px solid #b9b4a8;border-radius:4px;background:#fff}
 textarea{min-height:84px;resize:vertical}
 :focus-visible{outline:3px solid var(--gold);outline-offset:1px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
@@ -34,14 +34,27 @@ textarea{min-height:84px;resize:vertical}
 .go:active{background:#8e0f18}
 .wa{display:block;text-align:center;margin-top:12px;padding:13px;border:2px solid #1a7f37;color:#1a7f37;font-weight:700;text-decoration:none;border-radius:6px}
 .hide{display:none}
+small{font:600 .85rem system-ui;color:var(--gold);margin-left:10px;letter-spacing:.06em;text-transform:uppercase}
+body[data-t=documentos]{--red:#1d4e89}body[data-t=escola]{--red:#1b6b45}
+.card{display:block;background:#fff;border:1px solid var(--line);border-left:8px solid var(--red);padding:18px;margin-bottom:12px;color:var(--ink);text-decoration:none;border-radius:6px}
+.card[data-c=cv]{border-left-color:#b3141f}.card[data-c=documentos]{border-left-color:#1d4e89}.card[data-c=escola]{border-left-color:#1b6b45}
+.card b{display:block;font:700 1.2rem Georgia,serif}.card span{display:block;margin:4px 0 8px;color:#4a463e}.card em{font-style:normal;font-weight:700}
+label input,label textarea{font-weight:400;margin-top:4px}
 footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 #msg{color:var(--red);font-weight:600;min-height:1.4em;margin:8px 0}
 @media(max-width:480px){.g2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><div><a class="brand" href="/" aria-label="Mukanda"><svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#b3141f"/><path d="M16 11H40L50 21V53H16Z" fill="#fff"/><path d="M40 11V21H50Z" fill="#e0a100"/><path d="M23 45V28L32 38L41 28V45" fill="none" stroke="#141414" stroke-width="4.6" stroke-linejoin="miter" stroke-linecap="butt"/></svg><h1>Mukanda</h1></a><p>O teu CV e a tua carta de apresentação em PDF, prontos em minutos.</p><i></i></div></header>
+<header><div><a class="brand" href="#inicio" aria-label="Mukanda – início"><svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true"><rect width="64" height="64" rx="14" style="fill:var(--red)"/><path d="M16 11H40L50 21V53H16Z" fill="#fff"/><path d="M40 11V21H50Z" fill="#e0a100"/><path d="M23 45V28L32 38L41 28V45" fill="none" stroke="#141414" stroke-width="4.6" stroke-linejoin="miter" stroke-linecap="butt"/></svg><h1>Mukanda<small id="sub"></small></h1></a><p id="lema"></p><i></i></div></header>
 <main>
+<section id="v-inicio" class="view">
+<p style="margin:0 0 14px;font-weight:600">O que precisas de fazer hoje?</p>
+<a class="card" data-c="cv" href="#cv"><b>Currículo e carta de apresentação</b><span>Para candidaturas a vagas e concursos.</span><em>Começar →</em></a>
+<a class="card" data-c="documentos" href="#documentos"><b>Requerimentos e documentos</b><span>Requerimento, declaração, pedido de demissão e contrato de arrendamento.</span><em>Começar →</em></a>
+<a class="card" data-c="escola" href="#escola"><b>Capa de trabalho escolar</b><span>Capa profissional para trabalhos do liceu e da universidade.</span><em>Começar →</em></a>
+</section>
+<div id="v-cv" class="view hide">
 <nav class="tabs"><button class="on" data-t="cv">Currículo</button><button data-t="carta">Carta de apresentação</button></nav>
 
 <section id="cv">
@@ -75,8 +88,28 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <button class="go" id="gcarta">Gerar carta em PDF</button>
 </section>
 
-<fieldset id="pagar"><legend>Descarregar o PDF</legend>
-<p style="margin:0 0 8px">Preço fixo: <strong id="preco"></strong> (CV e carta incluídos).</p>
+</div>
+<div id="v-documentos" class="view hide">
+<fieldset><legend>Os teus dados</legend>
+<label for="dnome">Nome completo</label><input id="dnome" autocomplete="name">
+<div class="g2"><div><label for="dbi">Nº do BI</label><input id="dbi"></div><div><label for="dcid">Cidade</label><input id="dcid" placeholder="Ex: Luanda"></div></div>
+<label for="dmorada">Morada</label><input id="dmorada"></fieldset>
+<fieldset><legend>Documento</legend><label for="dtipo">Que documento precisas?</label><select id="dtipo"></select>
+<div id="dcampos"></div><p style="font-size:.85rem;margin:10px 0 0">Modelos simples. Para contratos, peça a um advogado que reveja antes de assinar.</p></fieldset>
+<button class="go" id="gdoc">Gerar documento em PDF</button></div>
+<div id="v-escola" class="view hide">
+<fieldset><legend>Capa do trabalho</legend>
+<label for="e_inst">Escola ou universidade</label><input id="e_inst">
+<label for="e_curso">Curso ou classe</label><input id="e_curso">
+<label for="e_disc">Disciplina</label><input id="e_disc">
+<label for="e_tema">Tema do trabalho</label><textarea id="e_tema" style="min-height:60px"></textarea>
+<label for="e_autor">Autor(es)</label><input id="e_autor">
+<label for="e_prof">Professor(a)</label><input id="e_prof">
+<div class="g2"><div><label for="e_cid">Cidade</label><input id="e_cid"></div><div><label for="e_ano">Ano</label><input id="e_ano" inputmode="numeric"></div></div>
+</fieldset>
+<button class="go" id="gcapa">Gerar capa em PDF</button></div>
+<fieldset id="pagar" class="hide"><legend>Descarregar o PDF</legend>
+<p style="margin:0 0 8px">Preço fixo: <strong id="preco"></strong> (todos os documentos incluídos).</p>
 <div id="dados"></div>
 <a class="wa" id="comp" href="#" target="_blank" rel="noopener">Enviar comprovativo por WhatsApp</a>
 <label for="cod">Já tens o código de acesso?</label>
@@ -110,7 +143,7 @@ function Doc(){var p=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),y=20,M=20,W
   p.splitTextToSize(s,W).forEach(function(l){if(y>textLimit){p.addPage();y=20}p.text(l,M,y);y+=size*0.48})}
  var textLimit=282;
  return {p:p,t:t,gap:function(n){y+=n},
-  sec:function(s){y+=4;t(s.toUpperCase(),11,true,[179,20,31]);p.setDrawColor(224,161,0);p.setLineWidth(.5);p.line(M,y-3,M+W,y-3);y+=1.5}}}
+  sec:function(s){y+=4;t(s.toUpperCase(),11,true,window.COR||[179,20,31]);p.setDrawColor(224,161,0);p.setLineWidth(.5);p.line(M,y-3,M+W,y-3);y+=1.5}}}
 
 async function saveDoc(p,name){var dl=null;try{dl=window.claude&&await window.claude.use('downloads')}catch(e){}
  if(dl){try{await dl.save({filename:name,data:p.output('blob')});return}catch(e){if(e&&e.code==='declined')return}}
@@ -146,7 +179,7 @@ $('gcarta').onclick=function(){if(needName())return;if(!v('vaga')||!v('emp')){$(
 function lerCod(){try{return localStorage.getItem('mk_code')||''}catch(e){return ''}}
 async function checar(c){try{var r=await fetch('/api/validar?c='+encodeURIComponent(c));return (await r.json()).ok===true}catch(e){return false}}
 async function liberado(){var c=lerCod();return c?await checar(c):false}
-function pintar(ok){$('pagar').classList.toggle('hide',ok)}
+var pago=false,cur='inicio';function sync(){$('pagar').classList.toggle('hide',pago||cur==='inicio')}function pintar(ok){pago=ok;sync()}
 (function(){var P=PAGAMENTO;$('preco').textContent=P.preco;var d=$('dados');
  if(P.iban){d.innerHTML='';[['Banco',P.banco],['IBAN',P.iban],['Titular',P.titular]].forEach(function(x){if(x[1]){var p=document.createElement('p');p.style.margin='2px 0';p.textContent=x[0]+': '+x[1];d.appendChild(p)}})}
  else d.textContent='Dados de pagamento por configurar.';
@@ -154,11 +187,38 @@ function pintar(ok){$('pagar').classList.toggle('hide',ok)}
  if(!P.whatsapp)$('comp').classList.add('hide')})();
 $('vcod').onclick=async function(){var c=v('cod').toUpperCase();if(!c)return;
  if(await checar(c)){try{localStorage.setItem('mk_code',c)}catch(e){}pintar(true);$('msg').textContent='Código aceite. Já podes gerar os PDFs.'}else $('msg').textContent='Código inválido. Confirma com quem te enviou.'};
-['gcv','gcarta'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){
- if(needName())return;
+var TIPOS={
+requerimento:{n:'Requerimento',c:[['destino','A quem se dirige (ex: Director da Escola X)'],['assunto','Assunto'],['pedido','O que pretende pedir',1]],g:function(f,P){return {t:'Requerimento',p:['Exmo(a). Senhor(a) '+f.destino,'Assunto: '+f.assunto,'Eu, '+P.nome+P.id+', venho por este meio requerer a V. Exa. o seguinte: '+f.pedido,'Nestes termos, aguardo deferimento.']}}},
+declaracao:{n:'Declaração',c:[['decl','O que declara (ex: resido em ...)',1]],g:function(f,P){return {t:'Declaração',p:['Eu, '+P.nome+P.id+', declaro, para os devidos efeitos, que '+f.decl+'.']}}},
+rescisao:{n:'Pedido de demissão',c:[['empresa','Empresa'],['cargo','Cargo'],['data','Último dia de trabalho (dd/mm/aaaa)']],g:function(f,P){return {t:'Pedido de demissão',p:['Exmos. Senhores da '+f.empresa,'Eu, '+P.nome+P.id+', venho por este meio comunicar a minha decisão de rescindir o contrato de trabalho que mantenho com essa empresa, no cargo de '+f.cargo+', com efeitos a partir de '+f.data+'.','Agradeço a oportunidade de trabalho e coloco-me à disposição para a passagem de funções.']}}},
+arrendamento:{n:'Contrato de arrendamento',c:[['senhorio','Nome do senhorio'],['sbi','BI do senhorio'],['imovel','Morada do imóvel'],['renda','Renda mensal (Kz)'],['inicio','Data de início (dd/mm/aaaa)'],['prazo','Duração (meses)']],g:function(f,P){return {t:'Contrato de arrendamento',s:['Senhorio: '+f.senhorio,'Inquilino: '+P.nome],p:['Entre '+f.senhorio+(f.sbi?', BI n.º '+f.sbi:'')+', adiante designado(a) Senhorio(a), e '+P.nome+P.id+', adiante designado(a) Inquilino(a), é celebrado o presente contrato de arrendamento, que se rege pelas cláusulas seguintes.','Cláusula 1.ª – O Senhorio dá de arrendamento ao Inquilino o imóvel situado em '+f.imovel+'.','Cláusula 2.ª – O arrendamento tem a duração de '+f.prazo+' meses, com início em '+f.inicio+'.','Cláusula 3.ª – A renda mensal é de '+f.renda+' Kz, a pagar até ao dia 5 de cada mês, salvo acordo diferente por escrito.','Cláusula 4.ª – O Inquilino obriga-se a usar o imóvel apenas para habitação e a devolvê-lo no estado em que o recebeu, salvo o desgaste normal.','Cláusula 5.ª – Qualquer das partes pode terminar o contrato mediante aviso escrito com 30 dias de antecedência.']}}}};
+Object.keys(TIPOS).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=TIPOS[k].n;$('dtipo').appendChild(o)});
+function pintaDoc(){$('dcampos').innerHTML='';TIPOS[$('dtipo').value].c.forEach(function(f){var l=document.createElement('label');l.textContent=f[1];var e=document.createElement(f[2]?'textarea':'input');e.dataset.k=f[0];l.appendChild(e);$('dcampos').appendChild(l)})}
+$('dtipo').onchange=pintaDoc;pintaDoc();
+$('gdoc').onclick=function(){var P={nome:v('dnome'),id:(v('dbi')?', portador(a) do BI n.º '+v('dbi'):'')+(v('dmorada')?', residente em '+v('dmorada'):'')};
+ if(!P.nome){$('msg').textContent='Preenche o teu nome.';return}
+ var f={};$('dcampos').querySelectorAll('[data-k]').forEach(function(e){f[e.dataset.k]=e.value.trim()});
+ var T=TIPOS[$('dtipo').value].g(f,P),d=Doc();
+ d.t((v('dcid')?v('dcid')+', ':'')+new Date().toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'}),10);d.gap(8);
+ d.t(T.t.toUpperCase(),14,true);d.gap(6);T.p.forEach(function(s){d.t(s,11);d.gap(4)});d.gap(14);
+ (T.s||[P.nome]).forEach(function(s){d.t('______________________________',11);d.t(s,10);d.gap(10)});
+ saveDoc(d.p,T.t.replace(/\s+/g,'-')+'-'+P.nome.replace(/\s+/g,'-')+'.pdf');$('msg').textContent='Documento gerado. Verifica a pasta de transferências.'};
+$('gcapa').onclick=function(){if(!v('e_tema')||!v('e_autor')){$('msg').textContent='Preenche pelo menos o tema e o autor.';return}
+ var d=Doc(),p=d.p;function c(s,y,z,b){if(!s)return y;p.setFont('times',b?'bold':'normal');p.setFontSize(z);p.setTextColor(25,25,25);var l=p.splitTextToSize(s,150);p.text(l,105,y,{align:'center'});return y+l.length*z*0.5+4}
+ var y=c(v('e_inst').toUpperCase(),30,14,1);y=c(v('e_curso'),y,12);p.setDrawColor.apply(p,window.COR);p.setLineWidth(.6);p.line(60,y+2,150,y+2);
+ c(v('e_disc'),100,12);c(v('e_tema').toUpperCase(),135,20,1);
+ c('Autor(es): '+v('e_autor'),200,12);c(v('e_prof')?'Professor(a): '+v('e_prof'):'',216,12);
+ c([v('e_cid'),v('e_ano')].filter(Boolean).join(', '),275,12);
+ saveDoc(p,'Capa-'+v('e_autor').split(',')[0].replace(/\s+/g,'-')+'.pdf');$('msg').textContent='Capa gerada. Verifica a pasta de transferências.'};
+var V={inicio:['','Documentos prontos em PDF, feitos para Angola.'],cv:['CV','O teu CV e a tua carta de apresentação em PDF, prontos em minutos.'],documentos:['Documentos','Requerimentos, declarações e contratos simples, prontos em PDF.'],escola:['Escola','Capas de trabalhos escolares e universitários, prontas em PDF.']};
+var COR={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,107,69]};
+function route(){var k=location.hash.slice(1);if(!V[k])k='inicio';cur=k;document.body.dataset.t=k;window.COR=COR[k];
+ Object.keys(V).forEach(function(x){$('v-'+x).classList.toggle('hide',x!==k)});
+ $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title='Mukanda'+(V[k][0]?' '+V[k][0]:'')+' – PDF para Angola';$('msg').textContent='';sync();window.scrollTo(0,0)}
+['gcv','gcarta','gdoc','gcapa'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){
  if(!(await liberado())){$('msg').textContent='Para descarregar, paga e insere o código de acesso.';pintar(false);$('pagar').scrollIntoView({behavior:'smooth'});return}
  f()}});
-liberado().then(pintar);
+liberado().then(pintar);window.onhashchange=route;route();
 $('wa').href='https://wa.me/?text='+encodeURIComponent('Faz o teu CV e carta em PDF, grátis, no Mukanda: '+SITE_URL);
 </script>
 </body>
