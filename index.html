@@ -132,7 +132,7 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <fieldset id="pagar" class="hide"><legend>Descarregar o PDF</legend>
 <p style="margin:0 0 8px">Preço fixo: <strong id="preco"></strong> (todos os documentos incluídos).</p>
 <div id="dados"></div>
-<a class="wa" id="comp" href="#" target="_blank" rel="noopener">Enviar comprovativo por WhatsApp</a>
+<a class="wa" id="compv" href="#" target="_blank" rel="noopener">Enviar comprovativo por WhatsApp</a>
 <label for="cod">Já tens o código de acesso?</label>
 <div style="display:flex;gap:8px"><input id="cod" placeholder="Ex: MK-1234" autocapitalize="characters"><button type="button" class="add" id="vcod">Validar</button></div>
 </fieldset>
@@ -202,10 +202,10 @@ async function checar(c){try{var b=await crypto.subtle.digest('SHA-256',new Text
 async function liberado(){var c=lerCod();return c?await checar(c):false}
 var pago=false,cur='inicio';function sync(){$('pagar').classList.toggle('hide',pago||cur==='inicio')}function pintar(ok){pago=ok;sync()}
 (function(){var P=PAGAMENTO;$('preco').textContent=P.preco;var d=$('dados');
- if(P.iban){d.innerHTML='';[['Banco',P.banco],['IBAN',P.iban],['Titular',P.titular]].forEach(function(x){if(x[1]){var p=document.createElement('p');p.style.margin='2px 0';p.textContent=x[0]+': '+x[1];d.appendChild(p)}})}
+ if(P.nib||P.iban){d.innerHTML='';[['Banco',P.banco],['NIB',P.nib],['IBAN',P.iban],['Titular',P.titular]].forEach(function(x){if(x[1]){var p=document.createElement('p');p.style.margin='2px 0';p.textContent=x[0]+': '+x[1];d.appendChild(p)}})}
  else d.textContent='Dados de pagamento por configurar.';
- $('comp').href=P.whatsapp?'https://wa.me/'+P.whatsapp+'?text='+encodeURIComponent('Olá! Paguei o Mukanda. Segue o comprovativo.'):'#';
- if(!P.whatsapp)$('comp').classList.add('hide')})();
+ $('compv').href=P.whatsapp?'https://wa.me/'+P.whatsapp+'?text='+encodeURIComponent('Olá! Paguei o Mukanda. Segue o comprovativo.'):'#';
+ if(!P.whatsapp)$('compv').classList.add('hide')})();
 $('vcod').onclick=async function(){var c=v('cod').toUpperCase();if(!c)return;
  if(await checar(c)){try{localStorage.setItem('mk_code',c)}catch(e){}pintar(true);$('msg').textContent='Código aceite. Já podes gerar os PDFs.'}else $('msg').textContent='Código inválido. Confirma com quem te enviou.'};
 var TIPOS={
