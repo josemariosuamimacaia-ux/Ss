@@ -9,3 +9,6 @@
 2. Abra `gerar-codigos.html` no navegador, escreva os códigos e cole o resultado em `codigos` no config.js.
 3. Troque `SEU-ENDERECO` pelo endereço final do site em `public/index.html`, `public/robots.txt` e `public/sitemap.xml`.
 Os ficheiros server.js e package.json já não são necessários.
+
+## Modo de pagamento
+Em `public/config.js`: `obrigatorio: false` = descarga livre e pagamento voluntário (sem códigos). `obrigatorio: true` = só descarrega com código de acesso.
