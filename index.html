@@ -43,6 +43,7 @@ textarea{min-height:84px;resize:vertical}
 .go:active{background:#8e0f18}
 .wa{display:block;text-align:center;margin-top:12px;padding:13px;border:2px solid #1a7f37;color:#1a7f37;font-weight:700;text-decoration:none;border-radius:6px}
 .hide{display:none}
+.card i{font-style:normal;font-weight:600;color:#4a463e}
 #dlink{display:inline-block;margin:6px 0 10px;color:var(--ink);text-decoration:none}#dlink.hide{display:none}
 .pg{display:block;width:100%;height:auto;border:1px solid var(--line);margin-bottom:12px;background:#fff}
 a.add{display:inline-block;text-decoration:none;color:var(--ink)}
@@ -77,10 +78,10 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <main>
 <a class="voltar hide" id="voltar" href="#inicio">← Voltar ao início</a>
 <section id="v-inicio" class="view">
-<p style="margin:0 0 14px;font-weight:600">O que precisas de fazer hoje?</p>
-<a class="card" data-c="cv" href="#cv"><b>Currículo e carta de apresentação</b><span>Para candidaturas a vagas e concursos.</span><em>Começar →</em></a>
-<a class="card" data-c="documentos" href="#documentos"><b>Requerimentos e documentos</b><span>Requerimento, declaração, pedido de demissão e contrato de arrendamento.</span><em>Começar →</em></a>
-<a class="card" data-c="escola" href="#escola"><b>Capa de trabalho escolar</b><span>Capa profissional para trabalhos do liceu e da universidade.</span><em>Começar →</em></a>
+<p style="margin:0 0 14px;font-weight:600">O que precisas de fazer hoje?<br><span id="gnota" style="font-weight:400">O teu primeiro documento é grátis.</span></p>
+<a class="card" data-c="cv" href="#cv"><b>Currículo e carta de apresentação</b><span>Para candidaturas a vagas e concursos.</span><em>Começar →</em><i class="pc" data-k="cv"></i></a>
+<a class="card" data-c="documentos" href="#documentos"><b>Requerimentos e documentos</b><span>Requerimento, declaração, pedido de demissão e contrato de arrendamento.</span><em>Começar →</em><i class="pc" data-k="documentos"></i></a>
+<a class="card" data-c="escola" href="#escola"><b>Capa de trabalho escolar</b><span>Capa profissional para trabalhos do liceu e da universidade.</span><em>Começar →</em><i class="pc" data-k="escola"></i></a>
 </section>
 <div id="v-cv" class="view hide">
 <nav class="tabs"><button class="on" data-t="cv">Currículo</button><button data-t="carta">Carta de apresentação</button></nav>
@@ -131,6 +132,7 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <label for="e_curso">Curso ou classe</label><input id="e_curso">
 <label for="e_disc">Disciplina</label><input id="e_disc">
 <label for="e_tema">Tema do trabalho</label><textarea id="e_tema" style="min-height:60px"></textarea>
+<label for="e_tipo">Tipo de trabalho (opcional)</label><input id="e_tipo" placeholder="Ex: Trabalho de pesquisa">
 <label for="e_autor">Autor(es)</label><input id="e_autor">
 <label for="e_prof">Professor(a)</label><input id="e_prof">
 <div class="g2"><div><label for="e_cid">Cidade</label><input id="e_cid"></div><div><label for="e_ano">Ano</label><input id="e_ano" inputmode="numeric"></div></div>
@@ -148,6 +150,7 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <a class="wa" id="compv" href="#" target="_blank" rel="noopener">Enviar comprovativo por WhatsApp</a>
 <label for="cod">Já tens o código de acesso?</label>
 <div style="display:flex;gap:8px"><input id="cod" placeholder="Ex: MK-1234" autocapitalize="characters"><button type="button" class="add" id="vcod">Validar</button></div>
+<button class="go hide" id="jpago" type="button" style="margin-top:12px">Já paguei, descarregar o PDF</button>
 </fieldset>
 <a id="dlink" class="add hide" href="#" download>Não descarregou? Toque aqui para guardar o PDF</a>
 <div id="msg" role="status"></div>
@@ -232,9 +235,12 @@ $('gcarta').onclick=function(){if(needName())return;if(!v('vaga')||!v('emp')){$(
 
 function lerCod(){try{return sessionStorage.getItem('mk_code')||''}catch(e){return ''}}
 async function checar(c){try{var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(c.trim().toUpperCase()));var x=Array.from(new Uint8Array(b)).map(function(n){return n.toString(16).padStart(2,'0')}).join('');return (PAGAMENTO.codigos||[]).indexOf(x)>-1}catch(e){return false}}
-async function liberado(){if(!PAGAMENTO.obrigatorio)return true;var c=lerCod();return c?await checar(c):false}
-var AV=/FBAN|FBAV|FB_IAB|Instagram|TikTok|musical_ly|Snapchat|Line\//i.test(navigator.userAgent)?' Se não descarregou, abre o site no Chrome (menu ⋮ > Abrir no navegador).':'';var pago=false,apoio=false,cur='inicio',emPrev=false,PEND=null;function sync(){$('pagar').classList.toggle('hide',!emPrev||(pago&&!apoio))}function pintar(ok){pago=ok;sync()}
-(function(){var P=PAGAMENTO;if(!P.obrigatorio){$('pagp').innerHTML='Gostaste? Ajuda o Mukanda a crescer com <strong id="preco"></strong> por transferência e envia o comprovativo por WhatsApp. Obrigado!';$('pagar').querySelector('legend').textContent='Ajuda o Mukanda';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('prev').querySelector('p').innerHTML='Vê se está bom e descarrega o teu PDF. Para mudar algo, toca em Alterar, ajusta e vê de novo.'}$('preco').textContent=P.preco;var d=$('dados');
+async function pagoOk(){if(MODO==='honra'){try{return sessionStorage.getItem('mk_honra_'+cur)==='1'}catch(e){return false}}if(MODO==='codigo'){var c=lerCod();return c?await checar(c):false}return true}
+function gratisLivre(){if(!PAGAMENTO.primeiroGratis||MODO==='livre')return false;try{return localStorage.getItem('mk_gratis')!=='1'}catch(e){return true}}
+async function liberado(){if(MODO==='livre')return true;if(await pagoOk())return true;return gratisLivre()}
+function txtPrev(){if(MODO==='livre')return;$('prev').querySelector('p').innerHTML='Vê se está bom. <strong>'+(gratisLivre()?'O teu primeiro documento é grátis!':'Só pagas se gostares.')+'</strong> Para mudar algo, toca em Alterar, ajusta e vê de novo.'}
+function precoDe(k){return (PAGAMENTO.precos&&PAGAMENTO.precos[k])||PAGAMENTO.preco}function precoAtual(){return precoDe(cur)}var MODO=PAGAMENTO.modo||(PAGAMENTO.obrigatorio?'codigo':'livre');var AV=/FBAN|FBAV|FB_IAB|Instagram|TikTok|musical_ly|Snapchat|Line\//i.test(navigator.userAgent)?' Se não descarregou, abre o site no Chrome (menu ⋮ > Abrir no navegador).':'';var pago=false,apoio=false,cur='inicio',emPrev=false,PEND=null;function sync(){$('pagar').classList.toggle('hide',!emPrev||(pago&&!apoio))}function pintar(ok){pago=ok;sync()}
+(function(){var P=PAGAMENTO;if(MODO==='honra'){$('pagp').innerHTML='Preço fixo: <strong id="preco"></strong> Faz a transferência, envia o comprovativo por WhatsApp e toca no botão abaixo para descarregar.';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('jpago').classList.remove('hide')}if(MODO==='livre'){$('pagp').innerHTML='Gostaste? Ajuda o Mukanda a crescer com <strong id="preco"></strong> por transferência e envia o comprovativo por WhatsApp. Obrigado!';$('pagar').querySelector('legend').textContent='Ajuda o Mukanda';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('prev').querySelector('p').innerHTML='Vê se está bom e descarrega o teu PDF. Para mudar algo, toca em Alterar, ajusta e vê de novo.'}$('preco').textContent=P.preco;var d=$('dados');
  if(P.nib||P.iban){d.innerHTML='';[['Banco',P.banco],['NIB',P.nib],['IBAN',P.iban],['Titular',P.titular]].forEach(function(x){if(x[1]){var p=document.createElement('p');p.style.margin='2px 0';p.textContent=x[0]+': '+x[1];d.appendChild(p)}})}
  else d.textContent='Dados de pagamento por configurar.';
  $('compv').href=P.whatsapp?'https://wa.me/'+P.whatsapp+'?text='+encodeURIComponent('Olá! Paguei o Mukanda. Segue o comprovativo.'):'#';
@@ -258,11 +264,17 @@ $('gdoc').onclick=function(){var P={nome:v('dnome'),id:(v('dbi')?', portador(a) 
  (T.s||[P.nome]).forEach(function(s){d.t('______________________________',11);d.t(s,10);d.gap(10)});
  prever(d.p,T.t.replace(/\s+/g,'-')+'-'+P.nome.replace(/\s+/g,'-')+'.pdf');0};
 $('gcapa').onclick=function(){if(!v('e_tema')||!v('e_autor')){$('msg').textContent='Preenche pelo menos o tema e o autor.';return}
- var d=Doc(),p=d.p;function c(s,y,z,b,col){if(!s)return y;p.setFont(d.F,b?'bold':'normal');p.setFontSize(z);p.setTextColor.apply(p,col||[25,25,25]);var l=p.splitTextToSize(s,150);p.text(l,105,y,{align:'center'});return y+l.length*z*0.5+4}
- var y=c(v('e_inst').toUpperCase(),30,14,1);y=c(v('e_curso'),y,12);p.setDrawColor.apply(p,d.AC);p.setLineWidth(.6);p.line(60,y+2,150,y+2);
- c(v('e_disc'),100,12);c(v('e_tema').toUpperCase(),135,20,1,d.AC);
- c('Autor(es): '+v('e_autor'),200,12);c(v('e_prof')?'Professor(a): '+v('e_prof'):'',216,12);
- c([v('e_cid'),v('e_ano')].filter(Boolean).join(', '),275,12);
+ var d=Doc(),p=d.p,A=d.AC;
+ function c(s,y,z,b,col,w){if(!s)return y;p.setFont(d.F,b?'bold':'normal');p.setFontSize(z);p.setTextColor.apply(p,col||[25,25,25]);var l=p.splitTextToSize(s,w||150);p.text(l,105,y,{align:'center'});return y+l.length*z*0.5+3}
+ function ln(a,b,x,y,w){p.setDrawColor.apply(p,A);p.setLineWidth(w);p.line(a,b,x,y)}
+ [[10,.9],[13,.3]].forEach(function(f){var m=f[0],w=f[1];ln(m,m,210-m,m,w);ln(210-m,m,210-m,297-m,w);ln(210-m,297-m,m,297-m,w);ln(m,297-m,m,m,w)});
+ var y=c(v('e_inst').toUpperCase(),38,15,1);y=c(v('e_curso'),y+1,12,0,[90,90,90]);ln(85,y+3,125,y+3,1.2);
+ c(v('e_disc'),100,13,1,[60,60,60]);
+ if(v('e_tipo'))c(v('e_tipo').toUpperCase(),128,11,1,A);
+ y=c(v('e_tema').toUpperCase(),v('e_tipo')?142:134,22,1,[25,25,25],140);ln(85,y+3,125,y+3,1.2);
+ y=c('Autor(es)',195,10,0,[110,110,110]);y=c(v('e_autor'),y+3,13,1);
+ if(v('e_prof')){y=c('Professor(a)',y+6,10,0,[110,110,110]);c(v('e_prof'),y+3,13,1)}
+ c([v('e_cid'),v('e_ano')].filter(Boolean).join(', '),268,12,0,[60,60,60]);
  prever(p,'Capa-'+v('e_autor').split(',')[0].replace(/\s+/g,'-')+'.pdf');0};
 var COR_OPC=[['Vermelho',[179,20,31]],['Azul',[29,78,137]],['Verde',[27,107,69]],['Grafite',[43,43,43]],['Roxo',[106,44,145]]],MOD_OPC=[['moderno','Moderno'],['empresarial','Empresarial'],['classico','Clássico']];
 function marca(){document.querySelectorAll('.estilo').forEach(function(f){f.querySelectorAll('.sw').forEach(function(b){b.classList.toggle('on',COR_OPC[b.dataset.i][1]===ESTILO.cor)});f.querySelectorAll('.md').forEach(function(b){b.classList.toggle('on',b.dataset.m===ESTILO.modelo)})})}
@@ -301,15 +313,16 @@ function prever(p,nome){PEND={p:p,nome:nome};var box=$('telas'),SC=3;box.innerHT
    else if(o.k==='l'){x.strokeStyle='rgb('+o.col.join(',')+')';x.lineWidth=(o.w||.2)*SC;x.beginPath();x.moveTo(o.a*SC,o.b*SC);x.lineTo(o.c*SC,o.d*SC);x.stroke()}
    else{x.font=(o.b?'bold ':'')+Math.round(o.s*0.3528*SC)+'px '+(o.f==='times'?'"Times New Roman",Times,serif':'Arial,Helvetica,sans-serif');x.fillStyle='rgb('+o.c.join(',')+')';x.textAlign=o.al==='center'?'center':'left';x.fillText(o.t,o.x*SC,o.y*SC)}});
   x.save();x.translate(c.width/2,c.height/2);x.rotate(-Math.PI/5);x.fillStyle='rgba(110,110,110,.2)';x.textAlign='center';x.font='bold '+(15*SC)+'px Arial,sans-serif';x.fillText('PRÉ-VISUALIZAÇÃO',0,0);x.fillText('MUKANDA',0,18*SC);x.restore();box.appendChild(c)}
- document.querySelectorAll('.view').forEach(function(v){v.classList.add('hide')});$('prev').classList.remove('hide');emPrev=true;apoio=false;$('dlink').classList.add('hide');sync();$('msg').textContent='';window.scrollTo(0,0);try{history.pushState({p:1},'')}catch(e){}}
+ document.querySelectorAll('.view').forEach(function(v){v.classList.add('hide')});$('prev').classList.remove('hide');emPrev=true;apoio=false;$('dlink').classList.add('hide');txtPrev();liberado().then(pintar);sync();$('msg').textContent='';window.scrollTo(0,0);try{history.pushState({p:1},'')}catch(e){}}
 $('palt').onclick=function(){route(cur);if(history.state&&history.state.p){try{history.back()}catch(e){}}};
-$('pdown').onclick=async function(){if(!(await liberado())){$('msg').textContent='Para descarregar, paga e insere o código de acesso.';$('pagar').scrollIntoView({behavior:'smooth'});return}saveDoc(PEND.p,PEND.nome);if(!PAGAMENTO.obrigatorio){apoio=true;sync();$('msg').textContent='Documento descarregado. Obrigado por usares o Mukanda!'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}$('msg').textContent='Documento descarregado. Verifica a pasta de transferências.'+AV};
+$('jpago').onclick=function(){try{sessionStorage.setItem('mk_honra_'+cur,'1')}catch(e){}pintar(true);if(PEND){saveDoc(PEND.p,PEND.nome);$('msg').textContent='Obrigado! Se ainda não enviaste o comprovativo, envia-o por WhatsApp.'+AV}};
+$('pdown').onclick=async function(){if(!(await liberado())){$('msg').textContent=MODO==='honra'?'Para descarregar, faz o pagamento e toca em "Já paguei".':'Para descarregar, paga e insere o código de acesso.';$('pagar').scrollIntoView({behavior:'smooth'});return}saveDoc(PEND.p,PEND.nome);if(MODO!=='livre'&&!(await pagoOk())){try{localStorage.setItem('mk_gratis','1')}catch(e){}pago=false;apoio=true;sync();$('msg').textContent='Este foi o teu documento grátis! Para fazer mais, paga '+precoAtual()+'.'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}if(MODO==='livre'){apoio=true;sync();$('msg').textContent='Documento descarregado. Obrigado por usares o Mukanda!'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}$('msg').textContent='Documento descarregado. Verifica a pasta de transferências.'+AV};
 if(PAGAMENTO.whatsapp)$('avisar').href='https://wa.me/'+PAGAMENTO.whatsapp+'?text='+encodeURIComponent('Olá! Tive um problema com um documento no Mukanda: ');else $('avisar').classList.add('hide');
 var V={inicio:['','Documentos prontos em PDF, feitos para Angola.'],cv:['CV','O teu CV e a tua carta de apresentação em PDF, prontos em minutos.'],documentos:['Documentos','Requerimentos, declarações e contratos simples, prontos em PDF.'],escola:['Escola','Capas de trabalhos escolares e universitários, prontas em PDF.']};
 var PALETA={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,107,69]};
-var T0=document.title;function route(k){k=typeof k==='string'?k:location.hash.slice(1);if(!V[k])k='inicio';cur=k;$("prev").classList.add("hide");emPrev=false;apoio=false;$("dlink").classList.add("hide");$("voltar").classList.toggle("hide",k==="inicio");document.body.dataset.t=k;window.COR=PALETA[k];
+document.querySelectorAll('.pc').forEach(function(e){e.textContent=' · '+precoDe(e.dataset.k)});if(!PAGAMENTO.primeiroGratis||MODO==='livre')$('gnota').classList.add('hide');var T0=document.title;function route(k){k=typeof k==='string'?k:location.hash.slice(1);if(!V[k])k='inicio';cur=k;$("prev").classList.add("hide");emPrev=false;apoio=false;$("dlink").classList.add("hide");$("voltar").classList.toggle("hide",k==="inicio");document.body.dataset.t=k;window.COR=PALETA[k];
  Object.keys(V).forEach(function(x){$('v-'+x).classList.toggle('hide',x!==k)});
- $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title=V[k][0]?'Mukanda '+V[k][0]+' – PDF para Angola':T0;$('msg').textContent='';sync();window.scrollTo(0,0)}
+ $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title=V[k][0]?'Mukanda '+V[k][0]+' – PDF para Angola':T0;$('msg').textContent='';sync();if($('preco'))$('preco').textContent=precoAtual();window.scrollTo(0,0)}
 liberado().then(pintar);document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(){route(a.getAttribute("href").slice(1))})});window.addEventListener('popstate',function(){if(emPrev)route(cur)});window.onhashchange=function(){route()};route();
 (function(){var s=$('splash'),visto=false;try{visto=sessionStorage.getItem('mk_s')==='1';sessionStorage.setItem('mk_s','1')}catch(e){}
 function fecha(){s.classList.add('sai');setTimeout(function(){s.remove()},400)}

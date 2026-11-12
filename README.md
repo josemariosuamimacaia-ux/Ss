@@ -12,3 +12,8 @@ Os ficheiros server.js e package.json já não são necessários.
 
 ## Modo de pagamento
 Em `public/config.js`: `obrigatorio: false` = descarga livre e pagamento voluntário (sem códigos). `obrigatorio: true` = só descarrega com código de acesso.
+
+## Modo de pagamento (config.js, campo `modo`)
+- `honra`: o cliente paga, envia o comprovativo e toca em "Já paguei" para descarregar (sem códigos, não é verificado).
+- `codigo`: só descarrega com código de acesso (verificado por si).
+- `livre`: descarga livre e pagamento voluntário.
