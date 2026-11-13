@@ -1,9 +1,9 @@
 // Edite aqui os dados de pagamento. Deixe vazio o que ainda não tiver.
 var PAGAMENTO = {
-  preco: '500 Kz',      // preço de cada documento (padrão)
-  precos: { escola: '100 Kz' },   // preços por serviço (cv, documentos, escola); o que não estiver aqui usa o preço padrão
-  primeiroGratis: true,  // o 1.º documento de cada pessoa (por aparelho) é grátis
-  modo: 'honra',   // 'honra' = paga, envia o comprovativo e toca "Já paguei" | 'codigo' = só com código de acesso | 'livre' = descarga livre e pagamento voluntário
+  preco: '400 Kz',      // preço de cada documento (padrão)
+  precos: { escola: '300 Kz' },   // preços por serviço (cv, documentos, escola); o que não estiver aqui usa o preço padrão
+  primeiroGratis: false,  // o 1.º documento de cada pessoa (por aparelho) é grátis
+  modo: 'honra',   // 'honra' = PDF grátis com marca no rodapé; sem marca = paga, escreve o nome e toca "Já paguei" (2 documentos por pagamento) | 'codigo' = só com código de acesso | 'livre' = descarga livre e pagamento voluntário
   banco: 'BFA',            // ex: BAI
   nib: '000600003840991930117',   // NIB (21 dígitos). Confirme no app do banco
   iban: '',             // IBAN da conta que vai receber (ex: AO06 0000 0000 0000 0000 0000 0)

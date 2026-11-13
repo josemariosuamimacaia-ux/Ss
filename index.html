@@ -78,7 +78,7 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <main>
 <a class="voltar hide" id="voltar" href="#inicio">← Voltar ao início</a>
 <section id="v-inicio" class="view">
-<p style="margin:0 0 14px;font-weight:600">O que precisas de fazer hoje?<br><span id="gnota" style="font-weight:400">O teu primeiro documento é grátis.</span></p>
+<p style="margin:0 0 14px;font-weight:600">O que precisas de fazer hoje?<br><span id="gnota" style="font-weight:400">Descarrega grátis, ou sem a marca do Mukanda por um preço fixo.</span></p>
 <a class="card" data-c="cv" href="#cv"><b>Currículo e carta de apresentação</b><span>Para candidaturas a vagas e concursos.</span><em>Começar →</em><i class="pc" data-k="cv"></i></a>
 <a class="card" data-c="documentos" href="#documentos"><b>Requerimentos e documentos</b><span>Requerimento, declaração, pedido de demissão e contrato de arrendamento.</span><em>Começar →</em><i class="pc" data-k="documentos"></i></a>
 <a class="card" data-c="escola" href="#escola"><b>Capa de trabalho escolar</b><span>Capa profissional para trabalhos do liceu e da universidade.</span><em>Começar →</em><i class="pc" data-k="escola"></i></a>
@@ -88,6 +88,7 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 
 <section id="cv">
 <fieldset><legend>Dados pessoais</legend>
+<label for="foto">Foto (opcional)</label><input id="foto" type="file" accept="image/*"><p style="font-size:.8rem;margin:4px 0 0">Com foto, o currículo usa duas colunas. A foto fica só no teu telemóvel.</p>
 <label for="nome">Nome completo</label><input id="nome" autocomplete="name">
 <label for="prof">Profissão ou área</label><input id="prof" placeholder="Ex: Técnico de Informática">
 <div class="g2"><div><label for="tel">Telefone</label><input id="tel" type="tel" autocomplete="tel"></div><div><label for="email">Email</label><input id="email" type="email" autocomplete="email"></div></div>
@@ -130,12 +131,15 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <fieldset><legend>Capa do trabalho</legend>
 <label for="e_inst">Escola ou universidade</label><input id="e_inst">
 <label for="e_curso">Curso ou classe</label><input id="e_curso">
+<label for="e_cab">Cabeçalho oficial (opcional, uma linha por linha)</label><textarea id="e_cab" style="min-height:90px" placeholder="República de Angola&#10;Ministério da Educação&#10;Instituto Superior Politécnico&#10;Departamento de Engenharia"></textarea>
 <label for="e_disc">Disciplina</label><input id="e_disc">
 <label for="e_tema">Tema do trabalho</label><textarea id="e_tema" style="min-height:60px"></textarea>
+<label for="e_sub">Subtítulo (opcional)</label><input id="e_sub" placeholder="Ex: Caso de estudo na Empresa XYZ">
 <label for="e_tipo">Tipo de trabalho (opcional)</label><input id="e_tipo" placeholder="Ex: Trabalho de pesquisa">
-<label for="e_autor">Autor(es)</label><input id="e_autor">
-<label for="e_prof">Professor(a)</label><input id="e_prof">
-<div class="g2"><div><label for="e_cid">Cidade</label><input id="e_cid"></div><div><label for="e_ano">Ano</label><input id="e_ano" inputmode="numeric"></div></div>
+<label for="e_rot">Mostrar nomes como</label><select id="e_rot"><option value="1">Discente / Docente</option><option value="2">Autor / Professor</option></select>
+<label for="e_autor">Nome do autor (discente)</label><input id="e_autor">
+<label for="e_prof">Professor(a) / Docente</label><input id="e_prof">
+<div class="g2"><div><label for="e_cid">Cidade</label><input id="e_cid" placeholder="Luanda, Angola"></div><div><label for="e_ano">Data</label><input id="e_ano" placeholder="Outubro de 2026"></div></div>
 </fieldset>
 <button class="go" id="gcapa">Ver pré-visualização</button></div>
 <section id="prev" class="hide"><fieldset><legend>Pré-visualização</legend>
@@ -150,6 +154,9 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <a class="wa" id="compv" href="#" target="_blank" rel="noopener">Enviar comprovativo por WhatsApp</a>
 <label for="cod">Já tens o código de acesso?</label>
 <div style="display:flex;gap:8px"><input id="cod" placeholder="Ex: MK-1234" autocapitalize="characters"><button type="button" class="add" id="vcod">Validar</button></div>
+<details id="difv" class="hide"><summary style="cursor:pointer;font-weight:600;margin:10px 0">Ver a diferença entre grátis e pago</summary><img id="difimg" alt="Comparação entre a versão grátis e a paga" style="width:100%;border:1px solid var(--line);border-radius:6px"></details>
+<label for="pnome" id="lpnome" class="hide">O teu nome (para confirmar o pagamento)</label><input id="pnome" class="hide" autocomplete="name">
+<p id="aviso2" class="hide" style="font-size:.85rem;margin:8px 0 0">Os pagamentos são confirmados no extrato do banco. Enviar um comprovativo falso é crime e pode ser denunciado. O teu nome serve só para confirmar o pagamento.</p>
 <button class="go hide" id="jpago" type="button" style="margin-top:12px">Já paguei, descarregar o PDF</button>
 </fieldset>
 <a id="dlink" class="add hide" href="#" download>Não descarregou? Toque aqui para guardar o PDF</a>
@@ -189,7 +196,18 @@ function PDF(){var j=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),R=[],pg=1,s
   addPage:function(){j.addPage();pg++},
   text:function(t,x,y,o){(Array.isArray(t)?t:[t]).forEach(function(s,i){R.push({k:'t',pg:pg,t:s,x:x,y:y+i*st.s*0.3528*1.15,al:o&&o.align,f:st.f,b:st.b,s:st.s,c:st.tc})});j.text(t,x,y,o)},
   line:function(a,b,c,d){R.push({k:'l',pg:pg,a:a,b:b,c:c,d:d,col:st.dc,w:st.w});j.line(a,b,c,d)},
-  rect:function(x,y,w,h,m){R.push({k:'r',pg:pg,x:x,y:y,w:w,h:h,col:st.fc});j.rect(x,y,w,h,m)},
+  rect:function(x,y,w,h,m){R.push({k:'r',pg:pg,x:x,y:y,w:w,h:h,m:m,w2:st.w,col:m==='S'?st.dc:st.fc});j.rect(x,y,w,h,m)},
+  circle:function(x,y,r,m){R.push({k:'c',pg:pg,x:x,y:y,r:r,m:m||'S',w2:st.w,col:m==='F'?st.fc:st.dc});j.circle(x,y,r,m)},
+  image:function(o,x,y,w,h){R.push({k:'i',pg:pg,x:x,y:y,w:w,h:h,im:o.im});j.addImage(o.d,'JPEG',x,y,w,h)},
+  marca:function(s){j.setFont('helvetica','normal');j.setFontSize(8);var w=j.getTextWidth(s),S=5,x0=105-(w+S+2)/2,y0=287.2,m=[[1.7,3.8,1.7,2.2],[1.7,2.2,2.5,3.1],[2.5,3.1,3.3,2.2],[3.3,2.2,3.3,3.8]];
+   for(var i=1;i<=pg;i++){j.setPage(i);
+    j.setFillColor(179,20,31);j.rect(x0,y0,S,S,'F');R.push({k:'r',pg:i,x:x0,y:y0,w:S,h:S,col:[179,20,31]});
+    j.setFillColor(255,255,255);j.rect(x0+1,y0+.7,3,3.6,'F');R.push({k:'r',pg:i,x:x0+1,y:y0+.7,w:3,h:3.6,col:[255,255,255]});
+    j.setFillColor(224,161,0);j.rect(x0+3.2,y0+.7,.8,.8,'F');R.push({k:'r',pg:i,x:x0+3.2,y:y0+.7,w:.8,h:.8,col:[224,161,0]});
+    j.setDrawColor(20,20,20);j.setLineWidth(.35);
+    m.forEach(function(q){j.line(x0+q[0],y0+q[1],x0+q[2],y0+q[3]);R.push({k:'l',pg:i,a:x0+q[0],b:y0+q[1],c:x0+q[2],d:y0+q[3],col:[20,20,20],w:.35})});
+    j.setFont('helvetica','normal');j.setFontSize(8);j.setTextColor(120,120,120);j.text(s,x0+S+2,y0+3.6);R.push({k:'t',pg:i,t:s,x:x0+S+2,y:y0+3.6,f:'helvetica',b:0,s:8,c:[120,120,120]})}
+   j.setPage(pg)},
   blob:function(){return j.output('blob')},save:function(n){j.save(n)}}}
 function Doc(){var E=ESTILO,F=E.modelo==='classico'?'times':'helvetica',AC=E.cor,INK=[25,25,25],p=PDF(),y=20,M=20,W=170;
  function t(s,size,bold,col,al){size=size||10;p.setFont(F,bold?'bold':'normal');p.setFontSize(size);p.setTextColor.apply(p,col||INK);
@@ -208,7 +226,34 @@ async function saveDoc(p,name){var dl=null;try{dl=window.claude&&await window.cl
 function needName(){if(!v('nome')){$('msg').textContent='Preenche o teu nome no separador Currículo.';return true}$('msg').textContent='';return false}
 function contactLine(){return [v('tel'),v('email'),v('morada')].filter(Boolean).join('  |  ')}
 
-$('gcv').onclick=function(){if(needName())return;var d=Doc();
+function PRO(){return MODO!=='honra'||cred()>0}
+var FOTO=null;
+$('foto').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f){FOTO=null;return}
+ var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(im.width,im.height),c=document.createElement('canvas');c.width=c.height=360;c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,360,360);var d=c.toDataURL('image/jpeg',.85),i2=new Image();i2.onload=function(){FOTO={d:d,im:i2}};i2.src=d};im.src=r.result};r.readAsDataURL(f)});
+function brk(s){return String(s).replace(/(\S{24})(?=\S)/g,'$1 ')}
+function lista(s){return String(s||'').split(/[,;\n]/).map(function(x){return x.trim()}).filter(Boolean)}
+function cvLado(){var d=Doc(),p=d.p,AC=d.AC,F=d.F,pro=PRO(),SW=66,ink=[25,25,25],side=pro?AC:[238,235,229],sT=pro?[255,255,255]:[30,30,30],sH=pro?[255,255,255]:AC,ys=66,ym=22,MX=74,MW=124;
+ function bg(){p.setFillColor.apply(p,side);p.rect(0,0,SW,284,'F')}
+ function st(s,size,bold,col){p.setFont(F,bold?'bold':'normal');p.setFontSize(size);p.setTextColor.apply(p,col);p.splitTextToSize(brk(s),50).forEach(function(l){p.text(l,8,ys);ys+=size*0.48})}
+ function sh(t){ys+=5;st(t.toUpperCase(),9.5,true,sH);p.setDrawColor.apply(p,sH);p.setLineWidth(.3);p.line(8,ys-3.2,58,ys-3.2);ys+=1.5}
+ function mt(s,size,bold,col){p.setFont(F,bold?'bold':'normal');p.setFontSize(size);p.setTextColor.apply(p,col);p.splitTextToSize(brk(s),MW).forEach(function(l){if(ym>282){p.addPage();bg();ym=20}p.text(l,MX,ym);ym+=size*0.48})}
+ function ms(t){if(ym>255){p.addPage();bg();ym=20}ym+=4;mt(t.toUpperCase(),11,true,AC);p.setDrawColor.apply(p,AC);p.setLineWidth(.4);p.line(MX,ym-3,MX+MW,ym-3);ym+=1.5}
+ bg();p.setFillColor(255,255,255);p.rect(11.5,15.5,43,43,'F');p.image(FOTO,13,17,40,40);
+ var ct=[v('tel'),v('email'),v('morada')].filter(Boolean);if(ct.length){sh('Contacto');ct.forEach(function(s){st(s,9,false,sT);ys+=1})}
+ var pe=[['Nascimento',v('nasc')],['Naturalidade',v('nat')],['Estado civil',v('civil')],['BI',v('bi')]].filter(function(x){return x[1]});
+ if(pe.length){sh('Dados pessoais');pe.forEach(function(x){st(x[0],8,true,sT);st(x[1],9,false,sT);ys+=1})}
+ var cp=lista(v('comp'));if(cp.length){sh('Competências');cp.forEach(function(s){st('• '+s,9,false,sT)})}
+ var ld=lista(v('idi'));if(ld.length){sh('Idiomas');ld.forEach(function(s){st('• '+s,9,false,sT)})}
+ mt(v('nome'),22,true,ink);if(v('prof'))mt(v('prof'),12,false,[90,90,90]);ym+=2;p.setDrawColor.apply(p,AC);p.setLineWidth(1);p.line(MX,ym,MX+30,ym);ym+=3;
+ if(v('res')){ms('Resumo');mt(v('res'),10,false,ink)}
+ var ex=rows('exp');if(ex.length){ms('Experiência profissional');ex.forEach(function(e){ym+=1.5;mt([e.cargo,e.emp].filter(Boolean).join(' – ')+(e.per?'  ('+e.per+')':''),10.5,true,ink);if(e.desc)mt(e.desc,10,false,ink)})}
+ var ed=rows('edu');if(ed.length){ms('Formação');ed.forEach(function(e){ym+=1.5;mt([e.curso,e.inst].filter(Boolean).join(' – ')+(e.ano?'  ('+e.ano+')':''),10.5,true,ink)})}
+ prever(p,'CV-'+v('nome').replace(/\s+/g,'-')+'.pdf')}
+function rede(p,A,cx,cy){var L=[[0,-1],[.9,-.6],[1,.3],[.5,.9],[-.4,1],[-1,.4],[-.9,-.5]];
+ p.setDrawColor.apply(p,A);p.setLineWidth(.5);p.circle(cx,cy,24,'S');p.setLineWidth(.25);p.circle(cx,cy,17,'S');p.circle(cx,cy,10,'S');
+ p.setFillColor.apply(p,A);L.forEach(function(q){var nx=cx+q[0]*24,ny=cy+q[1]*24;p.setLineWidth(.25);p.line(cx,cy,nx,ny);p.circle(nx,ny,1.8,'F')});
+ p.setFillColor(201,162,39);p.circle(cx,cy,3.2,'F')}
+$('gcv').onclick=function(){if(needName())return;if(FOTO){cvLado();return}var d=Doc();
  d.head(v('nome'),v('prof'),contactLine());
  var pes=[['Data de nascimento',v('nasc')],['Naturalidade',v('nat')],['Estado civil',v('civil')],['BI',v('bi')]].filter(function(x){return x[1]}).map(function(x){return x[0]+': '+x[1]}).join('  |  ');
  if(pes)d.t(pes,9.5);
@@ -235,12 +280,13 @@ $('gcarta').onclick=function(){if(needName())return;if(!v('vaga')||!v('emp')){$(
 
 function lerCod(){try{return sessionStorage.getItem('mk_code')||''}catch(e){return ''}}
 async function checar(c){try{var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(c.trim().toUpperCase()));var x=Array.from(new Uint8Array(b)).map(function(n){return n.toString(16).padStart(2,'0')}).join('');return (PAGAMENTO.codigos||[]).indexOf(x)>-1}catch(e){return false}}
-async function pagoOk(){if(MODO==='honra'){try{return sessionStorage.getItem('mk_honra_'+cur)==='1'}catch(e){return false}}if(MODO==='codigo'){var c=lerCod();return c?await checar(c):false}return true}
+async function pagoOk(){if(MODO==='honra')return cred()>0;if(MODO==='codigo'){var c=lerCod();return c?await checar(c):false}return true}
 function gratisLivre(){if(!PAGAMENTO.primeiroGratis||MODO==='livre')return false;try{return localStorage.getItem('mk_gratis')!=='1'}catch(e){return true}}
 async function liberado(){if(MODO==='livre')return true;if(await pagoOk())return true;return gratisLivre()}
-function txtPrev(){if(MODO==='livre')return;$('prev').querySelector('p').innerHTML='Vê se está bom. <strong>'+(gratisLivre()?'O teu primeiro documento é grátis!':'Só pagas se gostares.')+'</strong> Para mudar algo, toca em Alterar, ajusta e vê de novo.'}
-function precoDe(k){return (PAGAMENTO.precos&&PAGAMENTO.precos[k])||PAGAMENTO.preco}function precoAtual(){return precoDe(cur)}var MODO=PAGAMENTO.modo||(PAGAMENTO.obrigatorio?'codigo':'livre');var AV=/FBAN|FBAV|FB_IAB|Instagram|TikTok|musical_ly|Snapchat|Line\//i.test(navigator.userAgent)?' Se não descarregou, abre o site no Chrome (menu ⋮ > Abrir no navegador).':'';var pago=false,apoio=false,cur='inicio',emPrev=false,PEND=null;function sync(){$('pagar').classList.toggle('hide',!emPrev||(pago&&!apoio))}function pintar(ok){pago=ok;sync()}
-(function(){var P=PAGAMENTO;if(MODO==='honra'){$('pagp').innerHTML='Preço fixo: <strong id="preco"></strong> Faz a transferência, envia o comprovativo por WhatsApp e toca no botão abaixo para descarregar.';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('jpago').classList.remove('hide')}if(MODO==='livre'){$('pagp').innerHTML='Gostaste? Ajuda o Mukanda a crescer com <strong id="preco"></strong> por transferência e envia o comprovativo por WhatsApp. Obrigado!';$('pagar').querySelector('legend').textContent='Ajuda o Mukanda';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('prev').querySelector('p').innerHTML='Vê se está bom e descarrega o teu PDF. Para mudar algo, toca em Alterar, ajusta e vê de novo.'}$('preco').textContent=P.preco;var d=$('dados');
+function atualizaWa(){var P=PAGAMENTO;if(!P.whatsapp||MODO!=='honra')return;$('compv').href='https://wa.me/'+P.whatsapp+'?text='+encodeURIComponent('Olá! Paguei o Mukanda ('+(V[cur][0]||'')+', '+precoAtual()+'). Nome: '+v('pnome')+'. Referência: '+REF+'. Segue o comprovativo.')}
+function txtPrev(){if(MODO==='honra'){$('prev').querySelector('p').innerHTML='Vê se está bom. <strong>'+(cred()>0?'Este PDF vai sem marca e com o design completo.':'A versão grátis leva a marca do Mukanda no rodapé. A paga vem sem marca e com decoração extra.')+'</strong> Para mudar algo, toca em Alterar, ajusta e vê de novo.';return}if(MODO==='livre')return;$('prev').querySelector('p').innerHTML='Vê se está bom. <strong>'+(gratisLivre()?'O teu primeiro documento é grátis!':'Só pagas se gostares.')+'</strong> Para mudar algo, toca em Alterar, ajusta e vê de novo.'}
+function precoDe(k){return (PAGAMENTO.precos&&PAGAMENTO.precos[k])||PAGAMENTO.preco}function precoAtual(){return precoDe(cur)}function cred(){try{return +localStorage.getItem('mk_cred_'+cur)||0}catch(e){return 0}}function setCred(n){try{localStorage.setItem('mk_cred_'+cur,String(n))}catch(e){}}var REF=(function(){var r='';try{r=sessionStorage.getItem('mk_ref')||''}catch(e){}if(!r){r='MK-'+Math.floor(1000+Math.random()*9000);try{sessionStorage.setItem('mk_ref',r)}catch(e){}}return r})();var ULTIMO='';var MODO=PAGAMENTO.modo||(PAGAMENTO.obrigatorio?'codigo':'livre');var AV=/FBAN|FBAV|FB_IAB|Instagram|TikTok|musical_ly|Snapchat|Line\//i.test(navigator.userAgent)?' Se não descarregou, abre o site no Chrome (menu ⋮ > Abrir no navegador).':'';var pago=false,apoio=false,cur='inicio',emPrev=false,PEND=null;function sync(){$('pagar').classList.toggle('hide',!emPrev||(pago&&!apoio))}function pintar(ok){pago=ok;sync()}
+(function(){var P=PAGAMENTO;if(MODO==='honra'){$('pagp').innerHTML='O PDF grátis leva a marca do Mukanda no rodapé. Para o PDF <strong>sem marca</strong>: preço <strong id="preco"></strong> (2 documentos por pagamento). 1) Faz a transferência e escreve a referência <strong id="ref"></strong> na descrição. 2) Escreve o teu nome. 3) Toca em "Já paguei" e envia o comprovativo por WhatsApp.';$('ref').textContent=REF;$('pagar').querySelector('legend').textContent='PDF sem marca';$('lpnome').classList.remove('hide');$('difv').classList.remove('hide');$('difv').addEventListener('toggle',function(){if(this.open&&!$('difimg').getAttribute('src'))$('difimg').src='comparacao.jpg'});$('pnome').classList.remove('hide');$('aviso2').classList.remove('hide');$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('jpago').classList.remove('hide')}if(MODO==='livre'){$('pagp').innerHTML='Gostaste? Ajuda o Mukanda a crescer com <strong id="preco"></strong> por transferência e envia o comprovativo por WhatsApp. Obrigado!';$('pagar').querySelector('legend').textContent='Ajuda o Mukanda';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('prev').querySelector('p').innerHTML='Vê se está bom e descarrega o teu PDF. Para mudar algo, toca em Alterar, ajusta e vê de novo.'}$('preco').textContent=P.preco;var d=$('dados');
  if(P.nib||P.iban){d.innerHTML='';[['Banco',P.banco],['NIB',P.nib],['IBAN',P.iban],['Titular',P.titular]].forEach(function(x){if(x[1]){var p=document.createElement('p');p.style.margin='2px 0';p.textContent=x[0]+': '+x[1];d.appendChild(p)}})}
  else d.textContent='Dados de pagamento por configurar.';
  $('compv').href=P.whatsapp?'https://wa.me/'+P.whatsapp+'?text='+encodeURIComponent('Olá! Paguei o Mukanda. Segue o comprovativo.'):'#';
@@ -264,36 +310,41 @@ $('gdoc').onclick=function(){var P={nome:v('dnome'),id:(v('dbi')?', portador(a) 
  (T.s||[P.nome]).forEach(function(s){d.t('______________________________',11);d.t(s,10);d.gap(10)});
  prever(d.p,T.t.replace(/\s+/g,'-')+'-'+P.nome.replace(/\s+/g,'-')+'.pdf');0};
 $('gcapa').onclick=function(){if(!v('e_tema')||!v('e_autor')){$('msg').textContent='Preenche pelo menos o tema e o autor.';return}
- var d=Doc(),p=d.p,A=d.AC;
- function c(s,y,z,b,col,w){if(!s)return y;p.setFont(d.F,b?'bold':'normal');p.setFontSize(z);p.setTextColor.apply(p,col||[25,25,25]);var l=p.splitTextToSize(s,w||150);p.text(l,105,y,{align:'center'});return y+l.length*z*0.5+3}
- function ln(a,b,x,y,w){p.setDrawColor.apply(p,A);p.setLineWidth(w);p.line(a,b,x,y)}
- [[10,.9],[13,.3]].forEach(function(f){var m=f[0],w=f[1];ln(m,m,210-m,m,w);ln(210-m,m,210-m,297-m,w);ln(210-m,297-m,m,297-m,w);ln(m,297-m,m,m,w)});
- var y=c(v('e_inst').toUpperCase(),38,15,1);y=c(v('e_curso'),y+1,12,0,[90,90,90]);ln(85,y+3,125,y+3,1.2);
- c(v('e_disc'),100,13,1,[60,60,60]);
- if(v('e_tipo'))c(v('e_tipo').toUpperCase(),128,11,1,A);
- y=c(v('e_tema').toUpperCase(),v('e_tipo')?142:134,22,1,[25,25,25],140);ln(85,y+3,125,y+3,1.2);
- y=c('Autor(es)',195,10,0,[110,110,110]);y=c(v('e_autor'),y+3,13,1);
- if(v('e_prof')){y=c('Professor(a)',y+6,10,0,[110,110,110]);c(v('e_prof'),y+3,13,1)}
- c([v('e_cid'),v('e_ano')].filter(Boolean).join(', '),268,12,0,[60,60,60]);
- prever(p,'Capa-'+v('e_autor').split(',')[0].replace(/\s+/g,'-')+'.pdf');0};
+ var d=Doc(),p=d.p,A=d.AC,pro=PRO(),F=(ESTILO.modelo==='moderno'&&ESTILO.m2)?'helvetica':'times',INK=[25,25,25],GOLD=[201,162,39];
+ function c(s,y,z,b,col,w){if(!s)return y;p.setFont(F,b?'bold':'normal');p.setFontSize(z);p.setTextColor.apply(p,col||INK);var l=p.splitTextToSize(s,w||150);p.text(l,105,y,{align:'center'});return y+l.length*z*0.5+2}
+ function ln(a,b,x,y,w,col){p.setDrawColor.apply(p,col||A);p.setLineWidth(w);p.line(a,b,x,y)}
+ var fr=pro?[[10,.9],[13,.3]]:[[12,.5]];fr.forEach(function(f){var m=f[0],w=f[1];ln(m,m,210-m,m,w);ln(210-m,m,210-m,297-m,w);ln(210-m,297-m,m,297-m,w);ln(m,297-m,m,m,w)});
+ var cab=v('e_cab').split('\n').map(function(s){return s.trim()}).filter(Boolean);if(!cab.length)cab=[v('e_inst'),v('e_curso')].filter(Boolean);
+ var y=36;cab.forEach(function(s,i){y=c(s.toUpperCase(),y,i===0?14:12,1,INK)});ln(85,y+1,125,y+1,1.2,pro?GOLD:A);
+ if(v('e_disc'))c(v('e_disc'),Math.max(y+16,98),13,1,[60,60,60]);
+ if(v('e_tipo'))c(v('e_tipo').toUpperCase(),124,11,1,A);
+ y=c(v('e_tema').toUpperCase(),v('e_tipo')?138:130,20,1,pro?A:INK,140);
+ if(v('e_sub'))y=c(v('e_sub'),y+1,13,1,[70,70,70],140);
+ ln(85,y+2,125,y+2,1.2,pro?GOLD:A);
+ if(pro)rede(p,A,46,242);
+ var rot=$('e_rot').value==='1'?['DISCENTE','DOCENTE']:['AUTOR(ES)','PROFESSOR(A)'],by=Math.max(y+22,192);
+ function bl(lab,val){p.setFont(F,'bold');p.setFontSize(12);p.setTextColor.apply(p,INK);var l=p.splitTextToSize(lab+': '+val,95);p.text(l,100,by);by+=l.length*6+3}
+ bl(rot[0],v('e_autor'));if(v('e_prof'))bl(rot[1],v('e_prof'));
+ c(v('e_cid').toUpperCase(),262,12,1);c(v('e_ano').toUpperCase(),268,12,1);
+ prever(p,'Capa-'+v('e_autor').split(',')[0].replace(/\s+/g,'-')+'.pdf')};
 var COR_OPC=[['Vermelho',[179,20,31]],['Azul',[29,78,137]],['Verde',[27,107,69]],['Grafite',[43,43,43]],['Roxo',[106,44,145]]],MOD_OPC=[['moderno','Moderno'],['empresarial','Empresarial'],['classico','Clássico']];
 function marca(){document.querySelectorAll('.estilo').forEach(function(f){f.querySelectorAll('.sw').forEach(function(b){b.classList.toggle('on',COR_OPC[b.dataset.i][1]===ESTILO.cor)});f.querySelectorAll('.md').forEach(function(b){b.classList.toggle('on',b.dataset.m===ESTILO.modelo)})})}
 function mkEstilo(){var f=document.createElement('fieldset');f.className='estilo';f.innerHTML='<legend>Estilo do documento</legend><label>Cor</label><div class="op cores"></div><label>Modelo</label><div class="op mods"></div>';
  var c=f.querySelector('.cores'),m=f.querySelector('.mods');
  COR_OPC.forEach(function(o,i){var b=document.createElement('button');b.type='button';b.className='sw';b.style.background='rgb('+o[1].join(',')+')';b.setAttribute('aria-label',o[0]);b.dataset.i=i;c.appendChild(b)});
  MOD_OPC.forEach(function(o){var b=document.createElement('button');b.type='button';b.className='md';b.textContent=o[1];b.dataset.m=o[0];m.appendChild(b)});
- f.onclick=function(e){var b=e.target.closest('button');if(!b)return;if(b.dataset.i!==undefined)ESTILO.cor=COR_OPC[b.dataset.i][1];if(b.dataset.m)ESTILO.modelo=b.dataset.m;marca()};return f}
+ f.onclick=function(e){var b=e.target.closest('button');if(!b)return;if(b.dataset.i!==undefined)ESTILO.cor=COR_OPC[b.dataset.i][1];if(b.dataset.m){ESTILO.modelo=b.dataset.m;ESTILO.m2=1}marca()};return f}
 ['gcv','gcarta','gdoc','gcapa'].forEach(function(id){var b=$(id);b.parentNode.insertBefore(mkEstilo(),b)});marca();
 function carregaJS(u){return new Promise(function(ok){var s=document.createElement('script');s.src=u;s.onload=function(){ok(true)};s.onerror=function(){ok(false)};document.head.appendChild(s)})}
 async function garantePDF(){if(window.jspdf)return true;$('msg').textContent='A preparar o gerador de PDF...';
  var us=['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js','https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js'];
  for(var i=0;i<us.length&&!window.jspdf;i++)await carregaJS(us[i]);
  $('msg').textContent='';return !!window.jspdf}
-['gcv','gcarta','gdoc','gcapa'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){
+['gcv','gcarta','gdoc','gcapa'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){ULTIMO=id;
  if(!(await garantePDF())){$('msg').textContent='Não foi possível carregar o gerador de PDF. Verifica a internet e tenta de novo.';return}
  try{f()}catch(e){$('msg').textContent='Ocorreu um erro ao gerar. Tenta de novo ou avisa-nos pelo WhatsApp.'}}});
 var DK='mk_draft';
-function salvar(){try{var f={};document.querySelectorAll('input[id],textarea[id],select[id]').forEach(function(e){if(e.id!=='cod')f[e.id]=e.value});
+function salvar(){try{var f={};document.querySelectorAll('input[id],textarea[id],select[id]').forEach(function(e){if(e.id!=='cod'&&e.type!=='file')f[e.id]=e.value});
  var d={f:f,exp:rows('exp'),edu:rows('edu'),tipo:$('dtipo').value,dc:{},est:ESTILO};
  $('dcampos').querySelectorAll('[data-k]').forEach(function(e){d.dc[e.dataset.k]=e.value});sessionStorage.setItem(DK,JSON.stringify(d))}catch(e){}}
 function restaurar(){try{var d=JSON.parse(sessionStorage.getItem(DK)||'null');if(!d)return;
@@ -306,21 +357,27 @@ document.addEventListener('input',salvar);document.addEventListener('change',sal
 document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.estilo,.x,#aexp,#aedu'))setTimeout(salvar,0)});
 restaurar();
 
-function prever(p,nome){PEND={p:p,nome:nome};var box=$('telas'),SC=3;box.innerHTML='';
+function prever(p,nome){if(MODO==='honra'&&cred()===0&&p.marca)p.marca('Feito no Mukanda · '+(location.host||'mukanda'));PEND={p:p,nome:nome};var box=$('telas'),SC=3;box.innerHTML='';
  for(var i=1;i<=p.pages();i++){var c=document.createElement('canvas');c.width=210*SC;c.height=297*SC;c.className='pg';var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);
   p.R.forEach(function(o){if(o.pg!==i)return;
-   if(o.k==='r'){x.fillStyle='rgb('+o.col.join(',')+')';x.fillRect(o.x*SC,o.y*SC,o.w*SC,o.h*SC)}
+   if(o.k==='r'){if(o.m==='S'){x.strokeStyle='rgb('+o.col.join(',')+')';x.lineWidth=(o.w2||.2)*SC;x.strokeRect(o.x*SC,o.y*SC,o.w*SC,o.h*SC)}else{x.fillStyle='rgb('+o.col.join(',')+')';x.fillRect(o.x*SC,o.y*SC,o.w*SC,o.h*SC)}}
+   else if(o.k==='c'){x.beginPath();x.arc(o.x*SC,o.y*SC,o.r*SC,0,6.2832);if(o.m==='F'){x.fillStyle='rgb('+o.col.join(',')+')';x.fill()}else{x.strokeStyle='rgb('+o.col.join(',')+')';x.lineWidth=(o.w2||.2)*SC;x.stroke()}}
+   else if(o.k==='i'){try{x.drawImage(o.im,o.x*SC,o.y*SC,o.w*SC,o.h*SC)}catch(e){}}
    else if(o.k==='l'){x.strokeStyle='rgb('+o.col.join(',')+')';x.lineWidth=(o.w||.2)*SC;x.beginPath();x.moveTo(o.a*SC,o.b*SC);x.lineTo(o.c*SC,o.d*SC);x.stroke()}
    else{x.font=(o.b?'bold ':'')+Math.round(o.s*0.3528*SC)+'px '+(o.f==='times'?'"Times New Roman",Times,serif':'Arial,Helvetica,sans-serif');x.fillStyle='rgb('+o.c.join(',')+')';x.textAlign=o.al==='center'?'center':'left';x.fillText(o.t,o.x*SC,o.y*SC)}});
-  x.save();x.translate(c.width/2,c.height/2);x.rotate(-Math.PI/5);x.fillStyle='rgba(110,110,110,.2)';x.textAlign='center';x.font='bold '+(15*SC)+'px Arial,sans-serif';x.fillText('PRÉ-VISUALIZAÇÃO',0,0);x.fillText('MUKANDA',0,18*SC);x.restore();box.appendChild(c)}
- document.querySelectorAll('.view').forEach(function(v){v.classList.add('hide')});$('prev').classList.remove('hide');emPrev=true;apoio=false;$('dlink').classList.add('hide');txtPrev();liberado().then(pintar);sync();$('msg').textContent='';window.scrollTo(0,0);try{history.pushState({p:1},'')}catch(e){}}
+  if(!window.__semMarca){x.save();x.translate(c.width/2,c.height/2);x.rotate(-Math.PI/5);x.fillStyle='rgba(110,110,110,.2)';x.textAlign='center';x.font='bold '+(15*SC)+'px Arial,sans-serif';x.fillText('PRÉ-VISUALIZAÇÃO',0,0);x.fillText('MUKANDA',0,18*SC);x.restore()}box.appendChild(c)}
+ document.querySelectorAll('.view').forEach(function(v){v.classList.add('hide')});$('prev').classList.remove('hide');emPrev=true;apoio=false;$('dlink').classList.add('hide');txtPrev();liberado().then(pintar);atualizaWa();sync();$('msg').textContent='';window.scrollTo(0,0);try{history.pushState({p:1},'')}catch(e){}}
 $('palt').onclick=function(){route(cur);if(history.state&&history.state.p){try{history.back()}catch(e){}}};
-$('jpago').onclick=function(){try{sessionStorage.setItem('mk_honra_'+cur,'1')}catch(e){}pintar(true);if(PEND){saveDoc(PEND.p,PEND.nome);$('msg').textContent='Obrigado! Se ainda não enviaste o comprovativo, envia-o por WhatsApp.'+AV}};
-$('pdown').onclick=async function(){if(!(await liberado())){$('msg').textContent=MODO==='honra'?'Para descarregar, faz o pagamento e toca em "Já paguei".':'Para descarregar, paga e insere o código de acesso.';$('pagar').scrollIntoView({behavior:'smooth'});return}saveDoc(PEND.p,PEND.nome);if(MODO!=='livre'&&!(await pagoOk())){try{localStorage.setItem('mk_gratis','1')}catch(e){}pago=false;apoio=true;sync();$('msg').textContent='Este foi o teu documento grátis! Para fazer mais, paga '+precoAtual()+'.'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}if(MODO==='livre'){apoio=true;sync();$('msg').textContent='Documento descarregado. Obrigado por usares o Mukanda!'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}$('msg').textContent='Documento descarregado. Verifica a pasta de transferências.'+AV};
+$('pnome').addEventListener('input',atualizaWa);
+$('jpago').onclick=async function(){if(!v('pnome')){$('msg').textContent='Escreve o teu nome para eu confirmar o pagamento.';$('pnome').focus();return}
+ if(cred()<=0)setCred(2);try{if(ULTIMO)await $(ULTIMO).onclick()}catch(e){}
+ if(!PEND)return;saveDoc(PEND.p,PEND.nome);var r=cred()-1;setCred(r);apoio=true;sync();atualizaWa();
+ $('msg').textContent='Obrigado, '+v('pnome')+'! PDF sem marca descarregado. Envia o comprovativo por WhatsApp.'+(r>0?' Ainda podes fazer mais '+r+' sem marca.':'')+AV;if(r<=0)pago=false};
+$('pdown').onclick=async function(){if(MODO==='honra'){if(!PEND)return;saveDoc(PEND.p,PEND.nome);if(cred()>0){var r=cred()-1;setCred(r);$('msg').textContent='Documento sem marca descarregado.'+(r>0?' Ainda podes fazer mais '+r+' sem marca.':' Para fazer mais sem marca, paga de novo.')+AV}else{$('msg').textContent='Documento descarregado, com a marca do Mukanda no rodapé. Para o PDF sem marca, paga '+precoAtual()+'.'+AV;$('pagar').scrollIntoView({behavior:'smooth'})}return}if(!(await liberado())){$('msg').textContent=MODO==='honra'?'Para descarregar, faz o pagamento e toca em "Já paguei".':'Para descarregar, paga e insere o código de acesso.';$('pagar').scrollIntoView({behavior:'smooth'});return}saveDoc(PEND.p,PEND.nome);if(MODO!=='livre'&&!(await pagoOk())){try{localStorage.setItem('mk_gratis','1')}catch(e){}pago=false;apoio=true;sync();$('msg').textContent='Este foi o teu documento grátis! Para fazer mais, paga '+precoAtual()+'.'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}if(MODO==='honra'){var r=cred()-1;setCred(r);$('msg').textContent='Documento descarregado.'+(r>0?' Ainda podes fazer mais '+r+' sem pagar.':' Para fazer mais, paga de novo.')+AV;return}if(MODO==='livre'){apoio=true;sync();$('msg').textContent='Documento descarregado. Obrigado por usares o Mukanda!'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}$('msg').textContent='Documento descarregado. Verifica a pasta de transferências.'+AV};
 if(PAGAMENTO.whatsapp)$('avisar').href='https://wa.me/'+PAGAMENTO.whatsapp+'?text='+encodeURIComponent('Olá! Tive um problema com um documento no Mukanda: ');else $('avisar').classList.add('hide');
 var V={inicio:['','Documentos prontos em PDF, feitos para Angola.'],cv:['CV','O teu CV e a tua carta de apresentação em PDF, prontos em minutos.'],documentos:['Documentos','Requerimentos, declarações e contratos simples, prontos em PDF.'],escola:['Escola','Capas de trabalhos escolares e universitários, prontas em PDF.']};
 var PALETA={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,107,69]};
-document.querySelectorAll('.pc').forEach(function(e){e.textContent=' · '+precoDe(e.dataset.k)});if(!PAGAMENTO.primeiroGratis||MODO==='livre')$('gnota').classList.add('hide');var T0=document.title;function route(k){k=typeof k==='string'?k:location.hash.slice(1);if(!V[k])k='inicio';cur=k;$("prev").classList.add("hide");emPrev=false;apoio=false;$("dlink").classList.add("hide");$("voltar").classList.toggle("hide",k==="inicio");document.body.dataset.t=k;window.COR=PALETA[k];
+document.querySelectorAll('.pc').forEach(function(e){e.textContent=' · sem marca: '+precoDe(e.dataset.k)});if(MODO!=='honra')$('gnota').classList.add('hide');var T0=document.title;function route(k){k=typeof k==='string'?k:location.hash.slice(1);if(!V[k])k='inicio';cur=k;$("prev").classList.add("hide");emPrev=false;apoio=false;$("dlink").classList.add("hide");$("voltar").classList.toggle("hide",k==="inicio");document.body.dataset.t=k;window.COR=PALETA[k];
  Object.keys(V).forEach(function(x){$('v-'+x).classList.toggle('hide',x!==k)});
  $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title=V[k][0]?'Mukanda '+V[k][0]+' – PDF para Angola':T0;$('msg').textContent='';sync();if($('preco'))$('preco').textContent=precoAtual();window.scrollTo(0,0)}
 liberado().then(pintar);document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(){route(a.getAttribute("href").slice(1))})});window.addEventListener('popstate',function(){if(emPrev)route(cur)});window.onhashchange=function(){route()};route();

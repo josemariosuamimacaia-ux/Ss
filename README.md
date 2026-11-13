@@ -17,3 +17,6 @@ Em `public/config.js`: `obrigatorio: false` = descarga livre e pagamento volunt�
 - `honra`: o cliente paga, envia o comprovativo e toca em "Já paguei" para descarregar (sem códigos, não é verificado).
 - `codigo`: só descarrega com código de acesso (verificado por si).
 - `livre`: descarga livre e pagamento voluntário.
+
+## Versão grátis e versão sem marca (modo `honra`)
+O PDF grátis leva uma linha no rodapé com o endereço do site. Para o PDF sem marca o cliente paga, escreve o nome, toca em "Já paguei" e envia o comprovativo por WhatsApp (2 documentos por pagamento). Você confirma no extrato do banco pela referência.
