@@ -5,6 +5,7 @@ var PAGAMENTO = {
   precosDoc: { requerimento:'200 Kz', declaracao:'200 Kz', rescisao:'200 Kz', candidatura:'200 Kz', licenca:'200 Kz', reclamacao:'200 Kz', honra:'200 Kz', recibo:'200 Kz' },   // documentos de 1 página (o resto usa o preço de 'documentos')
   precos: { escola: '300 Kz' },   // preços por serviço (cv, documentos, escola); o que não estiver aqui usa o preço padrão
   primeiroGratis: false,  // o 1.º documento de cada pessoa (por aparelho) é grátis
+  canal: '',   // endereço do teu Canal de WhatsApp (ex: https://whatsapp.com/channel/...). Vazio = não aparece
   modo: 'honra',   // 'honra' = PDF grátis com marca no rodapé; sem marca = paga, escreve o nome e toca "Já paguei" (2 documentos por pagamento) | 'codigo' = só com código de acesso | 'livre' = descarga livre e pagamento voluntário
   banco: 'BFA',            // ex: BAI
   nib: '000600003840991930117',   // NIB (21 dígitos). Confirme no app do banco

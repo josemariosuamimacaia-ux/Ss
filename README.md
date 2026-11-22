@@ -32,3 +32,9 @@ Nota: ao publicar uma versão nova, o site atualiza-se sozinho quando o cliente 
 
 ## Funciona sem internet
 Depois da primeira visita, o site guarda-se no telemóvel (`sw.js`) e abre mesmo sem dados. O gerador de PDF fica guardado depois da primeira vez que o cliente gera um documento.
+
+## Parceiros e Modo Balcão (cybers, escolas, centros de formação)
+- Link do parceiro: `https://SEU-SITE/?parceiro=Cyber%20Kilamba` (o nome aparece no rodapé dos PDFs grátis e na mensagem de pagamento por WhatsApp, para calcular comissões).
+- Modo Balcão: acrescenta `&balcao=1`. Não guarda dados no computador e mostra o botão "Próximo cliente".
+- Códigos pré-pagos para agentes: gere códigos em `gerar-codigos.html`, cole os resultados em `codigos` no `config.js` e venda cada código (2 documentos sem marca por aparelho).
+- Canal de WhatsApp: preencha `canal` no `config.js`.
