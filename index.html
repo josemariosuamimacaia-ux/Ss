@@ -9,6 +9,9 @@
 <meta property="og:description" content="Faz o teu CV, requerimentos e capas de trabalhos pelo telemóvel. Rápido e feito para Angola.">
 <meta property="og:image" content="https://ss-7uzy.onrender.com/capa.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ss-7uzy.onrender.com/">
+<meta property="og:url" content="https://ss-7uzy.onrender.com/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Mukanda","url":"https://ss-7uzy.onrender.com/","applicationCategory":"BusinessApplication","operatingSystem":"Any","inLanguage":"pt-AO","offers":{"@type":"Offer","price":"0","priceCurrency":"AOA"}}</script>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#141414">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -61,7 +64,7 @@ a.add{display:inline-block;text-decoration:none;color:var(--ink)}
 .voltar.hide{display:none}
 .voltar{display:inline-block;margin-bottom:14px;padding:10px 16px;border:2px solid var(--ink);color:var(--ink);background:#fff;text-decoration:none;font-weight:700;border-radius:6px}
 small{font:600 .85rem system-ui;color:var(--gold);margin-left:10px;letter-spacing:.06em;text-transform:uppercase}
-body[data-t=documentos]{--red:#1d4e89}body[data-t=escola]{--red:#1b6b45}
+body[data-t=documentos]{--red:#1d4e89}body[data-t=escola]{--red:#1b6b45}body[data-t=comercial]{--red:#9a5b00}.card[data-c=comercial]{border-left-color:#9a5b00}
 .card{display:block;background:#fff;border:1px solid var(--line);border-left:8px solid var(--red);padding:18px;margin-bottom:12px;color:var(--ink);text-decoration:none;border-radius:6px}
 .card[data-c=cv]{border-left-color:#b3141f}.card[data-c=documentos]{border-left-color:#1d4e89}.card[data-c=escola]{border-left-color:#1b6b45}
 .card b{display:block;font:700 1.2rem Georgia,serif}.card span{display:block;margin:4px 0 8px;color:#4a463e}.card em{font-style:normal;font-weight:700}
@@ -69,6 +72,13 @@ label input,label textarea{font-weight:400;margin-top:4px}
 footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 #msg{color:var(--red);font-weight:600;min-height:1.4em;margin:8px 0}
 @media(max-width:480px){.g2{grid-template-columns:1fr}}
+body[data-t=fotos]{--red:#6a2c91}body[data-t=salario]{--red:#0f6b73}
+.card[data-c=fotos]{border-left-color:#6a2c91}.card[data-c=salario]{border-left-color:#0f6b73}
+.ftabs{display:flex;gap:8px;margin-bottom:16px}.ftabs button{flex:1;padding:10px 6px;font:600 .9rem system-ui;border:2px solid var(--ink);background:#fff;cursor:pointer}.ftabs button.on{background:var(--ink);color:#fff}
+#pf_cv{display:block;max-width:100%;margin:10px auto;border:1px solid var(--line);background:#eee;border-radius:4px}
+input[type=range]{padding:0}
+.thumbs .it{display:flex;gap:8px;align-items:center;border:1px dashed var(--line);padding:6px;margin-bottom:6px;border-radius:4px;background:#fff}.thumbs img{width:48px;height:48px;object-fit:cover;border-radius:3px}.thumbs .nm{flex:1;font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.res{background:#fff;border:1px solid var(--line);border-left:6px solid var(--red);padding:12px 14px;border-radius:6px;margin:12px 0;font-size:.95rem}.res p{display:flex;justify-content:space-between;gap:12px;margin:3px 0}.res p.t{font-weight:700;font-size:1.1rem;border-top:1px solid var(--line);padding-top:6px;margin-top:6px;color:var(--red)}.res p.n{font-size:.85rem;color:#5b574e}
 </style>
 </head>
 <body>
@@ -82,6 +92,9 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <a class="card" data-c="cv" href="#cv"><b>Currículo e carta de apresentação</b><span>Para candidaturas a vagas e concursos.</span><em>Começar →</em><i class="pc" data-k="cv"></i></a>
 <a class="card" data-c="documentos" href="#documentos"><b>Requerimentos e documentos</b><span>Requerimento, declaração, pedido de demissão e contrato de arrendamento.</span><em>Começar →</em><i class="pc" data-k="documentos"></i></a>
 <a class="card" data-c="escola" href="#escola"><b>Capa de trabalho escolar</b><span>Capa profissional para trabalhos do liceu e da universidade.</span><em>Começar →</em><i class="pc" data-k="escola"></i></a>
+<a class="card" data-c="comercial" href="#comercial"><b>Recibos, orçamentos e faturas proforma</b><span>Numeração automática, total por extenso, IVA 14% e histórico no telemóvel. Para lojas, zungueiras e prestadores de serviços.</span><em>Começar →</em><i class="pc" data-k="comercial"></i></a>
+<a class="card" data-c="fotos" href="#fotos"><b>Fotos: tipo passe, PDF e reduzir tamanho</b><span>Folha A4 de fotos tipo passe pronta a imprimir, várias fotos num só PDF e fotos reduzidas para caberem nos portais. Tudo no teu telemóvel.</span><em>Começar →</em><i class="pc" data-k="fotos"></i></a>
+<a class="card" data-c="salario" href="#salario"><b>Salário líquido e recibo de vencimento</b><span>Calcula o INSS e o IRT pela tabela de 2026 e gera o recibo de vencimento em PDF.</span><em>Começar →</em><i class="pc" data-k="salario"></i></a>
 <div id="perfilbox" style="margin-top:18px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:6px;font-size:.9rem">
 <label style="display:flex;gap:10px;align-items:flex-start;margin:0;font-weight:600"><input type="checkbox" id="guardar" style="width:auto;margin-top:4px"><span>Guardar os meus dados neste telemóvel<br><span style="font-weight:400">Assim não escreves o nome, o BI e a morada de novo. Não uses em computadores partilhados.</span></span></label>
 <button type="button" class="add" id="apagar" style="margin-top:10px">Apagar os meus dados deste aparelho</button></div>
@@ -149,6 +162,66 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <div class="g2"><div><label for="e_cid">Cidade</label><input id="e_cid" placeholder="Luanda, Angola"></div><div><label for="e_ano">Data</label><input id="e_ano" placeholder="Outubro de 2026"></div></div>
 </fieldset>
 <button class="go" id="gcapa">Ver pré-visualização</button></div>
+<div id="v-comercial" class="view hide">
+<fieldset><legend>Documento</legend>
+<label for="ctipo">Tipo</label><select id="ctipo"><option value="rec">Recibo</option><option value="orc">Orçamento</option><option value="fp">Fatura proforma</option></select>
+<div class="g2"><div><label for="cnum">Número (automático)</label><input id="cnum"></div><div><label for="cdata">Data</label><input id="cdata"></div></div>
+<label for="cval">Validade do orçamento (dias)</label><input id="cval" inputmode="numeric" placeholder="15"></fieldset>
+<fieldset><legend>Quem emite</legend>
+<label for="cemit">Nome da loja, empresa ou pessoa</label><input id="cemit">
+<div class="g2"><div><label for="cnif">NIF (opcional)</label><input id="cnif"></div><div><label for="ctel">Telefone</label><input id="ctel" type="tel"></div></div>
+<label for="cmor">Morada</label><input id="cmor"></fieldset>
+<fieldset><legend>Cliente</legend><label for="ccli">Nome do cliente</label><input id="ccli"><label for="cclitel">Telefone do cliente (opcional)</label><input id="cclitel" type="tel"></fieldset>
+<fieldset><legend>Itens</legend><div id="itens"></div><button type="button" class="add" id="aitem">+ Adicionar item</button>
+<label for="cdesc">Desconto (Kz, opcional)</label><input id="cdesc" inputmode="decimal">
+<label for="civa">IVA</label><select id="civa"><option value="0">Sem IVA</option><option value="1">Acrescentar IVA de 14%</option></select>
+<label for="cobs">Observações (ex: pago por transferência BAI)</label><textarea id="cobs"></textarea></fieldset>
+<button class="go" id="gcom">Ver pré-visualização</button>
+<fieldset style="margin-top:16px"><legend>Histórico neste aparelho</legend><div id="chist"></div>
+<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button type="button" class="add" id="hcsv">Exportar para Excel (CSV)</button><button type="button" class="add" id="hdel">Apagar histórico</button></div></fieldset></div>
+<div id="v-fotos" class="view hide">
+<nav class="ftabs"><button class="on" data-f="passe">Foto tipo passe</button><button data-f="fpdf">Fotos em PDF</button><button data-f="red">Reduzir foto</button></nav>
+<section id="f-passe">
+<fieldset><legend>Foto tipo passe</legend>
+<p style="margin:0 0 8px;font-size:.9rem">Tira uma foto de frente, com boa luz e fundo liso. O Mukanda recorta e enche uma folha A4 pronta a imprimir. A foto não sai do teu telemóvel.</p>
+<label for="pf_in">Foto</label><input id="pf_in" type="file" accept="image/*">
+<div class="g2"><div><label for="pf_fmt">Tamanho</label><select id="pf_fmt"><option value="30x40">3 × 4 cm</option><option value="35x45">3,5 × 4,5 cm</option><option value="40x40">4 × 4 cm</option><option value="40x60">4 × 6 cm</option></select></div><div><label for="pf_qt">Quantas fotos</label><input id="pf_qt" type="number" min="1" max="40" value="8" inputmode="numeric"></div></div>
+<canvas id="pf_cv" width="240" height="320" aria-label="Pré-visualização do recorte"></canvas>
+<label for="pf_z">Aproximar</label><input id="pf_z" type="range" min="100" max="300" value="100">
+<label for="pf_x">Mover para os lados</label><input id="pf_x" type="range" min="-100" max="100" value="0">
+<label for="pf_y">Mover para cima ou para baixo</label><input id="pf_y" type="range" min="-100" max="100" value="0">
+<p style="font-size:.85rem;margin:8px 0 0">Põe o rosto dentro da elipse. Confirma na tua instituição o tamanho exigido antes de imprimir.</p></fieldset>
+<button class="go" id="gpasse">Ver pré-visualização</button>
+</section>
+<section id="f-fpdf" class="hide">
+<fieldset><legend>Juntar fotos num PDF</legend>
+<p style="margin:0 0 8px;font-size:.9rem">Bom para enviar BI, certificados e comprovativos num só ficheiro. Uma foto por página. As fotos são reduzidas para o PDF ficar leve.</p>
+<label for="fp_in">Escolhe as fotos (até 30)</label><input id="fp_in" type="file" accept="image/*" multiple>
+<div id="fp_lista" class="thumbs" style="margin-top:10px"></div></fieldset>
+<button class="go" id="gfpdf">Ver pré-visualização</button>
+</section>
+<section id="f-red" class="hide">
+<fieldset><legend>Reduzir o tamanho de uma foto</legend>
+<p style="margin:0 0 8px;font-size:.9rem">Muitos portais só aceitam fotos até 100 ou 200 KB. Diz o limite e o Mukanda reduz a foto mantendo a melhor qualidade possível. Grátis.</p>
+<label for="rd_in">Foto</label><input id="rd_in" type="file" accept="image/*">
+<label for="rd_kb">Tamanho máximo (KB)</label><input id="rd_kb" type="number" min="20" value="200" inputmode="numeric">
+<button type="button" class="go" id="rd_go" style="margin-top:12px">Reduzir foto</button>
+<div id="rd_out" class="hide" style="margin-top:12px"><p id="rd_info" style="margin:0 0 8px"></p><a class="add" id="rd_dl" href="#" download="foto.jpg">Guardar a foto reduzida</a></div></fieldset>
+</section>
+</div>
+<div id="v-salario" class="view hide">
+<fieldset><legend>Empresa e trabalhador</legend>
+<label for="sl_emp">Empresa</label><input id="sl_emp">
+<label for="sl_nome">Nome do trabalhador</label><input id="sl_nome" autocomplete="off">
+<div class="g2"><div><label for="sl_cargo">Cargo</label><input id="sl_cargo"></div><div><label for="sl_mes">Mês</label><input id="sl_mes" placeholder="Novembro de 2026"></div></div></fieldset>
+<fieldset><legend>Valores do mês (Kz)</legend>
+<label for="sl_base">Salário base</label><input id="sl_base" inputmode="decimal">
+<label for="sl_sub">Subsídios e prémios sujeitos a INSS e IRT (opcional)</label><input id="sl_sub" inputmode="decimal">
+<label for="sl_iso">Subsídios não sujeitos, dentro do limite legal (opcional)</label><input id="sl_iso" inputmode="decimal">
+<label for="sl_out">Outros descontos (opcional)</label><input id="sl_out" inputmode="decimal">
+<div id="sl_res" class="res" aria-live="polite"></div>
+<p id="sl_aviso" style="font-size:.85rem;margin:0"></p></fieldset>
+<button class="go" id="gsal">Ver recibo de vencimento</button></div>
 <section id="prev" class="hide"><fieldset><legend>Pré-visualização</legend>
 <p style="margin:0 0 10px">Vê se está bom. <strong>Só pagas se gostares.</strong> Para mudar algo, toca em Alterar, ajusta e vê de novo.</p>
 <div id="telas"></div>
@@ -174,10 +247,9 @@ footer{text-align:center;padding:24px 20px 40px;font-size:.85rem;color:#5b574e}
 <div id="msg" role="status"></div>
 <a class="wa" id="wa" href="#" target="_blank" rel="noopener">Partilhar o Mukanda no WhatsApp</a>
 </main>
-<footer>Mukanda · Os teus dados ficam no teu telemóvel. Nada é guardado no servidor.</footer>
+<footer><p style="margin:0 0 10px"><a href="curriculo-angola.html">Como fazer um currículo</a> · <a href="requerimento-angola.html">Modelos de requerimento</a> · <a href="capa-trabalho-escolar.html">Capa de trabalho</a> · <a href="recibo-orcamento-angola.html">Recibos e orçamentos</a> · <a href="foto-tipo-passe.html">Foto tipo passe</a> · <a href="salario-liquido-angola.html">Salário líquido e IRT</a></p>Mukanda · Os teus dados ficam no teu telemóvel. Nada é guardado no servidor.</footer>
 
 <script src="config.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 var SITE_URL = location.origin;
 var $ = function(i){return document.getElementById(i)}, v = function(i){return ($(i).value||'').trim()};
@@ -231,9 +303,7 @@ function Doc(){var E=ESTILO,F=E.modelo==='classico'?'times':'helvetica',AC=E.cor
    else if(E.modelo==='classico'){t(nome,22,true,INK,'c');if(sub)t(sub,12,false,[90,90,90],'c');y+=1;t(ct,9.5,false,INK,'c');y+=4;lin(INK);y+=3}
    else{t(nome,22,true,AC);if(sub)t(sub,12,false,[90,90,90]);y+=1;t(ct,9.5)}},
   sec:function(s){if(y>255){p.addPage();y=20}y+=4;var c=E.modelo==='classico'?INK:AC;t(s.toUpperCase(),11,true,c);lin(c);y+=1.5}}}
-async function saveDoc(p,name){if(MODOENT==='share'&&navigator.share){try{var f=new File([p.blob()],name,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:name});return}}catch(e){if(e&&e.name==='AbortError')return}}var dl=null;try{dl=window.claude&&await window.claude.use('downloads')}catch(e){}
- if(dl){try{await dl.save({filename:name,data:p.blob()});return}catch(e){if(e&&e.code==='declined')return}}
- try{p.save(name)}catch(e){}
+async function saveDoc(p,name){if(MODOENT==='share'&&navigator.share){try{var f=new File([p.blob()],name,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:name});return}}catch(e){if(e&&e.name==='AbortError')return}} try{p.save(name)}catch(e){}
  try{var u=URL.createObjectURL(p.blob()),a=$('dlink');a.href=u;a.download=name;a.classList.remove('hide')}catch(e){}
  try{var fl=new File([p.blob()],name,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[fl]})){var pb=$('partilha');pb.classList.remove('hide');pb.onclick=function(){navigator.share({files:[fl],title:name}).catch(function(){})}}}catch(e){}}
 function needName(){if(!v('nome')){$('msg').textContent='Preenche o teu nome no separador Currículo.';return true}$('msg').textContent='';return false}
@@ -310,12 +380,15 @@ function dicas(){var a=[],t=ULTIMO,box=$('dicas');if(!box)return;
   if(!rows('exp').length)a.push('Sem experiência? Acrescenta estágios, trabalho voluntário ou projetos.');if(!rows('edu').length)a.push('Acrescenta a tua formação.');if(lista(v('comp')).length<3)a.push('Acrescenta pelo menos 3 competências.');
   if(PEND&&PEND.p.pages()>2)a.push('O currículo tem mais de 2 páginas. O ideal é 1 ou 2.');if(!FOTO)a.push('Com uma foto, o currículo fica em duas colunas e mais apresentável.')}
  else if(t==='gcarta'){if(!v('dest'))a.push('Conta o que tens de melhor para esta vaga.');if(!v('porq'))a.push('Explica porque queres esta vaga.');if(!v('onde'))a.push('Diz onde viste o anúncio, se souberes.')}
+ else if(t==='gpasse'){a.push('Fundo claro e liso, rosto de frente, sem óculos escuros nem chapéu.');a.push('Imprime em papel fotográfico e corta pelas linhas cinzentas.')}
+ else if(t==='gfpdf'){a.push('Confirma a ordem das páginas e se todas as fotos estão legíveis.')}
+ else if(t==='gsal'){a.push('Confirma os valores com o contrato e com o teu contabilista antes de entregar o recibo.')}
+ else if(t==='gcom'){if(!v('ccli'))a.push('Acrescenta o nome do cliente.');if(!v('ctel'))a.push('Acrescenta o teu telefone para o cliente te contactar.');if(!v('cobs'))a.push('Podes acrescentar a forma de pagamento nas observações.')}
  else if(t==='gdoc'){if(!v('dbi'))a.push('Preenche o número do BI.');if(!v('dmorada'))a.push('Preenche a morada.');if(!v('dcid'))a.push('Preenche a cidade, para a data ficar completa.')}
  else if(t==='gcapa'){if(!v('e_cab')&&!v('e_inst'))a.push('Acrescenta a instituição ou o cabeçalho oficial.');if(!v('e_disc'))a.push('Falta a disciplina.');if(!v('e_prof'))a.push('Falta o nome do docente.');if(!v('e_ano'))a.push('Falta a data (ex: Outubro de 2026).');if(v('e_tema').length>110)a.push('O tema está longo. Títulos curtos ficam melhor.');if(!v('e_ind'))a.push('Podes acrescentar o índice do trabalho.')}
  box.classList.toggle('hide',false);box.innerHTML=a.length?'<strong>Dicas para melhorar</strong><br>'+a.map(function(s){return '• '+s}).join('<br>'):'<strong>✓ Sem avisos.</strong> Está pronto.'}
 var MODOENT='download';if(navigator.share)$('pshare').classList.remove('hide');
 $('pshare').onclick=async function(){MODOENT='share';try{await $('pdown').onclick()}finally{MODOENT='download'}};
-if('serviceWorker' in navigator)window.addEventListener('load',function(){try{navigator.serviceWorker.register('sw.js').catch(function(){})}catch(e){}});
 function txtPrev(){if(MODO==='honra'){$('prev').querySelector('p').innerHTML='Vê se está bom. <strong>'+(cred()>0?'Este PDF vai sem marca e com o design completo.':'A versão grátis leva a marca do Mukanda no rodapé. A paga vem sem marca e com decoração extra.')+'</strong> Para mudar algo, toca em Alterar, ajusta e vê de novo.';return}if(MODO==='livre')return;$('prev').querySelector('p').innerHTML='Vê se está bom. <strong>'+(gratisLivre()?'O teu primeiro documento é grátis!':'Só pagas se gostares.')+'</strong> Para mudar algo, toca em Alterar, ajusta e vê de novo.'}
 function precoDe(k){return (PAGAMENTO.precos&&PAGAMENTO.precos[k])||PAGAMENTO.preco}function precoAtual(){if(cur==='documentos'&&PAGAMENTO.precosDoc){var t=$('dtipo')&&$('dtipo').value;if(t&&PAGAMENTO.precosDoc[t])return PAGAMENTO.precosDoc[t]}return precoDe(cur)}
 function precoCartao(k){if(k==='documentos'&&PAGAMENTO.precosDoc){var m=Infinity,all=Object.keys(PAGAMENTO.precosDoc).map(function(x){return PAGAMENTO.precosDoc[x]}).concat([precoDe('documentos')]);all.forEach(function(s){var n=parseInt(s,10);if(n<m)m=n});return 'desde '+m+' Kz'}return precoDe(k)}var PARC=(function(){var s='';try{var q=new URLSearchParams(location.search);s=(q.get('parceiro')||'').replace(/[^\w \u00C0-\u00FF.'-]/g,'').trim().slice(0,30);if(s)localStorage.setItem('mk_parc',s);else s=localStorage.getItem('mk_parc')||''}catch(e){}return s})();
@@ -373,6 +446,139 @@ $('gcapa').onclick=function(){if(!v('e_tema')||!v('e_autor')){$('msg').textConte
   it.forEach(function(s){var m=s.match(/^(.*?)\s+(\d{1,3})$/),t=m?m[1]:s,n=m?m[2]:'';p.setFont(F,'normal');p.setFontSize(12);p.setTextColor.apply(p,INK);p.text(t,28,yy);
    if(n){var wt=p.tw(t),wn=p.tw(n),dw=p.tw('.'),cnt=Math.max(0,Math.floor((182-28-wt-wn-4)/dw));p.text('.'.repeat(cnt),28+wt+1.5,yy);p.text(n,182,yy,{align:'right'})}yy+=11})}
  prever(p,'Capa-'+v('e_autor').split(',')[0].replace(/\s+/g,'-')+'.pdf')};
+var TC={rec:{n:'RECIBO',p:'REC'},orc:{n:'ORÇAMENTO',p:'ORC'},fp:{n:'FATURA PROFORMA',p:'FP'}},ITENS=[['desc','Descrição do item'],['qtd','Qtd'],['preco','Preço unitário (Kz)']];
+addRow('itens',ITENS);$('aitem').onclick=function(){addRow('itens',ITENS)};
+function nm(s){return parseFloat(String(s||'').replace(/\s/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.'))||0}
+function fm(c){var n=Math.floor(c/100),r=c%100;return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(r?','+(r<10?'0':'')+r:'')+' Kz'}
+function exc(c){var n=Math.floor(c/100),r=c%100;if(n>=1e9)return '';return extenso(n)+(n===1?' kwanza':' kwanzas')+(r?' e '+extenso(r)+(r===1?' cêntimo':' cêntimos'):'')}
+function sk(t){return 'mk_seq_'+TC[t].p+'_'+new Date().getFullYear()}
+function seq(t){try{return+CS().getItem(sk(t))||0}catch(e){return 0}}
+function numTxt(t,n){return TC[t].p+'-'+new Date().getFullYear()+'-'+String(n).padStart(4,'0')}
+function proxNum(){var t=$('ctipo').value;$('cnum').value=numTxt(t,seq(t)+1)}
+function hoje(){var d=new Date();return ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear()}
+var HK='mk_hist';function HL(){try{return JSON.parse(CS().getItem(HK)||'[]')}catch(e){return []}}
+function hist(){var h=HL(),b=$('chist');b.textContent='';if(!h.length){b.textContent='Ainda não emitiste documentos neste aparelho.';return}
+ var ym=new Date().toISOString().slice(0,7),s=0,n=0;h.forEach(function(x){if(x.t==='rec'&&x.ym===ym){s+=x.tt;n++}});
+ var a=document.createElement('p');a.style.fontWeight='600';a.textContent='Recibos deste mês: '+n+' · total '+fm(s);b.appendChild(a);
+ h.slice(0,8).forEach(function(x){var q=document.createElement('p');q.style.cssText='margin:3px 0;font-size:.9rem';q.textContent=x.n+' · '+x.dt+' · '+(x.c||'sem cliente')+' · '+fm(x.tt);b.appendChild(q)})}
+function cmt(o){var m=o.n.match(/(\d+)$/),h=HL().filter(function(x){return !(x.t===o.t&&x.n===o.n)});
+ if(m&&+m[1]>seq(o.t))try{CS().setItem(sk(o.t),String(+m[1]))}catch(e){}
+ h.unshift(o);try{CS().setItem(HK,JSON.stringify(h.slice(0,200)))}catch(e){}proxNum();hist()}
+var _sd=saveDoc;saveDoc=function(p,n){try{if(PEND&&PEND.p===p&&PEND.com)cmt(PEND.com)}catch(e){}return _sd(p,n)};
+$('ctipo').onchange=proxNum;
+$('hdel').onclick=function(){if(!confirm('Apagar o histórico deste aparelho? A numeração continua.'))return;try{CS().removeItem(HK)}catch(e){}hist()};
+$('hcsv').onclick=function(){var h=HL();if(!h.length)return;var q=function(s){s=String(s||'');if(/^[=+\-@]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'};
+ var c='Numero;Data;Cliente;Total (Kz)\n'+h.map(function(x){return [q(x.n),x.dt,q(x.c),(x.tt/100).toString().replace('.',',')].join(';')}).join('\n');
+ var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+c],{type:'text/csv'}));a.download='mukanda-historico.csv';a.click()};
+$('gcom').onclick=function(){var t=$('ctipo').value,it=rows('itens').map(function(o){var q=nm(o.qtd)||1,pc=Math.round(nm(o.preco)*100);return {d:o.desc||'Item',q:q,pc:pc,l:Math.round(q*pc)}}).filter(function(o){return o.pc>0});
+ if(!v('cemit')){$('msg').textContent='Preenche o nome de quem emite.';return}
+ if(!it.length){$('msg').textContent='Acrescenta pelo menos um item com preço.';return}
+ $('msg').textContent='';
+ var sub=it.reduce(function(a,o){return a+o.l},0),ds=Math.min(sub,Math.round(nm(v('cdesc'))*100)),base=sub-ds,iva=$('civa').value==='1'?Math.round(base*.14):0,tot=base+iva,num=v('cnum')||numTxt(t,seq(t)+1),dt=v('cdata')||hoje();
+ var E=ESTILO,AC=E.cor,F=E.modelo==='classico'?'times':'helvetica',p=PDF(),y=0,INK=[25,25,25];
+ function tx(s,x,yy,z,b,col,al){p.setFont(F,b?'bold':'normal');p.setFontSize(z);p.setTextColor.apply(p,col||INK);p.text(s,x,yy,al?{align:al}:undefined)}
+ p.setFillColor.apply(p,AC);p.rect(0,0,210,34,'F');tx(TC[t].n,20,20,22,1,[255,255,255]);tx('Nº '+num,190,16,11,1,[255,255,255],'right');tx(dt,190,23,10,0,[255,255,255],'right');
+ y=46;tx(v('cemit'),20,y,13,1);y+=5.5;
+ [v('cnif')?'NIF: '+v('cnif'):'',v('ctel'),v('cmor')].filter(Boolean).forEach(function(s){tx(s,20,y,9.5,0,[70,70,70]);y+=4.8});
+ y+=3;if(v('ccli')){tx('Cliente',20,y,9,1,AC);y+=4.8;tx(v('ccli')+(v('cclitel')?'  |  '+v('cclitel'):''),20,y,10.5,0);y+=7}
+ function cab(){p.setFillColor(238,235,229);p.rect(20,y-4.5,170,7,'F');tx('Descrição',22,y,9,1);tx('Qtd',118,y,9,1,null,'right');tx('Preço',152,y,9,1,null,'right');tx('Total',188,y,9,1,null,'right');y+=7}
+ cab();
+ it.forEach(function(o){var l=p.splitTextToSize(o.d,88);if(y+l.length*4.6>268){p.addPage();y=22;cab()}
+  tx(l,22,y,9.5,0);tx(String(o.q).replace('.',','),118,y,9.5,0,null,'right');tx(fm(o.pc),152,y,9.5,0,null,'right');tx(fm(o.l),188,y,9.5,0,null,'right');
+  y+=l.length*4.6+1.5;p.setDrawColor(217,213,204);p.setLineWidth(.2);p.line(20,y-2.5,190,y-2.5)});
+ if(y>228){p.addPage();y=22}y+=3;
+ function lt(a,b,big){var c=big?AC:INK,z=big?12:10;tx(a,150,y,z,big,c,'right');tx(b,188,y,z,big,c,'right');y+=big?8:6}
+ if(ds||iva){lt('Subtotal',fm(sub));if(ds)lt('Desconto','- '+fm(ds));if(iva)lt('IVA (14%)',fm(iva))}
+ lt('TOTAL',fm(tot),1);
+ var ex=exc(tot);if(ex){y+=1;var l=p.splitTextToSize('Total por extenso: '+ex+'.',170);tx(l,20,y,9.5,0,[70,70,70]);y+=l.length*4.6+2}
+ if(y>262){p.addPage();y=22}
+ if(t==='orc'){tx('Orçamento válido por '+(parseInt(v('cval'),10)||15)+' dias.',20,y,9.5,0);y+=6}
+ if(v('cobs')){var o=p.splitTextToSize(v('cobs'),170);tx(o,20,y,9.5,0)}
+ tx(t==='rec'?'Recibo simples, sem valor fiscal.':t==='fp'?'Fatura proforma: não é uma fatura e não tem valor fiscal.':'Orçamento sem valor fiscal.',20,281,8,0,[120,120,120]);
+ prever(p,num.replace(/[^\w-]+/g,'-')+'.pdf');PEND.com={t:t,n:num,c:v('ccli'),tt:tot,dt:dt,ym:new Date().toISOString().slice(0,7)}};
+setTimeout(function(){proxNum();$('cdata').value=hoje();hist()},0);
+/* ===== Fotos e Salário ===== */
+function sm(s){$('msg').textContent=s}
+document.querySelectorAll('.ftabs button').forEach(function(b){b.onclick=function(){document.querySelectorAll('.ftabs button').forEach(function(x){x.classList.toggle('on',x===b)});['passe','fpdf','red'].forEach(function(k){$('f-'+k).classList.toggle('hide',k!==b.dataset.f)});sm('')}});
+function ftCarrega(file){return new Promise(function(ok,no){var u=URL.createObjectURL(file),i=new Image();i.onload=function(){URL.revokeObjectURL(u);ok(i)};i.onerror=function(){URL.revokeObjectURL(u);no(new Error('img'))};i.src=u})}
+function ftCanvas(im,max){var e=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*e));c.height=Math.max(1,Math.round(im.height*e));var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);return c}
+/* Foto tipo passe */
+var PF={im:null};
+function pfFmt(){return $('pf_fmt').value.split('x').map(Number)}
+function pfSrc(W,H){var im=PF.im,z=+$('pf_z').value/100,ox=+$('pf_x').value/100,oy=+$('pf_y').value/100,ar=W/H,sw,sh;
+ if(im.width/im.height>ar){sh=im.height/z;sw=sh*ar}else{sw=im.width/z;sh=sw/ar}
+ var cx=(im.width-sw)/2,cy=(im.height-sh)/2;return [cx+ox*cx,cy+oy*cy,sw,sh]}
+function pfDesenha(){var f=pfFmt(),c=$('pf_cv'),x=c.getContext('2d');c.width=240;c.height=Math.round(240*f[1]/f[0]);x.fillStyle='#eee';x.fillRect(0,0,c.width,c.height);if(!PF.im)return;
+ var r=pfSrc(f[0],f[1]);x.drawImage(PF.im,r[0],r[1],r[2],r[3],0,0,c.width,c.height);
+ x.strokeStyle='rgba(255,255,255,.9)';x.lineWidth=2;x.setLineDash([6,4]);x.beginPath();x.ellipse(c.width/2,c.height*.46,c.width*.3,c.height*.34,0,0,6.2832);x.stroke();x.setLineDash([])}
+$('pf_in').addEventListener('change',async function(){var f=this.files&&this.files[0];if(!f)return;
+ try{PF.im=ftCanvas(await ftCarrega(f),2400);$('pf_z').value=100;$('pf_x').value=0;$('pf_y').value=0;pfDesenha();sm('')}catch(e){PF.im=null;pfDesenha();sm('Não consegui abrir esta foto. Usa uma foto JPG ou PNG.')}});
+['pf_z','pf_x','pf_y'].forEach(function(i){$(i).addEventListener('input',pfDesenha)});$('pf_fmt').addEventListener('change',pfDesenha);pfDesenha();
+$('gpasse').onclick=function(){if(!PF.im){sm('Escolhe primeiro uma foto.');return}
+ var f=pfFmt(),W=f[0],H=f[1],qt=Math.max(1,Math.min(40,parseInt(v('pf_qt'),10)||8)),g=2,mx=10,top=10,bot=16,
+  cols=Math.max(1,Math.floor((210-2*mx+g)/(W+g))),rn=Math.max(1,Math.floor((297-top-bot+g)/(H+g))),cap=cols*rn;
+ var r=pfSrc(W,H),c=document.createElement('canvas');c.width=Math.round(W/25.4*300);c.height=Math.round(H/25.4*300);
+ var cx=c.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,c.width,c.height);cx.drawImage(PF.im,r[0],r[1],r[2],r[3],0,0,c.width,c.height);
+ var o={d:c.toDataURL('image/jpeg',.92),im:c},p=PDF(),x0=(210-(cols*W+(cols-1)*g))/2;
+ p.setDrawColor(190,190,190);p.setLineWidth(.1);
+ for(var i=0;i<qt;i++){var pos=i%cap;if(i&&pos===0)p.addPage();var px=x0+(pos%cols)*(W+g),py=top+Math.floor(pos/cols)*(H+g);p.image(o,px,py,W,H);p.rect(px,py,W,H,'S')}
+ prever(p,'Fotos-tipo-passe-'+W/10+'x'+H/10+'.pdf')};
+/* Fotos em PDF */
+var FP=[];
+function fpLista(){var b=$('fp_lista');b.textContent='';FP.forEach(function(o,i){var d=document.createElement('div');d.className='it';var im=document.createElement('img');im.alt='';im.src=o.d;var n=document.createElement('span');n.className='nm';n.textContent=(i+1)+'. '+o.n;d.appendChild(im);d.appendChild(n);
+ [['↑',-1,'Subir'],['↓',1,'Descer'],['×',0,'Remover']].forEach(function(a){var bt=document.createElement('button');bt.type='button';bt.className='add';bt.textContent=a[0];bt.setAttribute('aria-label',a[2]);bt.onclick=function(){if(!a[1])FP.splice(i,1);else{var j=i+a[1];if(j<0||j>=FP.length)return;var t=FP[i];FP[i]=FP[j];FP[j]=t}fpLista()};d.appendChild(bt)});b.appendChild(d)})}
+$('fp_in').addEventListener('change',async function(){var fs=Array.prototype.slice.call(this.files||[],0,30),el=this;if(!fs.length)return;sm('A preparar as fotos...');var erro='';
+ for(var i=0;i<fs.length&&FP.length<30;i++){try{var c=ftCanvas(await ftCarrega(fs[i]),1600);FP.push({n:fs[i].name,d:c.toDataURL('image/jpeg',.8),im:c,w:c.width,h:c.height})}catch(e){erro='Não consegui abrir "'+fs[i].name+'". Usa fotos JPG ou PNG.'}}
+ el.value='';fpLista();sm(erro)});
+$('gfpdf').onclick=function(){if(!FP.length){sm('Escolhe pelo menos uma foto.');return}
+ var p=PDF();FP.forEach(function(o,i){if(i)p.addPage();var r=Math.min(190/o.w,268/o.h),w=o.w*r,h=o.h*r;p.image(o,(210-w)/2,10+(268-h)/2,w,h)});
+ prever(p,'Fotos.pdf')};
+/* Reduzir foto */
+function kbTxt(n){return n>=1048576?(n/1048576).toFixed(1).replace('.',',')+' MB':Math.round(n/1024)+' KB'}
+function blobQ(c,q){return new Promise(function(r){c.toBlob(r,'image/jpeg',q)})}
+async function rdFazer(file,alvo){if(file.type==='image/jpeg'&&file.size<=alvo)return {blob:file,ok:true};
+ var im=await ftCarrega(file),max=Math.min(2000,Math.max(im.width,im.height)),best=null;
+ for(var t=0;t<10;t++){var c=ftCanvas(im,max),lo=.3,hi=.92,ok=null;
+  for(var k=0;k<7;k++){var q=(lo+hi)/2,b=await blobQ(c,q);if(!b)break;if(b.size<=alvo){ok=b;lo=q}else hi=q}
+  if(ok)return {blob:ok,ok:true};
+  best=await blobQ(c,.3);if(max<=400)break;max=Math.round(max*.8)}
+ return {blob:best||file,ok:false}}
+var rdUrl='';
+$('rd_go').onclick=async function(){var f=$('rd_in').files&&$('rd_in').files[0],kb=Math.max(20,parseInt(v('rd_kb'),10)||200);if(!f){sm('Escolhe primeiro uma foto.');return}
+ sm('A reduzir a foto...');$('rd_out').classList.add('hide');
+ try{var r=await rdFazer(f,kb*1024);if(rdUrl)URL.revokeObjectURL(rdUrl);rdUrl=URL.createObjectURL(r.blob);
+  $('rd_info').textContent='Antes: '+kbTxt(f.size)+'. Depois: '+kbTxt(r.blob.size)+'.'+(r.ok?'':' Não foi possível chegar a '+kb+' KB sem estragar a foto. Tenta um limite maior.');
+  var a=$('rd_dl');a.href=rdUrl;a.download='foto-'+kb+'kb.jpg';$('rd_out').classList.remove('hide');sm('')}
+ catch(e){sm('Não consegui abrir esta foto. Usa uma foto JPG ou PNG.')}};
+/* Salário líquido */
+function slIrt(mc){var t=IRT_TAB.escaloes,r=0;for(var k=0;k<t.length;k++)if(mc>t[k][0]*100)r=Math.round(t[k][1]*100+(mc-t[k][0]*100)*t[k][2]);return r}
+function slCalc(){var b=Math.round(nm(v('sl_base'))*100),s=Math.round(nm(v('sl_sub'))*100),i=Math.round(nm(v('sl_iso'))*100),o=Math.round(nm(v('sl_out'))*100),tr=b+s,inss=Math.round(tr*IRT_TAB.inss),mc=tr-inss,irt=slIrt(mc);
+ return {b:b,s:s,i:i,o:o,tr:tr,inss:inss,mc:mc,irt:irt,emp:Math.round(tr*IRT_TAB.inssEmp),liq:tr+i-inss-irt-o}}
+function slMostra(){var c=slCalc(),b=$('sl_res');b.textContent='';
+ if(c.tr<=0){b.textContent='Escreve o salário base para ver o cálculo.';return}
+ function L(a,val,cl){var p=document.createElement('p');if(cl)p.className=cl;var x=document.createElement('span');x.textContent=a;var y=document.createElement('span');y.textContent=val;p.appendChild(x);p.appendChild(y);b.appendChild(p)}
+ L('Remuneração sujeita',fm(c.tr));L('INSS do trabalhador ('+(IRT_TAB.inss*100).toString().replace('.',',')+'%)','- '+fm(c.inss));L('Base de cálculo do IRT',fm(c.mc),'n');L('IRT','- '+fm(c.irt));
+ if(c.i)L('Subsídios não sujeitos','+ '+fm(c.i));if(c.o)L('Outros descontos','- '+fm(c.o));L('Líquido a receber',fm(c.liq),'t');
+ L('A empresa paga ainda de INSS ('+(IRT_TAB.inssEmp*100).toString().replace('.',',')+'%)',fm(c.emp),'n')}
+$('v-salario').addEventListener('input',slMostra);
+$('sl_aviso').textContent='Estimativa com a tabela de IRT do Grupo A ('+IRT_TAB.fonte+'). '+(new Date().getFullYear()>IRT_TAB.ano?'Atenção: esta tabela é de '+IRT_TAB.ano+' e pode ter mudado. Confirma antes de usar. ':'')+'Não substitui o processamento salarial oficial.';
+setTimeout(function(){if(!$('sl_mes').value){var m=new Date().toLocaleDateString('pt-PT',{month:'long',year:'numeric'});$('sl_mes').value=m.charAt(0).toUpperCase()+m.slice(1)}slMostra()},0);
+$('gsal').onclick=function(){var c=slCalc();if(!v('sl_nome')){sm('Preenche o nome do trabalhador.');return}if(c.tr<=0){sm('Preenche o salário base.');return}sm('');
+ var E=ESTILO,AC=E.cor,F=E.modelo==='classico'?'times':'helvetica',p=PDF(),INK=[25,25,25];
+ function tx(s,x,yy,z,b,col,al){p.setFont(F,b?'bold':'normal');p.setFontSize(z);p.setTextColor.apply(p,col||INK);p.text(s,x,yy,al?{align:al}:undefined)}
+ p.setFillColor.apply(p,AC);p.rect(0,0,210,34,'F');tx('RECIBO DE VENCIMENTO',20,20,20,1,[255,255,255]);tx(v('sl_mes'),190,20,11,1,[255,255,255],'right');
+ var y=46;if(v('sl_emp')){tx(v('sl_emp'),20,y,13,1);y+=8}tx('Trabalhador',20,y,9,1,AC);y+=4.8;tx(v('sl_nome'),20,y,11,0);y+=5.5;
+ if(v('sl_cargo')){tx('Cargo: '+v('sl_cargo'),20,y,10,0,[70,70,70]);y+=5.5}y+=6;
+ p.setFillColor(238,235,229);p.rect(20,y-4.5,170,7,'F');tx('Descrição',22,y,9,1);tx('Valor',188,y,9,1,null,'right');y+=7;
+ function R(a,val,neg,b,col){tx(a,22,y,10,b,col);tx((neg?'- ':'')+fm(val),188,y,10,b,col,'right');y+=3;p.setDrawColor(217,213,204);p.setLineWidth(.2);p.line(20,y,190,y);y+=5}
+ R('Salário base',c.b);if(c.s)R('Subsídios e prémios sujeitos',c.s);if(c.i)R('Subsídios não sujeitos',c.i);R('Total bruto',c.tr+c.i,0,1);
+ R('Segurança Social (INSS '+(IRT_TAB.inss*100).toString().replace('.',',')+'%)',c.inss,1);R('IRT (base de cálculo '+fm(c.mc)+')',c.irt,1);if(c.o)R('Outros descontos',c.o,1);
+ y+=2;tx('LÍQUIDO A RECEBER',22,y,12,1,AC);tx(fm(c.liq),188,y,12,1,AC,'right');y+=9;
+ var ex=exc(c.liq);if(ex){var l=p.splitTextToSize('Por extenso: '+ex+'.',170);tx(l,20,y,9.5,0,[70,70,70]);y+=l.length*4.6+4}
+ y=Math.max(y+20,150);p.setDrawColor(25,25,25);p.setLineWidth(.3);p.line(20,y,85,y);p.line(125,y,190,y);tx('Entidade empregadora',20,y+5,9,0,[70,70,70]);tx('Trabalhador',125,y+5,9,0,[70,70,70]);
+ tx('Cálculo pela tabela de IRT do Grupo A ('+IRT_TAB.fonte+'). Documento de apoio, sem valor fiscal.',20,281,8,0,[120,120,120]);
+ prever(p,'Recibo-vencimento-'+v('sl_nome').replace(/\s+/g,'-')+'.pdf')};
+/* ===== fim Fotos e Salário ===== */
 var COR_OPC=[['Vermelho',[179,20,31]],['Azul',[29,78,137]],['Verde',[27,107,69]],['Grafite',[43,43,43]],['Roxo',[106,44,145]]],MOD_OPC=[['moderno','Moderno'],['empresarial','Empresarial'],['classico','Clássico']];
 function marca(){document.querySelectorAll('.estilo').forEach(function(f){f.querySelectorAll('.sw').forEach(function(b){b.classList.toggle('on',COR_OPC[b.dataset.i][1]===ESTILO.cor)});f.querySelectorAll('.md').forEach(function(b){b.classList.toggle('on',b.dataset.m===ESTILO.modelo)})})}
 function mkEstilo(){var f=document.createElement('fieldset');f.className='estilo';f.innerHTML='<legend>Estilo do documento</legend><label>Cor</label><div class="op cores"></div><label>Modelo</label><div class="op mods"></div>';
@@ -380,27 +586,27 @@ function mkEstilo(){var f=document.createElement('fieldset');f.className='estilo
  COR_OPC.forEach(function(o,i){var b=document.createElement('button');b.type='button';b.className='sw';b.style.background='rgb('+o[1].join(',')+')';b.setAttribute('aria-label',o[0]);b.dataset.i=i;c.appendChild(b)});
  MOD_OPC.forEach(function(o){var b=document.createElement('button');b.type='button';b.className='md';b.textContent=o[1];b.dataset.m=o[0];m.appendChild(b)});
  f.onclick=function(e){var b=e.target.closest('button');if(!b)return;if(b.dataset.i!==undefined)ESTILO.cor=COR_OPC[b.dataset.i][1];if(b.dataset.m){ESTILO.modelo=b.dataset.m;ESTILO.m2=1}marca()};return f}
-['gcv','gcarta','gdoc','gcapa'].forEach(function(id){var b=$(id);b.parentNode.insertBefore(mkEstilo(),b)});marca();
+['gcv','gcarta','gdoc','gcapa','gcom','gsal'].forEach(function(id){var b=$(id);b.parentNode.insertBefore(mkEstilo(),b)});marca();
 function carregaJS(u){return new Promise(function(ok){var s=document.createElement('script');s.src=u;s.onload=function(){ok(true)};s.onerror=function(){ok(false)};document.head.appendChild(s)})}
 async function garantePDF(){if(window.jspdf)return true;$('msg').textContent='A preparar o gerador de PDF...';
  var us=['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js','https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js'];
  for(var i=0;i<us.length&&!window.jspdf;i++)await carregaJS(us[i]);
  $('msg').textContent='';return !!window.jspdf}
-['gcv','gcarta','gdoc','gcapa'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){ULTIMO=id;
+['gcv','gcarta','gdoc','gcapa','gcom','gsal','gpasse','gfpdf'].forEach(function(id){var f=$(id).onclick;$(id).onclick=async function(){ULTIMO=id;
  if(!(await garantePDF())){$('msg').textContent='Não foi possível carregar o gerador de PDF. Verifica a internet e tenta de novo.';return}
  try{f()}catch(e){$('msg').textContent='Ocorreu um erro ao gerar. Tenta de novo ou avisa-nos pelo WhatsApp.'}}});
 var DK='mk_draft';
-function salvar(){try{var f={};document.querySelectorAll('input[id],textarea[id],select[id]').forEach(function(e){if(e.id!=='cod'&&e.type!=='file')f[e.id]=e.value});
- var d={f:f,exp:rows('exp'),edu:rows('edu'),tipo:$('dtipo').value,dc:{},est:ESTILO};
+function salvar(){try{var f={};document.querySelectorAll('input[id],textarea[id],select[id]').forEach(function(e){if(!/^(cod|cnum|cdata)$/.test(e.id)&&e.type!=='file')f[e.id]=e.value});
+ var d={f:f,exp:rows('exp'),edu:rows('edu'),it:rows('itens'),tipo:$('dtipo').value,dc:{},est:ESTILO};
  $('dcampos').querySelectorAll('[data-k]').forEach(function(e){d.dc[e.dataset.k]=e.value});if(ST()===localStorage&&FOTO)d.foto=FOTO.d;ST().setItem(DK,JSON.stringify(d))}catch(e){}}
 function restaurar(){try{var d=JSON.parse(ST().getItem(DK)||sessionStorage.getItem(DK)||'null');if(!d)return;
  Object.keys(d.f).forEach(function(k){var e=$(k);if(e)e.value=d.f[k]});
- [['exp',EXP,d.exp],['edu',EDU,d.edu]].forEach(function(a){if(!a[2]||!a[2].length)return;$(a[0]).innerHTML='';a[2].forEach(function(o){addRow(a[0],a[1]);$(a[0]).lastChild.querySelectorAll('[data-k]').forEach(function(e){e.value=o[e.dataset.k]||''})})});
+ [['exp',EXP,d.exp],['edu',EDU,d.edu],['itens',ITENS,d.it]].forEach(function(a){if(!a[2]||!a[2].length)return;$(a[0]).innerHTML='';a[2].forEach(function(o){addRow(a[0],a[1]);$(a[0]).lastChild.querySelectorAll('[data-k]').forEach(function(e){e.value=o[e.dataset.k]||''})})});
  if(d.tipo&&TIPOS[d.tipo]){$('dtipo').value=d.tipo;pintaDoc()}
  $('dcampos').querySelectorAll('[data-k]').forEach(function(e){if(d.dc&&d.dc[e.dataset.k]!=null)e.value=d.dc[e.dataset.k]});
  if(d.foto){var i2=new Image();i2.onload=function(){FOTO={d:d.foto,im:i2}};i2.src=d.foto}if(d.est){ESTILO.cor=d.est.cor;ESTILO.modelo=d.est.modelo;marca()}}catch(e){}}
 document.addEventListener('input',salvar);document.addEventListener('change',salvar);
-document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.estilo,.x,#aexp,#aedu'))setTimeout(salvar,0)});
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.estilo,.x,#aexp,#aedu,#aitem'))setTimeout(salvar,0)});
 restaurar();
 var PARES=[['nome','dnome'],['bi','dbi'],['morada','dmorada']];
 PARES.forEach(function(q){if(!$(q[1]).value&&$(q[0]).value)$(q[1]).value=$(q[0]).value;if(!$(q[0]).value&&$(q[1]).value)$(q[0]).value=$(q[1]).value;
@@ -450,8 +656,8 @@ $('jpago').onclick=async function(){if(!v('pnome')){$('msg').textContent='Escrev
  try{$('cod').value=''}catch(e){}$('msg').textContent='Código aceite! PDF sem marca descarregado.'+(r>0?' Ainda podes fazer mais '+r+' sem marca.':'')+AV;if(r<=0)pago=false}})();
 $('pdown').onclick=async function(){if(MODO==='honra'){if(!PEND)return;saveDoc(PEND.p,PEND.nome);if(cred()>0){var r=cred()-1;setCred(r);$('msg').textContent='Documento sem marca descarregado.'+(r>0?' Ainda podes fazer mais '+r+' sem marca.':' Para fazer mais sem marca, paga de novo.')+AV}else{$('msg').textContent='Documento descarregado, com a marca do Mukanda no rodapé. Para o PDF sem marca, paga '+precoAtual()+'.'+AV;$('pagar').scrollIntoView({behavior:'smooth'})}return}if(!(await liberado())){$('msg').textContent=MODO==='honra'?'Para descarregar, faz o pagamento e toca em "Já paguei".':'Para descarregar, paga e insere o código de acesso.';$('pagar').scrollIntoView({behavior:'smooth'});return}saveDoc(PEND.p,PEND.nome);if(MODO!=='livre'&&!(await pagoOk())){try{localStorage.setItem('mk_gratis','1')}catch(e){}pago=false;apoio=true;sync();$('msg').textContent='Este foi o teu documento grátis! Para fazer mais, paga '+precoAtual()+'.'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}if(MODO==='honra'){var r=cred()-1;setCred(r);$('msg').textContent='Documento descarregado.'+(r>0?' Ainda podes fazer mais '+r+' sem pagar.':' Para fazer mais, paga de novo.')+AV;return}if(MODO==='livre'){apoio=true;sync();$('msg').textContent='Documento descarregado. Obrigado por usares o Mukanda!'+AV;$('pagar').scrollIntoView({behavior:'smooth'});return}$('msg').textContent='Documento descarregado. Verifica a pasta de transferências.'+AV};
 if(PAGAMENTO.whatsapp)$('avisar').href='https://wa.me/'+PAGAMENTO.whatsapp+'?text='+encodeURIComponent('Olá! Tive um problema com um documento no Mukanda: ');else $('avisar').classList.add('hide');
-var V={inicio:['','Documentos prontos em PDF, feitos para Angola.'],cv:['CV','O teu CV e a tua carta de apresentação em PDF, prontos em minutos.'],documentos:['Documentos','Requerimentos, declarações e contratos simples, prontos em PDF.'],escola:['Escola','Capas de trabalhos escolares e universitários, prontas em PDF.']};
-var PALETA={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,107,69]};
+var V={inicio:['','Documentos prontos em PDF, feitos para Angola.'],cv:['CV','O teu CV e a tua carta de apresentação em PDF, prontos em minutos.'],documentos:['Documentos','Requerimentos, declarações e contratos simples, prontos em PDF.'],escola:['Escola','Capas de trabalhos escolares e universitários, prontas em PDF.'],comercial:['Comercial','Recibos, orçamentos e faturas proforma com numeração automática.'],fotos:['Fotos','Foto tipo passe, fotos em PDF e fotos mais leves para os portais.'],salario:['Salário','Salário líquido, INSS e IRT, e recibo de vencimento em PDF.']};
+var PALETA={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,107,69],comercial:[154,91,0],fotos:[106,44,145],salario:[15,107,115]};
 document.querySelectorAll('.pc').forEach(function(e){e.textContent=' · sem marca: '+precoCartao(e.dataset.k)});if(MODO!=='honra')$('gnota').classList.add('hide');var T0=document.title;function route(k){k=typeof k==='string'?k:location.hash.slice(1);if(!V[k])k='inicio';cur=k;$("prev").classList.add("hide");emPrev=false;apoio=false;$("dlink").classList.add("hide");$("partilha").classList.add("hide");$("voltar").classList.toggle("hide",k==="inicio");document.body.dataset.t=k;window.COR=PALETA[k];
  Object.keys(V).forEach(function(x){$('v-'+x).classList.toggle('hide',x!==k)});
  $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title=V[k][0]?'Mukanda '+V[k][0]+' – PDF para Angola':T0;$('msg').textContent='';sync();if($('preco'))$('preco').textContent=precoAtual();window.scrollTo(0,0)}
@@ -460,6 +666,7 @@ if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))window.addEv
 (function(){var s=$('splash'),visto=false;try{visto=sessionStorage.getItem('mk_s')==='1';sessionStorage.setItem('mk_s','1')}catch(e){}
 function fecha(){s.classList.add('sai');setTimeout(function(){s.remove()},400)}
 if(visto){s.remove();return}s.onclick=fecha;setTimeout(fecha,1100)})();
+window.addEventListener('load',function(){setTimeout(function(){if(!window.jspdf)carregaJS('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js').then(function(ok){if(!ok)carregaJS('https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js')})},300)});
 $('wa').href='https://wa.me/?text='+encodeURIComponent('Faz o teu CV e carta em PDF, grátis, no Mukanda: '+SITE_URL);
 </script>
 </body>

@@ -1,40 +1,25 @@
 # Mukanda (site estático, grátis e sem espera)
-## Publicar na Render (Static Site, não adormece)
+
+Só programação pura: HTML, CSS e JavaScript. Sem servidor, sem base de dados, sem chaves e sem variáveis no Render. Tudo corre no telemóvel de quem usa.
+
+## Publicar no Render (Static Site)
 1. Envie esta pasta para um repositório no GitHub.
-2. Na Render: New > Static Site > escolha o repositório.
-3. Build Command: deixe vazio. Publish Directory: `public`.
+2. Na Render: New > Static Site > escolha o repositório. Build Command vazio. Publish Directory: `public`.
 
-## Antes de publicar
-1. Edite `public/config.js` (preço, banco, IBAN, titular, WhatsApp).
-2. Abra `gerar-codigos.html` no navegador, escreva os códigos e cole o resultado em `codigos` no config.js.
-3. Troque `SEU-ENDERECO` pelo endereço final do site em `public/index.html`, `public/robots.txt` e `public/sitemap.xml`.
-Os ficheiros server.js e package.json já não são necessários.
+## O que tem
+- **CV e carta** (PT/EN), **requerimentos e documentos**, **capa de trabalho escolar**, **recibos, orçamentos e faturas proforma**.
+- **Fotos**: foto tipo passe numa folha A4 pronta a imprimir (3×4, 3,5×4,5, 4×4, 4×6 cm), várias fotos num só PDF, e reduzir uma foto até ao limite em KB do portal (grátis).
+- **Salário líquido e recibo de vencimento**: INSS e IRT pela tabela da Lei n.º 14/25 (2026). A tabela está em `public/config.js` (`IRT_TAB`): se a lei mudar, edite só ali (e o ano).
+- 6 páginas de conteúdo para o Google (`curriculo-angola.html`, `salario-liquido-angola.html`, etc.), todas no `sitemap.xml`.
+- Funciona sem internet depois da primeira visita (`sw.js`).
 
-## Modo de pagamento
-Em `public/config.js`: `obrigatorio: false` = descarga livre e pagamento voluntário (sem códigos). `obrigatorio: true` = só descarrega com código de acesso.
+## Configurar
+1. `public/config.js`: preços, banco, NIB, titular, WhatsApp.
+2. Códigos de acesso: abra `gerar-codigos.html` no navegador, gere códigos, cole os hashes em `codigos` no `config.js` e venda os códigos.
+3. Se mudar o endereço do site, troque `ss-7uzy.onrender.com` em `public/index.html`, `robots.txt`, `sitemap.xml` e nas páginas `.html`.
 
-## Modo de pagamento (config.js, campo `modo`)
-- `honra`: o cliente paga, envia o comprovativo e toca em "Já paguei" para descarregar (sem códigos, não é verificado).
-- `codigo`: só descarrega com código de acesso (verificado por si).
-- `livre`: descarga livre e pagamento voluntário.
+## Limite de qualquer site estático
+O pagamento (modo `honra`) é por confiança: o "Já paguei" não é verificado por um servidor, e quem souber mexer no navegador consegue contornar. Os códigos longos protegem só o modo `codigo`. Para verificação a sério seria preciso um servidor.
 
-## Versão grátis e versão sem marca (modo `honra`)
-O PDF grátis leva uma linha no rodapé com o endereço do site. Para o PDF sem marca o cliente paga, escreve o nome, toca em "Já paguei" e envia o comprovativo por WhatsApp (2 documentos por pagamento). Você confirma no extrato do banco pela referência.
-
-## Pontos fortes (só programação, sem IA nem servidor)
-- Funciona sem internet depois da primeira visita (sw.js guarda o site e o gerador de PDF).
-- CV e carta em Português ou em Inglês, com um toque.
-- Valores por extenso nos contratos (ex: 150.000 Kz (cento e cinquenta mil kwanzas)).
-- Botão para partilhar o PDF por WhatsApp ou email, já com o ficheiro anexado.
-- Botão para copiar o NIB.
-- Os dados ficam no telemóvel do cliente.
-Nota: ao publicar uma versão nova, o site atualiza-se sozinho quando o cliente tem internet.
-
-## Funciona sem internet
-Depois da primeira visita, o site guarda-se no telemóvel (`sw.js`) e abre mesmo sem dados. O gerador de PDF fica guardado depois da primeira vez que o cliente gera um documento.
-
-## Parceiros e Modo Balcão (cybers, escolas, centros de formação)
-- Link do parceiro: `https://SEU-SITE/?parceiro=Cyber%20Kilamba` (o nome aparece no rodapé dos PDFs grátis e na mensagem de pagamento por WhatsApp, para calcular comissões).
-- Modo Balcão: acrescenta `&balcao=1`. Não guarda dados no computador e mostra o botão "Próximo cliente".
-- Códigos pré-pagos para agentes: gere códigos em `gerar-codigos.html`, cole os resultados em `codigos` no `config.js` e venda cada código (2 documentos sem marca por aparelho).
-- Canal de WhatsApp: preencha `canal` no `config.js`.
+## Sugestão
+Descarregue `jspdf.umd.min.js` (versão 2.5.1) para a pasta `public` e aponte o `index.html` para ele: assim o site não depende de nenhum serviço externo.

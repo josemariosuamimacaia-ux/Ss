@@ -1,5 +1,13 @@
 <!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gerar códigos Mukanda</title>
-<body style="font:16px system-ui;max-width:640px;margin:20px auto;padding:0 16px"><h2>Gerar códigos de acesso</h2>
-<p>Escreva um código por linha (ex: MK-7391). Copie o resultado para <code>codigos</code> em <code>public/config.js</code>. Guarde os códigos em texto para os enviar aos clientes.</p>
-<textarea id="i" rows="6" style="width:100%"></textarea><button id="b" style="margin:8px 0;padding:10px 16px">Gerar</button><pre id="o" style="white-space:pre-wrap;background:#eee;padding:10px"></pre>
-<script>document.getElementById('b').onclick=async function(){var r=[];for(var l of document.getElementById('i').value.split('\n')){l=l.trim().toUpperCase();if(!l)continue;var h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(l));r.push("'"+Array.from(new Uint8Array(h)).map(n=>n.toString(16).padStart(2,'0')).join('')+"'")}document.getElementById('o').textContent='codigos: ['+r.join(',\n  ')+'],'}</script>
+<body style="font:16px system-ui;max-width:680px;margin:20px auto;padding:0 16px"><h2>Gerar códigos de acesso</h2>
+<p>Cada código é aleatório e longo, por isso ninguém o consegue adivinhar a partir do <code>config.js</code> (que é público). Escolha quantos quer, copie os <b>códigos</b> para guardar e vender, e cole os <b>hashes</b> em <code>codigos</code> no <code>public/config.js</code>.</p>
+<label>Quantidade <input id="n" type="number" min="1" max="200" value="10" style="width:80px;padding:6px"></label> <button id="b" style="margin:8px 0;padding:10px 16px">Gerar</button>
+<h3>1. Códigos (guarde e venda, não publique)</h3><pre id="c" style="white-space:pre-wrap;background:#eee;padding:10px"></pre>
+<h3>2. Hashes (cole no config.js)</h3><pre id="o" style="white-space:pre-wrap;background:#eee;padding:10px"></pre>
+<script>
+var AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+function cod(){var a=new Uint8Array(12),s='';crypto.getRandomValues(a);for(var i=0;i<12;i++){s+=AL[a[i]%32];if(i%4===3&&i<11)s+='-'}return 'MK-'+s}
+document.getElementById('b').onclick=async function(){var n=Math.max(1,Math.min(200,+document.getElementById('n').value||10)),cs=[],hs=[];
+ for(var i=0;i<n;i++){var c=cod(),h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(c));cs.push(c);hs.push("'"+Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')+"'")}
+ document.getElementById('c').textContent=cs.join('\n');document.getElementById('o').textContent='codigos: ['+hs.join(',\n  ')+'],'}
+</script>
