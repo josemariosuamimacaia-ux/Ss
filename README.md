@@ -23,3 +23,8 @@ O pagamento (modo `honra`) é por confiança: o "Já paguei" não é verificado 
 
 ## Sugestão
 Descarregue `jspdf.umd.min.js` (versão 2.5.1) para a pasta `public` e aponte o `index.html` para ele: assim o site não depende de nenhum serviço externo.
+
+
+## Catálogo de documentos atualizado
+
+A área de documentos inclui modelos para requerimentos, declarações pessoais, demissão, candidatura, dispensa/licença, reclamações, declaração de honra, recibos simples, arrendamento (modelo informativo), estágio, férias, justificação de faltas, transferência escolar, pedidos de histórico/certificado, segunda via, residência pessoal, autorização simples, entrega/recepção e propostas de prestação de serviços. Os campos obrigatórios são assinalados e validados antes da pré-visualização. Modelos com efeitos jurídicos devem ser revistos pela entidade competente ou por profissional habilitado antes de serem assinados.

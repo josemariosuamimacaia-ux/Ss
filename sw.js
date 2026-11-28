@@ -1,4 +1,4 @@
-var V='mk-v2',CORE=['./','index.html','config.js','manifest.json','favicon.svg','icon-192.png'],PDFJS='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+var V='mk-v6',CORE=['./','index.html','config.js','manifest.json','favicon.svg','icon-192.png'],PDFJS='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
 self.addEventListener('install',function(e){e.waitUntil(caches.open(V).then(function(c){return c.addAll(CORE).then(function(){return fetch(PDFJS,{mode:'no-cors'}).then(function(r){return c.put(PDFJS,r)}).catch(function(){})})}).then(function(){return self.skipWaiting()}))});
 self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k!==V}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}))});
 self.addEventListener('fetch',function(e){var r=e.request;if(r.method!=='GET')return;var u=new URL(r.url);

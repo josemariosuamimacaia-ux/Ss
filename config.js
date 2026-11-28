@@ -1,7 +1,8 @@
 // Edite aqui os dados de pagamento. Deixe vazio o que ainda não tiver.
 var PAGAMENTO = {
   preco: '400 Kz',      // preço de cada documento (padrão)
-  exigirComprovativo: true,   // true = o cliente anexa o comprovativo (foto ou PDF) antes de descarregar sem marca
+  exigirComprovativo: true,   // exige comprovativo antes de enviar pedido de validação
+  verificadorUrl: '', // URL da aplicação Web Google Apps Script; vazio mantém Premium bloqueado
   precosDoc: { requerimento:'200 Kz', declaracao:'200 Kz', rescisao:'200 Kz', candidatura:'200 Kz', licenca:'200 Kz', reclamacao:'200 Kz', honra:'200 Kz', recibo:'200 Kz' },   // documentos de 1 página (o resto usa o preço de 'documentos')
   precos: { escola: '300 Kz', fotos: '300 Kz', salario: '300 Kz' },   // preços por serviço (cv, documentos, escola); o que não estiver aqui usa o preço padrão
   primeiroGratis: false,  // o 1.º documento de cada pessoa (por aparelho) é grátis

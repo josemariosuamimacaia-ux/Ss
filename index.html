@@ -79,6 +79,28 @@ body[data-t=fotos]{--red:#6a2c91}body[data-t=salario]{--red:#0f6b73}
 input[type=range]{padding:0}
 .thumbs .it{display:flex;gap:8px;align-items:center;border:1px dashed var(--line);padding:6px;margin-bottom:6px;border-radius:4px;background:#fff}.thumbs img{width:48px;height:48px;object-fit:cover;border-radius:3px}.thumbs .nm{flex:1;font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .res{background:#fff;border:1px solid var(--line);border-left:6px solid var(--red);padding:12px 14px;border-radius:6px;margin:12px 0;font-size:.95rem}.res p{display:flex;justify-content:space-between;gap:12px;margin:3px 0}.res p.t{font-weight:700;font-size:1.1rem;border-top:1px solid var(--line);padding-top:6px;margin-top:6px;color:var(--red)}.res p.n{font-size:.85rem;color:#5b574e}
+
+/* Pesquisa rápida e dica diária — melhoria leve, sem dependências */
+.pesquisa-mukanda{margin:18px 0 12px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:8px}
+.pesquisa-mukanda label{margin:0 0 6px}
+.pesquisa-mukanda input{border:2px solid #b9b4a8;border-radius:6px}
+.pesquisa-mukanda input:focus{border-color:var(--red)}
+#pesq-resultado{font-size:.85rem;color:#5b574e;margin:7px 0 0;min-height:1.3em}
+.dica-mukanda{margin:14px 0;padding:14px 16px;background:#fff8e7;border:1px solid #ead9a8;border-left:5px solid var(--gold);border-radius:7px}
+.dica-mukanda strong{display:block;font:700 1rem Georgia,serif;margin-bottom:4px}
+.dica-mukanda p{margin:0;font-size:.92rem;color:#494438}
+/* Melhorias de utilização e acessibilidade */
+.estado-app{display:flex;align-items:center;gap:8px;margin:10px 0 14px;padding:9px 12px;border:1px solid var(--line);border-radius:7px;background:#fff;font-size:.84rem;color:#4a463e}
+.estado-app .ponto{width:9px;height:9px;border-radius:50%;background:#25834a;flex:0 0 auto}
+.estado-app.offline{border-color:#e5c78d;background:#fff8e7}
+.estado-app.offline .ponto{background:#b7791f}
+.pesquisa-linha{display:flex;gap:8px;align-items:center}
+.pesquisa-linha input{min-width:0;flex:1}
+#limpar-pesquisa{padding:10px 12px;white-space:nowrap}
+#instalar-mukanda{width:100%;margin:0 0 14px;padding:12px;border:2px solid var(--ink);border-radius:6px;background:var(--ink);color:#fff;font:700 .95rem system-ui;cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:360px){.pesquisa-linha{align-items:stretch;flex-direction:column}.pesquisa-linha button{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -89,8 +111,20 @@ input[type=range]{padding:0}
 <a class="voltar hide" id="voltar" href="#inicio">← Voltar ao início</a>
 <section id="v-inicio" class="view">
 <p style="margin:0 0 14px;font-weight:600">O que precisas de fazer hoje?<br><span id="gnota" style="font-weight:400">Descarrega grátis, ou sem a marca do Mukanda por um preço fixo. Os teus dados ficam no teu telemóvel.</span></p>
+
+<div class="pesquisa-mukanda">
+<label for="pesq-ferramenta">Encontrar uma ferramenta</label>
+<div class="pesquisa-linha"><input id="pesq-ferramenta" type="search" placeholder="Ex.: currículo, recibo, fotografia..." autocomplete="off" aria-describedby="pesq-resultado"><button type="button" class="add" id="limpar-pesquisa" aria-label="Limpar pesquisa">Limpar</button></div>
+<p id="pesq-resultado" aria-live="polite">Pesquisa por nome ou pelo que precisas de fazer.</p>
+</div>
+<div class="estado-app" id="estado-app" role="status" aria-live="polite"><span class="ponto" aria-hidden="true"></span><span id="estado-app-texto">A verificar ligação...</span></div>
+<button type="button" id="instalar-mukanda" class="hide">Instalar Mukanda no telemóvel</button>
+<div class="dica-mukanda" role="note" aria-label="Dica Mukanda">
+<strong>Uma dica útil do Mukanda</strong>
+<p id="dica-texto">Antes de enviar um currículo, confirma se o telefone e o endereço de email estão corretos.</p>
+</div>
 <a class="card" data-c="cv" href="#cv"><b>Currículo e carta de apresentação</b><span>Para candidaturas a vagas e concursos.</span><em>Começar →</em><i class="pc" data-k="cv"></i></a>
-<a class="card" data-c="documentos" href="#documentos"><b>Requerimentos e documentos</b><span>Requerimento, declaração, pedido de demissão e contrato de arrendamento.</span><em>Começar →</em><i class="pc" data-k="documentos"></i></a>
+<a class="card" data-c="documentos" href="#documentos"><b>Requerimentos e documentos</b><span>Requerimentos, declarações, estágio, férias, faltas, transferência escolar, segunda via, autorização e termos de entrega.</span><em>Começar →</em><i class="pc" data-k="documentos"></i></a>
 <a class="card" data-c="escola" href="#escola"><b>Capa de trabalho escolar</b><span>Capa profissional para trabalhos do liceu e da universidade.</span><em>Começar →</em><i class="pc" data-k="escola"></i></a>
 <a class="card" data-c="comercial" href="#comercial"><b>Recibos, orçamentos e faturas proforma</b><span>Numeração automática, total por extenso, IVA 14% e histórico no telemóvel. Para lojas, zungueiras e prestadores de serviços.</span><em>Começar →</em><i class="pc" data-k="comercial"></i></a>
 <a class="card" data-c="fotos" href="#fotos"><b>Fotos: tipo passe, PDF e reduzir tamanho</b><span>Folha A4 de fotos tipo passe pronta a imprimir, várias fotos num só PDF e fotos reduzidas para caberem nos portais. Tudo no teu telemóvel.</span><em>Começar →</em><i class="pc" data-k="fotos"></i></a>
@@ -236,9 +270,14 @@ input[type=range]{padding:0}
 
 <details id="difv" class="hide"><summary style="cursor:pointer;font-weight:600;margin:10px 0">Ver a diferença entre grátis e pago</summary><img id="difimg" alt="Comparação entre a versão grátis e a paga" style="width:100%;border:1px solid var(--line);border-radius:6px"></details>
 <label for="pcomp" id="lpcomp" class="hide">Anexa o comprovativo (foto ou PDF)</label><input id="pcomp" class="hide" type="file" accept="image/*,application/pdf">
-<label for="pnome" id="lpnome" class="hide">O teu nome (para confirmar o pagamento)</label><input id="pnome" class="hide" autocomplete="name">
-<p id="aviso2" class="hide" style="font-size:.85rem;margin:8px 0 0">Os pagamentos são confirmados no extrato do banco. Enviar um comprovativo falso é crime e pode ser denunciado. O teu nome serve só para confirmar o pagamento.</p>
-<button class="go hide" id="jpago" type="button" style="margin-top:12px">Já paguei, descarregar o PDF</button>
+<label for="pnome" id="lpnome" class="hide">O teu nome (para identificar o pagamento)</label><input id="pnome" class="hide" autocomplete="name">
+<div id="dadosTransacao" class="hide">
+<label for="pref">Referência ou número da transação</label><input id="pref" autocomplete="off" maxlength="80" placeholder="Referência que aparece no comprovativo">
+<label for="pdata">Data do pagamento</label><input id="pdata" type="date">
+<label for="pvalor">Valor transferido (Kz)</label><input id="pvalor" inputmode="numeric" placeholder="Ex.: 400">
+</div>
+<p id="aviso2" class="hide" style="font-size:.85rem;margin:8px 0 0">A Mukanda analisa dados e duplicados e regista o pedido. A análise da imagem não prova que o dinheiro chegou à conta. O Premium só é liberado após confirmação do pagamento.</p>
+<button class="go hide" id="jpago" type="button" style="margin-top:12px">Enviar comprovativo para análise</button>
 <label for="cod">Já tens o código de acesso?</label>
 <div style="display:flex;gap:8px"><input id="cod" placeholder="Ex: MK-1234" autocapitalize="characters"><button type="button" class="add" id="vcod">Validar</button></div>
 </fieldset>
@@ -247,7 +286,7 @@ input[type=range]{padding:0}
 <div id="msg" role="status"></div>
 <a class="wa" id="wa" href="#" target="_blank" rel="noopener">Partilhar o Mukanda no WhatsApp</a>
 </main>
-<footer><p style="margin:0 0 10px"><a href="curriculo-angola.html">Como fazer um currículo</a> · <a href="requerimento-angola.html">Modelos de requerimento</a> · <a href="capa-trabalho-escolar.html">Capa de trabalho</a> · <a href="recibo-orcamento-angola.html">Recibos e orçamentos</a> · <a href="foto-tipo-passe.html">Foto tipo passe</a> · <a href="salario-liquido-angola.html">Salário líquido e IRT</a></p>Mukanda · Os teus dados ficam no teu telemóvel. Nada é guardado no servidor.</footer>
+<footer><p style="margin:0 0 10px"><a href="curriculo-angola.html">Como fazer um currículo</a> · <a href="requerimento-angola.html">Modelos de requerimento</a> · <a href="capa-trabalho-escolar.html">Capa de trabalho</a> · <a href="recibo-orcamento-angola.html">Recibos e orçamentos</a> · <a href="foto-tipo-passe.html">Foto tipo passe</a> · <a href="salario-liquido-angola.html">Salário líquido e IRT</a></p>Mukanda · Os dados dos teus documentos ficam no teu telemóvel. Para pedidos Premium, guardamos apenas os dados mínimos de pagamento e o código de verificação do ficheiro, para detetar repetições.</footer>
 
 <script src="config.js"></script>
 <script>
@@ -396,7 +435,7 @@ var BALCAO=false;try{BALCAO=new URLSearchParams(location.search).has('balcao')}c
 function CS(){return BALCAO?sessionStorage:localStorage}
 function ST(){try{return(!BALCAO&&localStorage.getItem('mk_guardar')==='1')?localStorage:sessionStorage}catch(e){return sessionStorage}}
 function cred(){try{return +CS().getItem('mk_cred_'+cur)||0}catch(e){return 0}}function setCred(n){try{CS().setItem('mk_cred_'+cur,String(n))}catch(e){}}var REF=(function(){var r='';try{r=sessionStorage.getItem('mk_ref')||''}catch(e){}if(!r){r='MK-'+Math.floor(1000+Math.random()*9000);try{sessionStorage.setItem('mk_ref',r)}catch(e){}}return r})();var ULTIMO='';var MODO=PAGAMENTO.modo||(PAGAMENTO.obrigatorio?'codigo':'livre');var AV=/FBAN|FBAV|FB_IAB|Instagram|TikTok|musical_ly|Snapchat|Line\//i.test(navigator.userAgent)?' Se não descarregou, abre o site no Chrome (menu ⋮ > Abrir no navegador).':'';var pago=false,apoio=false,cur='inicio',emPrev=false,PEND=null;function sync(){$('pagar').classList.toggle('hide',!emPrev||(pago&&!apoio))}function pintar(ok){pago=ok;sync()}
-(function(){var P=PAGAMENTO;if(MODO==='honra'){$('pagp').innerHTML='O PDF grátis leva a marca do Mukanda no rodapé. Para o PDF <strong>sem marca</strong>: preço <strong id="preco"></strong> (2 documentos por pagamento). 1) Faz a transferência e escreve a referência <strong id="ref"></strong> na descrição. 2) Escreve o teu nome. '+(P.exigirComprovativo?'3) Anexa o comprovativo (foto ou PDF) e toca em "Já paguei".':'3) Toca em "Já paguei" e envia o comprovativo por WhatsApp.')+'';$('ref').textContent=REF;$('pagar').querySelector('legend').textContent='PDF sem marca';$('lpnome').classList.remove('hide');if(P.exigirComprovativo){$('lpcomp').classList.remove('hide');$('pcomp').classList.remove('hide')}$('difv').classList.remove('hide');$('difv').addEventListener('toggle',function(){if(this.open&&!$('difimg').getAttribute('src'))$('difimg').src='comparacao.jpg'});$('pnome').classList.remove('hide');$('aviso2').classList.remove('hide');document.querySelector('label[for=cod]').textContent='Tens um código pré-pago (de um agente ou do balcão)?';$('jpago').classList.remove('hide')}if(MODO==='livre'){$('pagp').innerHTML='Gostaste? Ajuda o Mukanda a crescer com <strong id="preco"></strong> por transferência e envia o comprovativo por WhatsApp. Obrigado!';$('pagar').querySelector('legend').textContent='Ajuda o Mukanda';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('prev').querySelector('p').innerHTML='Vê se está bom e descarrega o teu PDF. Para mudar algo, toca em Alterar, ajusta e vê de novo.'}$('preco').textContent=P.preco;var d=$('dados');
+(function(){var P=PAGAMENTO;if(MODO==='honra'){$('pagp').innerHTML='O PDF grátis leva a marca do Mukanda no rodapé. Para o PDF <strong>sem marca</strong>: preço <strong id="preco"></strong> (2 documentos por pagamento). 1) Faz a transferência e escreve a referência <strong id="ref"></strong> na descrição. 2) Escreve o teu nome. '+(P.exigirComprovativo?'3) Indica a referência, a data e o valor, anexa o comprovativo e envia para análise.':'3) Toca em "Já paguei" e envia o comprovativo por WhatsApp.')+'';$('ref').textContent=REF;$('pagar').querySelector('legend').textContent='PDF sem marca';$('lpnome').classList.remove('hide');if(P.exigirComprovativo){$('lpcomp').classList.remove('hide');$('pcomp').classList.remove('hide')}$('difv').classList.remove('hide');$('difv').addEventListener('toggle',function(){if(this.open&&!$('difimg').getAttribute('src'))$('difimg').src='comparacao.jpg'});$('pnome').classList.remove('hide');$('dadosTransacao').classList.remove('hide');$('aviso2').classList.remove('hide');document.querySelector('label[for=cod]').textContent='Tens um código pré-pago (de um agente ou do balcão)?';$('jpago').classList.remove('hide')}if(MODO==='livre'){$('pagp').innerHTML='Gostaste? Ajuda o Mukanda a crescer com <strong id="preco"></strong> por transferência e envia o comprovativo por WhatsApp. Obrigado!';$('pagar').querySelector('legend').textContent='Ajuda o Mukanda';$('cod').parentNode.style.display='none';document.querySelector('label[for=cod]').style.display='none';$('prev').querySelector('p').innerHTML='Vê se está bom e descarrega o teu PDF. Para mudar algo, toca em Alterar, ajusta e vê de novo.'}$('preco').textContent=P.preco;var d=$('dados');
  if(P.nib||P.iban){d.innerHTML='';[['Banco',P.banco],['NIB',P.nib],['IBAN',P.iban],['Titular',P.titular]].forEach(function(x){if(x[1]){var p=document.createElement('p');p.style.margin='2px 0';p.textContent=x[0]+': '+x[1];d.appendChild(p)}});if(P.nib){var cb=document.createElement('button');cb.type='button';cb.className='add';cb.style.margin='6px 0';cb.textContent='Copiar NIB';cb.onclick=function(){var ok=function(){$('msg').textContent='NIB copiado.'};try{navigator.clipboard.writeText(P.nib).then(ok,function(){})}catch(e){var t=document.createElement('textarea');t.value=P.nib;document.body.appendChild(t);t.select();try{document.execCommand('copy');ok()}catch(_){}t.remove()}};d.appendChild(cb)}}
  else d.textContent='Dados de pagamento por configurar.';
  $('compv').href=P.whatsapp?'https://wa.me/'+P.whatsapp+'?text='+encodeURIComponent('Olá! Paguei o Mukanda. Segue o comprovativo.'):'#';
@@ -412,13 +451,26 @@ licenca:{n:'Pedido de dispensa ou licença',c:[['destino','A quem se dirige (ex:
 reclamacao:{n:'Carta de reclamação',c:[['destino','Empresa ou entidade'],['facto','O que aconteceu',1],['pedido','O que pretende que façam',1]],g:function(f,P){return {t:'Carta de reclamação',p:['Exmos. Senhores da '+f.destino,'Eu, '+P.nome+P.id+', venho apresentar a seguinte reclamação: '+f.facto,'Assim, solicito que '+f.pedido+'.','Aguardo uma resposta no mais curto prazo possível.']}}},
 honra:{n:'Declaração de honra',c:[['decl','O que declara sob compromisso de honra',1]],g:function(f,P){return {t:'Declaração de honra',p:['Eu, '+P.nome+P.id+', declaro por minha honra que '+f.decl+'.','Mais declaro que as informações prestadas são verdadeiras.']}}},
 recibo:{n:'Recibo simples (sem valor fiscal)',c:[['receb','Recebi de (nome de quem pagou)'],['valor','Valor (Kz)'],['ref','Referente a'],['data','Data (dd/mm/aaaa)']],g:function(f,P){return {t:'Recibo',p:['Eu, '+P.nome+P.id+', declaro ter recebido de '+f.receb+' a quantia de '+f.valor+' Kz, referente a '+f.ref+'.','Data: '+f.data+'.','Este recibo não tem valor fiscal.']}}},
-arrendamento:{n:'Contrato de arrendamento',c:[['senhorio','Nome do senhorio'],['sbi','BI do senhorio'],['imovel','Morada do imóvel'],['renda','Renda mensal (Kz)'],['inicio','Data de início (dd/mm/aaaa)'],['prazo','Duração (meses)']],g:function(f,P){return {t:'Contrato de arrendamento',s:['Senhorio: '+f.senhorio,'Inquilino: '+P.nome],p:['Entre '+f.senhorio+(f.sbi?', BI n.º '+f.sbi:'')+', adiante designado(a) Senhorio(a), e '+P.nome+P.id+', adiante designado(a) Inquilino(a), é celebrado o presente contrato de arrendamento, que se rege pelas cláusulas seguintes.','Cláusula 1.ª – O Senhorio dá de arrendamento ao Inquilino o imóvel situado em '+f.imovel+'.','Cláusula 2.ª – O arrendamento tem a duração de '+mes(f.prazo)+', com início em '+f.inicio+'.','Cláusula 3.ª – A renda mensal é de '+kz(f.renda)+', a pagar até ao dia 5 de cada mês, salvo acordo diferente por escrito.','Cláusula 4.ª – O Inquilino obriga-se a usar o imóvel apenas para habitação e a devolvê-lo no estado em que o recebeu, salvo o desgaste normal.','Cláusula 5.ª – Qualquer das partes pode terminar o contrato mediante aviso escrito com 30 dias de antecedência.']}}}};
+
+arrendamento:{n:'Contrato de arrendamento (modelo simples)',c:[['senhorio','Nome do senhorio'],['sbi','BI do senhorio (opcional)'],['imovel','Morada do imóvel'],['renda','Renda mensal (Kz)'],['inicio','Data de início (dd/mm/aaaa)'],['prazo','Duração (meses)']],g:function(f,P){return {t:'Contrato de arrendamento — modelo simples',s:['Senhorio: '+f.senhorio,'Inquilino: '+P.nome],p:['Entre '+f.senhorio+(f.sbi?', BI n.º '+f.sbi:'')+', adiante designado(a) Senhorio(a), e '+P.nome+P.id+', adiante designado(a) Inquilino(a), é celebrado o presente modelo de contrato, sujeito à revisão e assinatura das partes.','Cláusula 1.ª — O imóvel objecto do presente acordo situa-se em '+f.imovel+'.','Cláusula 2.ª — O prazo indicado pelas partes é de '+mes(f.prazo)+', com início em '+f.inicio+'.','Cláusula 3.ª — A renda mensal acordada é de '+kz(f.renda)+'. A data e o meio de pagamento devem ser confirmados por escrito pelas partes.','Cláusula 4.ª — As partes devem registar por escrito o estado do imóvel, as despesas, as responsabilidades de manutenção e as condições de renovação e cessação.','Cláusula 5.ª — Este é um modelo informativo. As partes devem confirmar a conformidade com a legislação aplicável e obter aconselhamento jurídico antes de assinar.']}}},
+estagio:{n:'Pedido de estágio',c:[['destino','Empresa ou instituição'],['area','Área de estágio'],['curso','Curso ou formação'],['periodo','Período pretendido'],['motivacao','Por que pretendes o estágio',1]],g:function(f,P){return {t:'Pedido de estágio',p:['À Direcção de '+f.destino,'Assunto: Pedido de oportunidade de estágio','Eu, '+P.nome+P.id+', estudante/formando(a) de '+f.curso+', venho manifestar o meu interesse em realizar um estágio na área de '+f.area+'.','Tenho disponibilidade para o período de '+f.periodo+'. '+f.motivacao,'Agradeço a atenção e coloco-me à disposição para uma entrevista ou para apresentar documentação adicional.','Com os melhores cumprimentos, '+P.nome]}}},
+ferias:{n:'Pedido de férias',c:[['empresa','Empresa ou entidade empregadora'],['cargo','Função/cargo'],['inicio','Data de início'],['fim','Data de fim'],['dias','Número de dias'],['contacto','Contacto durante as férias (opcional)']],g:function(f,P){return {t:'Pedido de férias',p:['À Direcção de '+f.empresa,'Assunto: Pedido de marcação de férias','Eu, '+P.nome+P.id+', a exercer as funções de '+f.cargo+', venho solicitar a marcação do período de férias de '+f.inicio+' a '+f.fim+', correspondente a '+f.dias+' dia(s), sujeito à confirmação dos serviços competentes.',f.contacto?'Durante este período, poderei ser contactado(a) através de '+f.contacto+'.':'Agradeço a confirmação por escrito do período autorizado.','Com os melhores cumprimentos, '+P.nome]}}},
+faltas:{n:'Justificação de faltas',c:[['destino','Escola, empresa ou instituição'],['periodo','Data(s) ou período da ausência'],['motivo','Motivo da ausência',1],['anexo','Documento comprovativo (opcional)']],g:function(f,P){return {t:'Justificação de faltas',p:['À Direcção de '+f.destino,'Assunto: Justificação de ausência','Eu, '+P.nome+P.id+', venho apresentar a justificação da minha ausência no período de '+f.periodo+'.','A ausência deveu-se ao seguinte motivo: '+f.motivo+'.',f.anexo?'Junto, para apreciação, o seguinte documento: '+f.anexo+'.':'Caso seja necessário, poderei apresentar documentação complementar.','Agradeço a compreensão e a apreciação do presente pedido.']}}},
+transferencia:{n:'Pedido de transferência escolar',c:[['escola','Escola de origem'],['destino','Escola de destino'],['classe','Classe/ano e curso'],['motivo','Motivo da transferência',1]],g:function(f,P){return {t:'Pedido de transferência escolar',p:['À Direcção de '+f.escola,'Assunto: Pedido de transferência','Eu, '+P.nome+P.id+', venho solicitar a transferência do(a) estudante acima identificado(a), actualmente inscrito(a) na '+f.escola+', para a instituição '+f.destino+'.','A solicitação refere-se à classe/ano e curso de '+f.classe+'. Motivo: '+f.motivo+'.','Solicito, se possível, a emissão da documentação escolar necessária para dar seguimento ao processo.','Com os melhores cumprimentos, '+P.nome]}}},
+historico:{n:'Pedido de certificado ou histórico escolar',c:[['escola','Nome da escola/instituição'],['curso','Curso ou classe frequentada'],['periodo','Ano(s) lectivo(s)'],['documento','Documento pretendido (certificado, declaração ou histórico)'],['finalidade','Finalidade do pedido']],g:function(f,P){return {t:'Pedido de documentação escolar',p:['À Direcção de '+f.escola,'Assunto: Pedido de '+f.documento,'Eu, '+P.nome+P.id+', antigo(a) estudante/aluno(a) do curso ou classe de '+f.curso+', referente ao(s) ano(s) lectivo(s) '+f.periodo+', venho solicitar a emissão de '+f.documento+'.','O documento destina-se a: '+f.finalidade+'.','Agradeço a indicação de eventuais requisitos, taxas e prazo de levantamento.']}}},
+segundaVia:{n:'Pedido de segunda via de documento',c:[['entidade','Entidade que emitiu o documento'],['documento','Documento cuja segunda via solicitas'],['dataEmissao','Data aproximada de emissão'],['motivo','Motivo do pedido',1]],g:function(f,P){return {t:'Pedido de segunda via de documento',p:['À Direcção de '+f.entidade,'Assunto: Solicitação de segunda via','Eu, '+P.nome+P.id+', venho solicitar a emissão da segunda via de '+f.documento+', emitido(a) aproximadamente em '+f.dataEmissao+'.','O pedido deve-se ao seguinte motivo: '+f.motivo+'.','Agradeço a indicação dos procedimentos e documentos necessários para concluir o processo.']}}},
+residencia:{n:'Declaração pessoal de residência',c:[['morada','Morada completa onde reside'],['desde','Desde quando reside nessa morada'],['finalidade','Finalidade da declaração']],g:function(f,P){return {t:'Declaração pessoal de residência',p:['Eu, '+P.nome+P.id+', declaro, sob minha responsabilidade, que resido em '+f.morada+', desde '+f.desde+'.','A presente declaração é emitida por iniciativa própria para a seguinte finalidade: '+f.finalidade+'.','Declaro que as informações acima correspondem à verdade. Este documento é uma declaração pessoal e não substitui atestado ou comprovativo oficial de residência quando este for exigido.']}}},
+autorizacao:{n:'Autorização simples',c:[['responsavel','Nome do encarregado/responsável'],['biResp','BI do responsável (opcional)'],['autorizado','Nome da pessoa autorizada'],['biAut','BI da pessoa autorizada (opcional)'],['acto','O que fica autorizado',1],['validade','Data ou período de validade']],g:function(f,P){return {t:'Autorização simples',s:['Assinatura do responsável: __________________________'],p:['Eu, '+f.responsavel+(f.biResp?', titular do BI n.º '+f.biResp:'')+', na qualidade de responsável por '+P.nome+', autorizo '+f.autorizado+(f.biAut?', titular do BI n.º '+f.biAut:'')+', a '+f.acto+'.','Esta autorização é válida para '+f.validade+'.','Declaro que presto esta autorização de forma livre e consciente.','Nota: confirme se a entidade destinatária exige formulário próprio, reconhecimento de assinatura ou autorização específica.']}}},
+entrega:{n:'Termo de entrega e recepção',c:[['entregue','Nome de quem entrega'],['recebe','Nome de quem recebe'],['objecto','Material/documento entregue',1],['estado','Estado ou quantidade'],['dataEntrega','Data da entrega'],['observacao','Observações (opcional)']],g:function(f,P){return {t:'Termo de entrega e recepção',s:['Quem entrega: '+f.entregue,'Quem recebe: '+f.recebe],p:['Aos '+f.dataEntrega+', declara-se que '+f.entregue+' entregou a '+f.recebe+' o seguinte material/documento: '+f.objecto+'.','Quantidade/estado no momento da entrega: '+f.estado+'.',f.observacao?'Observações: '+f.observacao+'.':'Não foram registadas observações adicionais.','As partes confirmam que leram o presente termo e que os dados nele indicados correspondem ao acto de entrega realizado.']}}},
+servicos:{n:'Proposta de prestação de serviços',c:[['cliente','Nome do cliente/entidade'],['servico','Serviço proposto',1],['descricao','Descrição do trabalho e entregáveis',1],['prazo','Prazo estimado'],['valor','Valor proposto (Kz)'],['condicoes','Condições de pagamento e observações']],g:function(f,P){return {t:'Proposta de prestação de serviços',p:['Proponente: '+P.nome+P.id,'Destinatário: '+f.cliente,'Objecto: '+f.servico,'Descrição e entregáveis: '+f.descricao,'Prazo estimado: '+f.prazo+'.','Valor proposto: '+f.valor+' Kz.','Condições: '+f.condicoes+'.','A presente proposta fica sujeita à aceitação expressa das partes e à formalização de contrato, quando aplicável.']}}}
+};
 Object.keys(TIPOS).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=TIPOS[k].n;$('dtipo').appendChild(o)});
-function pintaDoc(){$('dcampos').innerHTML='';TIPOS[$('dtipo').value].c.forEach(function(f){var l=document.createElement('label');l.textContent=f[1];var e=document.createElement(f[2]?'textarea':'input');e.dataset.k=f[0];l.appendChild(e);$('dcampos').appendChild(l)})}
+function pintaDoc(){$('dcampos').innerHTML='';TIPOS[$('dtipo').value].c.forEach(function(f){var l=document.createElement('label');l.textContent=f[1];var e=document.createElement(f[2]?'textarea':'input');e.dataset.k=f[0];if(!/opcional/i.test(f[1])){e.required=true;l.textContent=f[1]+' *'}l.appendChild(e);$('dcampos').appendChild(l)})}
 $('dtipo').onchange=pintaDoc;pintaDoc();
 $('gdoc').onclick=function(){var P={nome:v('dnome'),id:(v('dbi')?', portador(a) do BI n.º '+v('dbi'):'')+(v('dmorada')?', residente em '+v('dmorada'):'')};
  if(!P.nome){$('msg').textContent='Preenche o teu nome.';return}
- var f={};$('dcampos').querySelectorAll('[data-k]').forEach(function(e){f[e.dataset.k]=e.value.trim()});
+ var f={},faltam=[];$('dcampos').querySelectorAll('[data-k]').forEach(function(e){f[e.dataset.k]=e.value.trim()});
+ TIPOS[$('dtipo').value].c.forEach(function(c){if(!/opcional/i.test(c[1])&&!f[c[0]])faltam.push(c[1])});if(faltam.length){$('msg').textContent='Preenche estes campos: '+faltam.join(', ')+'.';return}
  var T=TIPOS[$('dtipo').value].g(f,P),d=Doc();
  d.t((v('dcid')?v('dcid')+', ':'')+new Date().toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'}),10);d.gap(8);
  d.t(T.t.toUpperCase(),14,true,d.AC);d.gap(6);T.p.forEach(function(s){d.t(s,11);d.gap(4)});d.gap(14);
@@ -632,19 +684,33 @@ async function provaOK(){var f=$('pcomp').files&&$('pcomp').files[0];
  if(!f)return 'Anexa o comprovativo (foto ou PDF) para continuar.';
  if(!/^image\//.test(f.type)&&f.type!=='application/pdf')return 'O ficheiro tem de ser uma foto ou um PDF.';
  if(f.size<15000)return 'O ficheiro é pequeno demais para ser um comprovativo.';
- if(f.size>15000000)return 'O ficheiro é grande demais.';
- if(/^image\//.test(f.type)){var ok=await new Promise(function(r){var im=new Image(),u=URL.createObjectURL(f);im.onload=function(){URL.revokeObjectURL(u);r(im.width>=300&&im.height>=300)};im.onerror=function(){r(true)};im.src=u});if(!ok)return 'A imagem é pequena demais para ser um comprovativo.'}
- var hx='';try{var b=await f.arrayBuffer();hx=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b))).map(function(n){return n.toString(16).padStart(2,'0')}).join('')}catch(e){}
- var us=[];try{us=JSON.parse(localStorage.getItem('mk_provas')||'[]')}catch(e){}
- if(hx&&us.indexOf(hx)>-1)return 'Este comprovativo já foi usado. Anexa o do teu novo pagamento.';
- if(hx){us.push(hx);try{localStorage.setItem('mk_provas',JSON.stringify(us.slice(-50)))}catch(e){}}
- return ''}
+ if(f.size>15000000)return 'O ficheiro é grande demais (máximo 15 MB).';
+ if(/^image\//.test(f.type)){var ok=await new Promise(function(r){var im=new Image(),u=URL.createObjectURL(f);im.onload=function(){URL.revokeObjectURL(u);r(im.width>=300&&im.height>=300)};im.onerror=function(){URL.revokeObjectURL(u);r(false)};im.src=u});if(!ok)return 'A imagem não parece válida ou tem resolução muito baixa.'}
+ var hx='';try{var b=await f.arrayBuffer();hx=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b))).map(function(n){return n.toString(16).padStart(2,'0')}).join('')}catch(e){return 'Não foi possível analisar o ficheiro neste aparelho.'}
+ return {hash:hx,file:f};}
+function enviarRegistoPagamento(dados,cb){var base=PAGAMENTO.verificadorUrl;if(!base)return cb({ok:false,config:false});
+ var nome='mkpay_'+Date.now()+'_'+Math.floor(Math.random()*100000),script=document.createElement('script'),feito=false;
+ window[nome]=function(res){if(feito)return;feito=true;try{delete window[nome]}catch(e){window[nome]=undefined}script.remove();cb(res)};
+ var q=new URLSearchParams(dados);q.set('callback',nome);script.src=base+(base.indexOf('?')>-1?'&':'?')+q.toString();script.onerror=function(){if(feito)return;feito=true;try{delete window[nome]}catch(e){}script.remove();cb({ok:false,network:true})};
+ document.head.appendChild(script);setTimeout(function(){if(feito)return;feito=true;try{delete window[nome]}catch(e){}script.remove();cb({ok:false,timeout:true})},20000);}
 $('pnome').addEventListener('input',atualizaWa);$('dtipo').addEventListener('change',function(){if($('preco'))$('preco').textContent=precoAtual();atualizaWa()});
-$('jpago').onclick=async function(){if(!v('pnome')){$('msg').textContent='Escreve o teu nome para eu confirmar o pagamento.';$('pnome').focus();return}
- if(cred()<=0&&PAGAMENTO.exigirComprovativo){var er=await provaOK();if(er){$('msg').textContent=er;return}}
- if(cred()<=0)setCred(2);try{if(ULTIMO)await $(ULTIMO).onclick()}catch(e){}
- if(!PEND)return;saveDoc(PEND.p,PEND.nome);var r=cred()-1;setCred(r);apoio=true;sync();atualizaWa();
- try{$('pcomp').value=''}catch(e){}$('msg').textContent=(PAGAMENTO.exigirComprovativo?'Comprovativo recebido, obrigado, ':'Obrigado, ')+v('pnome')+'! PDF sem marca descarregado. '+(PAGAMENTO.exigirComprovativo?'O pagamento é confirmado no extrato do banco.':'Envia o comprovativo por WhatsApp.')+(r>0?' Ainda podes fazer mais '+r+' sem marca.':'')+AV;if(r<=0)pago=false};
+$('jpago').onclick=async function(){
+ if(!v('pnome')){$('msg').textContent='Escreve o teu nome.';$('pnome').focus();return}
+ if(!v('pref')){$('msg').textContent='Indica a referência ou número da transação.';$('pref').focus();return}
+ if(!$('pdata').value){$('msg').textContent='Indica a data do pagamento.';$('pdata').focus();return}
+ var valor=String(parseInt(v('pvalor').replace(/[^0-9]/g,''),10)||0),esperado=String(parseInt(precoAtual().replace(/[^0-9]/g,''),10)||0);
+ if(!valor||valor!==esperado){$('msg').textContent='O valor indicado não corresponde ao preço apresentado ('+precoAtual()+'). Confirma o comprovativo.';$('pvalor').focus();return}
+ var prova=await provaOK();if(typeof prova==='string'){$('msg').textContent=prova;return}
+ var dt=new Date($('pdata').value+'T00:00:00');if(isNaN(dt.getTime())||dt.getTime()>Date.now()+86400000){$('msg').textContent='A data do pagamento não é válida.';return}
+ $('jpago').disabled=true;$('jpago').textContent='A analisar e a registar…';
+ var payload={nome:v('pnome').slice(0,80),referencia:v('pref').trim().slice(0,80),data:$('pdata').value,valor:valor,preco:esperado,hash:prova.hash,servico:cur,tipo:($('dtipo')&&$('dtipo').value)||'',refMukanda:REF};
+ enviarRegistoPagamento(payload,function(res){$('jpago').disabled=false;$('jpago').textContent='Enviar para análise';
+  if(res&&res.ok&&res.status==='duplicate'){$('msg').textContent='Este comprovativo ou esta referência já foi apresentado. Não foi criado outro pedido.';return}
+  if(res&&res.ok&&res.status==='pending'){$('msg').textContent='Pedido registado com sucesso. A análise automática não encontrou uma repetição, mas o pagamento ainda não está confirmado. Guarda esta referência: '+res.ticket+'. Podes continuar a usar a versão grátis; o Premium será liberado após confirmação.';try{localStorage.setItem('mk_ticket_'+res.ticket,JSON.stringify(payload))}catch(e){}return}
+  if(!PAGAMENTO.verificadorUrl){$('msg').textContent='O registo automático ainda não está ligado. O comprovativo não foi aprovado nem o Premium desbloqueado. Envia-o pelo WhatsApp para análise posterior.';return}
+  $('msg').textContent='Não foi possível registar agora. O teu pagamento não foi confirmado. Tenta novamente mais tarde ou envia o comprovativo pelo WhatsApp.';
+ });
+};
 (function(){var old=$('vcod').onclick;$('vcod').onclick=async function(){if(MODO!=='honra')return old.apply(this,arguments);
  var c=v('cod').toUpperCase();if(!c)return;
  if(!(await checar(c))){$('msg').textContent='Código inválido. Confirma com quem to vendeu.';return}
@@ -661,6 +727,59 @@ var PALETA={inicio:[179,20,31],cv:[179,20,31],documentos:[29,78,137],escola:[27,
 document.querySelectorAll('.pc').forEach(function(e){e.textContent=' · sem marca: '+precoCartao(e.dataset.k)});if(MODO!=='honra')$('gnota').classList.add('hide');var T0=document.title;function route(k){k=typeof k==='string'?k:location.hash.slice(1);if(!V[k])k='inicio';cur=k;$("prev").classList.add("hide");emPrev=false;apoio=false;$("dlink").classList.add("hide");$("partilha").classList.add("hide");$("voltar").classList.toggle("hide",k==="inicio");document.body.dataset.t=k;window.COR=PALETA[k];
  Object.keys(V).forEach(function(x){$('v-'+x).classList.toggle('hide',x!==k)});
  $('sub').textContent=V[k][0];$('lema').textContent=V[k][1];document.title=V[k][0]?'Mukanda '+V[k][0]+' – PDF para Angola':T0;$('msg').textContent='';sync();if($('preco'))$('preco').textContent=precoAtual();window.scrollTo(0,0)}
+
+/* Pesquisa local, estado da ligação, instalação e dica diária: sem serviços externos. */
+(function(){
+ var campo=$('pesq-ferramenta'),resultado=$('pesq-resultado'),limpar=$('limpar-pesquisa');
+ var sinonimos={
+  'curriculo':'cv currículo candidatura emprego trabalho','currículo':'cv curriculo candidatura emprego trabalho',
+  'emprego':'cv currículo carta candidatura','vaga':'cv currículo carta candidatura',
+  'carta':'cv currículo apresentação candidatura','requerimento':'documentos pedido declaração estágio férias faltas transferência escolar segunda via autorização residência entrega',
+  'declaracao':'documentos declaração requerimento residência autorização histórico escolar','declaração':'documentos declaracao requerimento',
+  'contrato':'documentos arrendamento','recibo':'comercial salário vencimento pagamento',
+  'fatura':'comercial fatura proforma orçamento','factura':'comercial fatura proforma orçamento',
+  'orçamento':'comercial orçamento cotação','orcamento':'comercial orçamento cotação',
+  'foto':'fotos fotografia passe imagem','fotografia':'fotos foto passe imagem',
+  'bi':'fotos documentos fotografia pdf','pdf':'fotos documentos currículo escola comercial',
+  'irt':'salário salario imposto','inss':'salário salario desconto','salario':'salário vencimento irt inss',
+  'salário':'salario vencimento irt inss'
+ };
+ if(campo&&resultado){
+  var cartoes=Array.prototype.slice.call(document.querySelectorAll('#v-inicio a.card'));
+  function filtrar(){
+   var q=campo.value.toLocaleLowerCase('pt').trim(),termos=q.split(/\s+/).filter(Boolean),visiveis=0;
+   var expandidos=termos.map(function(t){return sinonimos[t]||t}).join(' ');
+   cartoes.forEach(function(c){
+    var texto=(c.textContent+' '+(c.getAttribute('data-c')||'')).toLocaleLowerCase('pt');
+    var ok=!q||termos.some(function(t){return texto.indexOf(t)>-1})||expandidos.split(/\s+/).some(function(t){return texto.indexOf(t)>-1});
+    c.style.display=ok?'':'none';if(ok)visiveis++;
+   });
+   resultado.textContent=q?(visiveis?visiveis+' ferramenta(s) encontrada(s).':'Não encontrámos. Experimenta: CV, emprego, BI, foto, recibo ou salário.'):'Pesquisa por nome ou pelo que precisas de fazer.';
+  }
+  campo.addEventListener('input',filtrar);
+  if(limpar)limpar.addEventListener('click',function(){campo.value='';filtrar();campo.focus()});
+  campo.addEventListener('keydown',function(e){if(e.key==='Escape'){campo.value='';filtrar()}});
+ }
+ var estado=$('estado-app'),estadoTexto=$('estado-app-texto');
+ function atualizaLigacao(){if(!estado||!estadoTexto)return;var off=!navigator.onLine;estado.classList.toggle('offline',off);estadoTexto.textContent=off?'Estás sem internet. As funções guardadas neste aparelho podem continuar disponíveis.':'Ligação à internet disponível. Os teus documentos são preparados neste aparelho.'}
+ window.addEventListener('online',atualizaLigacao);window.addEventListener('offline',atualizaLigacao);atualizaLigacao();
+ var instalar=$('instalar-mukanda'),eventoInstalacao=null;
+ window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();eventoInstalacao=e;if(instalar)instalar.classList.remove('hide')});
+ if(instalar)instalar.addEventListener('click',async function(){if(!eventoInstalacao)return;eventoInstalacao.prompt();try{await eventoInstalacao.userChoice}catch(e){}eventoInstalacao=null;instalar.classList.add('hide')});
+ window.addEventListener('appinstalled',function(){if(instalar)instalar.classList.add('hide');if(estadoTexto)estadoTexto.textContent='Mukanda instalado neste aparelho.'});
+ var dicas=[
+  'Antes de enviar um currículo, confirma se o telefone e o endereço de email estão corretos.',
+  'Ao criar um requerimento, indica claramente o destinatário e o motivo do pedido.',
+  'Guarda uma cópia do PDF final numa pasta fácil de encontrar no teu telemóvel.',
+  'Antes de partilhar um documento, verifica nomes, datas e números para evitar erros.',
+  'Se estiveres a preparar uma candidatura, adapta o resumo do CV à vaga pretendida.',
+  'Para um orçamento, confirma quantidades, preços e o total antes de o entregar.',
+  'Usa palavras simples e informações verdadeiras nos teus documentos.'
+ ];
+ var el=$('dica-texto');
+ if(el){var dia=Math.floor(Date.now()/86400000);el.textContent=dicas[dia%dicas.length]}
+})();
+
 liberado().then(pintar);document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(){route(a.getAttribute("href").slice(1))})});window.addEventListener('popstate',function(){if(emPrev)route(cur)});window.onhashchange=function(){route()};route();
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
 (function(){var s=$('splash'),visto=false;try{visto=sessionStorage.getItem('mk_s')==='1';sessionStorage.setItem('mk_s','1')}catch(e){}
